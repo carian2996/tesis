@@ -330,7 +330,7 @@ Desarrollando el cuadrado y utilizando nuestro supuesto de covarianza para el pr
 	& = \frac{1}{4} \left( \frac{j}{2^{n-1}} \right) + \frac{1}{4} \left( \frac{j+1}{2^{n-1}} \right) + \frac{1}{2} \left( \frac{j}{2^{n-1}} \right) + \frac{1}{2^{n+1}} \\
 	& = \frac{4j + 2}{2^{n+1}} = \frac{2j + 1}{2^n}.
 	\end{align*}
-Por lo tanto, para toda $n \geq 0$, $(X_n (t), t \in [0, 1])$ es un proceso Gaussiano centrado y de covarianza definida en (\ref{abv}). Ahora probemos que el proceso $(X_n (t), 0 \leq t \leq 1)$ converge uniformemente en el intervalo $[0, 1]$, es decir, queremos verificar que para todo $\epsilon > 0$ existe una $N \geq n$
+Por lo tanto, para toda $n \geq 0$, $(X_n (t), t \in [0, 1])$ es un proceso Gaussiano centrado y de covarianza definida en (\ref{abv}). Ahora probemos que el proceso $(X_n (t), 0 \leq t \leq 1)$ converge uniformemente en el intervalo $[0, 1]$. Primero, veamos que el proceso converge uniformemente Cauchy, es decir, para todo $\epsilon > 0$ existe una $N \geq n$
 	\begin{align*}
 		\sup_{t \in [0, 1]} |X_n (t) - X_{n-1} (t)| < \epsilon.
 	\end{align*}
@@ -350,7 +350,7 @@ Lo cual implica que $\sum \mathbb{P}(A_n) < \infty$, y entonces, por la Ley de B
 	\begin{align*}
 		\sup_{t \in [0, 1]} |X_n (t) - X_{n-1} (t)| \geq 2^{-n / 4} \hspace{0.5cm} \forall n \geq N.
 	\end{align*}
-Es decir, el proceso $X_n (t)$ converge uniformemente. Al ser, $(X_n (t); n \geq 0, 0 \leq t \leq 1)$ uniformemente convergente en $\mathbb{C}([0, 1], \mathbb{R})$, dicho límite es una función continua , ya que $\mathbb{C}([0, 1], \mathbb{R})$ es un espacio completo bajo una topología uniforme. \\
+Es decir, el proceso $X_n (t)$ uniformemente Cauchy, sin embargo, al ser funciones continuas en un espacio métrico con la imagen del espacio siendo completo, se tiene que es un proceso uniformemente convergente. Como $(X_n (t); n \geq 0, 0 \leq t \leq 1)$ uniformemente convergente en $\mathbb{C}([0, 1], \mathbb{R})$, dicho límite es una función continua , ya que $\mathbb{C}([0, 1], \mathbb{R})$ es un espacio completo bajo una topología uniforme. \\
 
 Sea 
 	\begin{align*}
