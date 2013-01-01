@@ -272,8 +272,65 @@ A continuación, se muestran pequeños resultados que nos daran útiles herramie
 	Sean $\theta$ y $\tau$ dos tiempos de paro con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$, entonces $\theta \wedge \tau$ y $\theta \vee \tau$ son tiempos de paro con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$.
 \end{lemma}
 \begin{proof}
-	Aquí va una demostración sencilla.
+	Como $\theta$ y $\tau$ dos tiempos de paro entonces $\{\tau \leq t \} \in \mathcal{F}_t$ y $\{\theta \leq t \} \in \mathcal{F}_t$, podemos entonces ver al conjunto
+	\begin{align*}
+		\{\theta \wedge \tau > t \} & = \{ \theta > t \} \cap \{ \tau > t \} \\
+		& = \{ \theta \leq t \}^{c} \cap \{ \tau \leq t \}^{c} \in \mathcal{F}_t.
+	\end{align*}
+	Por lo que $\{\theta \wedge \tau \leq t \} = \{\theta \wedge \tau > t \}^{c}$ es un conjunto de $\mathcal{F}_t$, es decir, $\theta \wedge \tau$ es un tiempo de paro respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$. \\
+
+	Para mostrar la segunda afirmación, tenemos que
+	\begin{align*}
+		\{ \theta \vee \tau \leq t \} = \{ \theta \leq t \} \cap \{ \tau \leq t \} \in \mathcal{F}_t,
+	\end{align*}
+	lo cual muestra que $\theta \vee \tau$ es un tiempo de paro respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$.
+\end{proof}
+
+\begin{lemma}
+	Sea $(\tau_n)_{n \geq 1}$ una sucesión de tiempos de paro con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$, entonces $\sup_{n \geq 1} \tau_n$ es tiempo de paro con respecto a la misma filtración. Si además suponemos que la filtración es continua por la derecha entonces
+	\begin{align*}
+		\inf_{n \geq 1} \tau_n, \hspace{0.3cm} \liminf_{n \rightarrow \infty} \tau_n, \hspace{0.3cm} \limsup_{n \rightarrow \infty} \tau_n,
+	\end{align*}
+	son tiempos de paro.
+\end{lemma}
+
+\begin{proof}
+	Basta mostrar que el $\sup_{n \geq 1} \tau_n$ e $\inf{n \geq 1} \tau_n$ son tiempos de paro, pues recordemos que de la definición de $\liminf$ y $\limsup$ tenemos que 
+	\begin{align*}
+		\limsup_{n \rightarrow \infty} \tau_n = \inf_{n \geq 1} \left\{ \sup_{m \geq n} \tau_m \right\} \text{   y   } \liminf_{n \rightarrow \infty}\tau_n = \sup_{n \geq 1} \left\{ \inf_{m \geq n} \tau_m \right\}.
+	\end{align*}.
+	Entonces, veamos que para demostrar que $\sup_{n \geq 1} \tau_n$ es un tiempo de paro con respecto a $(\mathcal{F}_t)_{t \geq 0}$, tenemos que comprobar que el conjunto $\{ \sup_{n \geq 1} \tau_n \leq t\}$ es un elemento de $\mathcal{F}_t$. Sin embargo, podemos ver que
+	\begin{align*}
+		\left\{ \sup_{n \geq 1} \tau_n \leq t \right\} = \bigcap_{n \geq 1} \{\tau_n \geq t\},
+	\end{align*}
+	donde cada elemento de la intersección pertenece a la filtración a tiempo $t$. De la misma manera podemos observar que
+	\begin{align*}
+		\left\{ \inf_{n \geq 1} \tau_n \leq t \right\} = \bigcup_{n \geq 1} \{\tau_n < t\}.
+	\end{align*}
+\end{proof}
+
+\begin{lemma}
+	Sean $\tau$ y $\theta$ dos tiempos de paro con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$, y un conjunto $A \in \mathcal{F}_{\theta}$ entonces $A \cap \{\theta \leq \tau\} \in \mathcal{F}_{\tau} \cap \mathcal{F}_{\theta}$. En particular, si $\theta \leq \tau$ entonces $\mathcal{F}_{\theta} \subset \mathcal{F}_{\tau}$.
+\end{lemma}
+\begin{proof}
+	En principio, para comprobar que $A \cap \{\theta \leq \tau\}$ es un elemento de $\mathcal{F}_{\tau}$, recordemos que un conjunto $B$ pertenece a la $\sigma$-álgebra mencionada si y solo si
+	\begin{align*}
+		B \in \mathcal{F}_{\infty} \text{  y para todo  } t \geq 0 \ B \cap \{\tau \leq t\} \in \mathcal{F}_t.
+	\end{align*}
+	Sabemos que $A$ y $\{\theta \leq t\}$ son elementos de $\mathcal{F}_{\infty}$. Ahora, consideremos el conjunto
+	\begin{align*}
+		A \cap \{ \theta \leq \tau\} \cap \{\tau \leq t\} = A \cap \{\theta \leq t\} \cap \{\theta \wedge t \leq \tau \wedge t\} \cap \{\tau \leq t\}.
+	\end{align*}
+	Sabemos que $A \cap \{\theta \leq t\} \in \mathcal{F}_t$, pues $A \in \mathcal{F}_{\theta}$, como $\tau$ es un tiempo de paro, $\{\tau \leq t\} \in \mathcal{F}_t$, por último, $\theta \wedge t$ y $\tau \wedge t$ son variables aleatorias $\mathcal{F}_t$-medibles, por lo tanto
+	\begin{align*}
+		A \cap \{ \theta \leq \tau\} \cap \{\tau \leq t\} \in \mathcal{F}_t.
+	\end{align*}
+	Por lo que, $A \in \{\theta \leq \tau\} \in \mathcal{F}_{\tau}$.
 \end{proof}
 
 \section{Martingalas a tiempo continuo}
 \section{Aplicaciones al Movimiento Browniano}
+
+
+
+
