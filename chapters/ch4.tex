@@ -220,19 +220,60 @@ Veamos ahora que, bajo ciertas condiciones dadas a la filtración, al proceso y 
 \end{definition}
 La prueba de que efectivamente, $\mathcal{F}_{\tau}$ es una $\sigma$-álgebra es análoga a la Proposición \ref{algebraaleatoria} del Capítulo 1. Veamos el siguiente resultado, relacionado a la $\sigma$-álgebra parada definida arriba.
 \begin{proposition}
-Considere las siguientes definiciones
+	Considere las siguientes definiciones
+	\begin{align*}
+		\mathcal{F}_{\tau^{+}} & = \left\{ A \in \mathcal{F}_{\infty} : \forall t \in \mathbb{R}_{+}, \ A \cap \{\tau < t\} \in \mathcal{F}_t \right\}, \\
+		\mathcal{F}_{\tau^{-}} & = \sigma \left\{ A \cap \{\tau > t\} : t \geq 0, \ A \in \mathcal{F}_t \right\}.
+	\end{align*}
+	Entonces, 
+	\begin{enumerate}
+		\item $\mathcal{F}_{\tau^{+}}$ es una $\sigma$-álgebra.
+		\item $\mathcal{F}_{\tau^{-}} \subset \mathcal{F}_{\tau} \subset \mathcal{F}_{\tau^{+}}$.
+		\item Si $(\mathcal{F}_t)_{t \geq 0}$ es continua por la derecha, entonces $\mathcal{F}_{\tau} = \mathcal{F}_{\tau^{+}}$.
+		\item Si $\tau = t$, entonces $\mathcal{F}_{\tau} = \mathcal{F}_t$ y $\mathcal{F}_{\tau^{+}} = \mathcal{F}_{t^{+}}$.
+	\end{enumerate}
+	\end{proposition}
+\begin{proof}
+1. Consideremos el conjunto $\Omega$ como la familia de conjuntos que pertenecen a $\mathcal{F}_{\tau^{+}}$. 
+
+% Para ver que $\Omega$ es un elemento de $\mathcal{F}_{t^{+}}$ probemos que $\Omega \in \mathcal{F}_{\infty}$ y además, para todo $t \geq 0$ el conjunto $\Omega \cap \{ \tau < t \}$ pertenece a $\mathcal{F}_t$. \\
+
+Como $\Omega$ está formado por conjuntos de $\mathcal{F}_{t^{+}}$, sabemos que cada uno de ellos pertenece a $\mathcal{F}_{\infty}$, por lo que $\Omega \in \mathcal{F}_{\infty}$. Además sabemos que cada uno de los conjuntos $A$ de $\Omega$ cumple para toda $t \geq 0$ que $A \cap \{\tau < t\} \in \mathcal{F}_t$, por lo que $\Omega \cap \{\tau < t\} \in \mathcal{F}_t$, de ambas condiciones, tenemos que $\Omega \in \mathcal{F}_{\tau^{+}}$. \\
+
+Si $A \in \mathcal{F}_{\tau^{+}}$, tenemos que comprobar que el complemento de $A$ es un elemento de $\mathcal{F}_{\tau^{+}}$. Sabemos que $A \in \mathcal{F}_{\infty}$, entonces $A^{c} \in \mathcal{F}_{\infty}$ al ser una $\sigma$-álgebra. Además, tenemos que $A \cap \{ \tau < t \} \in \mathcal{F}_t$ para toda $t \geq 0$, es decir, $A \in \mathcal{F}_t$, por lo que $A^{c} \in \mathcal{F}_t$ al ser $\sigma$-álgebra. Entonces $A^{c} \cap \{\tau < t\} \in \mathcal{F}_t$. De ambas condiciones, sabemos que $A^{c} \in \mathcal{F}_{\tau^{+}}$. \\
+
+Si $A_1, A_2, \ldots \in \mathcal{F}_{\tau^{+}}$, veamos que $\cup A_n \in \mathcal{F}_{\tau^{+}}$. Sabemos que si, $A_1, A_2, \ldots \in \mathcal{F}_{\tau^{+}}$ entonces cada $A_n \in \mathcal{F}_{\infty}$ para $n \geq 1$, por lo tanto $\cup A_n \in \mathcal{F}_{\infty}$.
+
+Si $A_1, A_2, \ldots \in \mathcal{F}_{\tau^{+}}$, tenemos que para toda $n \geq 1$ y $t \geq 0$ se tiene que 
 \begin{align*}
-	\mathcal{F}_{\tau^{+}} & = \left\{ A \in \mathcal{F}_{\infty} : \forall t \in \mathbb{R}_{+}, \ A \cap \{\tau < t\} \in \mathcal{F}_t \right\}, \\
-	\mathcal{F}_{\tau^{-}} & = \sigma \left\{ A \cap \{\tau > t\} : t \geq 0, \ A \in \mathcal{F}_t \right\}.
+	A_1 \cap \{\tau < t\} \in \mathcal{F}_t, \hspace{0.3cm} A_2 \cap \{\tau < t\} \in \mathcal{F}_t, \ldots
 \end{align*}
-Entonces, 
-\begin{enumerate}
-	\item $\mathcal{F}_{\tau^{+}}$ es una $\sigma$-álgebra.
-	\item $\mathcal{F}_{\tau^{-}} \subset \mathcal{F}_{\tau} \subset \mathcal{F}_{\tau^{+}}$.
-	\item Si $(\mathcal{F}_t)_{t \geq 0}$ es continua por la derecha, entonces $\mathcal{F}_{\tau} = \mathcal{F}_{\tau^{+}}$.
-	\item Si $\tau = t$, entonces $\mathcal{F}_{\tau} = \mathcal{F}_t$ y $\mathcal{F}_{\tau^{+}} = \mathcal{F}_{t^{+}}$.
-\end{enumerate}
+Entonces, para toda $t \geq 0$
+\begin{align*}
+	\left( \bigcup_{n \geq 1} A_n \right) \cap \{\tau < t\} = \bigcup_{n \geq 1} \left( A_n \cap \{\tau < t\} \right) \in \mathcal{F}_t.
+\end{align*}
+Se tiene entonces que $\cup A_n \in \mathcal{F}_{\tau^{+}}$. \\
+
+2. Falta la parte en que pruebo que $\mathcal{F}_{\tau^{-}} \subset \mathcal{F}_{\tau}$. \\
+
+Si $A \in \mathcal{F}_{\tau}$, entonces $A \in \mathcal{F}_{\infty}$, además de que, para toda $t \geq 0$ se tiene $A \cap \{ \tau \leq t \} \in \mathcal{F}_t$, en particular, para todo $t \geq 0$ el conjunto $A \cap \{ \tau < t \}$ pertenece a $\mathcal{F}_t$, es decir, $A \in \mathcal{F}_{\tau^{+}}$, por lo tanto, $\mathcal{F}_{\tau} \subset \mathcal{F}_{\tau^{+}}$. \\
+
+3. De la parte anterior sabemos que $\mathcal{F}_{\tau} \subset \mathcal{F}_{\tau^{+}}$. Por lo que, suponiendo que $(\mathcal{F}_t)_{t \geq 0}$ es continua por la derecha basta demostrar que $\mathcal{F}_{\tau^{+}} \subset \mathcal{F}_{\tau}$ para comprobar que $\mathcal{F}_{\tau} = \mathcal{F}_{\tau^{+}}$. \\
+
+4. Falta la cuarta demostración.
+\end{proof}
+
+\begin{proposition}
+	Sea $\tau$ un tiempo de paro con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$. Si consideramos un conjunto $A$ que pertenece a $\mathcal{F}{\infty}$ y definimos $\gamma = \tau 1_A + \infty 1_{A^{c}}$. Entonces, $\gamma$ es un tiempo de paro con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$.
 \end{proposition}
+
+A continuación, se muestran pequeños resultados que nos daran útiles herramientas a la hora de trabajar con respecto a los tiempos de paro en afirmaciones posteriores.
+\begin{lemma}
+	Sean $\theta$ y $\tau$ dos tiempos de paro con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$, entonces $\theta \wedge \tau$ y $\theta \vee \tau$ son tiempos de paro con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$.
+\end{lemma}
+\begin{proof}
+	Aquí va una demostración sencilla.
+\end{proof}
 
 \section{Martingalas a tiempo continuo}
 \section{Aplicaciones al Movimiento Browniano}
