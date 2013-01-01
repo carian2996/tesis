@@ -269,6 +269,7 @@ Si $A \in \mathcal{F}_{\tau}$, entonces $A \in \mathcal{F}_{\infty}$, además de
 
 A continuación, se muestran pequeños resultados que nos daran útiles herramientas a la hora de trabajar con respecto a los tiempos de paro en afirmaciones posteriores.
 \begin{lemma}
+	\label{paromaxmin}
 	Sean $\theta$ y $\tau$ dos tiempos de paro con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$, entonces $\theta \wedge \tau$ y $\theta \vee \tau$ son tiempos de paro con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$.
 \end{lemma}
 \begin{proof}
@@ -310,6 +311,7 @@ A continuación, se muestran pequeños resultados que nos daran útiles herramie
 \end{proof}
 
 \begin{lemma}
+	\label{sigmaparadasubset}
 	Sean $\tau$ y $\theta$ dos tiempos de paro con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$, y un conjunto $A \in \mathcal{F}_{\theta}$ entonces $A \cap \{\theta \leq \tau\} \in \mathcal{F}_{\tau} \cap \mathcal{F}_{\theta}$. En particular, si $\theta \leq \tau$ entonces $\mathcal{F}_{\theta} \subset \mathcal{F}_{\tau}$.
 \end{lemma}
 \begin{proof}
@@ -325,7 +327,50 @@ A continuación, se muestran pequeños resultados que nos daran útiles herramie
 	\begin{align*}
 		A \cap \{ \theta \leq \tau\} \cap \{\tau \leq t\} \in \mathcal{F}_t.
 	\end{align*}
-	Por lo que, $A \in \{\theta \leq \tau\} \in \mathcal{F}_{\tau}$.
+	Por lo que, $A \cap \{\theta \leq \tau\} \in \mathcal{F}_{\tau}$. \\
+
+	Por otro lado, podemos ver que se puede descomponer el conjunto
+	\begin{align}
+		A \cap \{\theta \leq \tau\} \cap \{\theta \leq t\} & = \left( A \cap \{\theta \leq \tau\} \cap \{\tau \leq t\} \cap \{\theta \leq t\} \right) \nonumber \\
+		& \cup \left( A \cap \{\theta \leq \tau\} \cap \{\tau > t\} \cap \{\theta \leq t\} \right), \label{acg}
+	\end{align}
+Pues ambos son disjuntos, ahora veamos que ambos son elementos de $\mathcal{F}_t$. De la primera parte de la demostración sabemos que el primer elemento de la unión en (\ref{acg}) pertenece a $\mathcal{F}_t$. Para la segunda parte en (\ref{acg}) vemos que
+	\begin{align*}
+		A \cap \{\theta \leq \tau\} \cap \{\tau > t\} \cap \{\theta \leq t\} = A \cap \{\tau \leq t\} \cap \{\theta \leq t\},
+	\end{align*}
+	donde cada elemento pertenece a $\mathcal{F}_t$, lo cual prueba que $A \cap \{\theta \leq \tau\} \in \mathcal{F}_{\theta}$. En particular, con $\theta \leq \tau$ tenemos que si $A \in \mathcal{F}_{\theta}$ entonces
+	\begin{align*}
+		A \cap \{ \tau \leq t \} = A \cap \{ \theta \leq \tau \} \cap \{ \tau \leq t \} \in \mathcal{F}_t,
+	\end{align*}
+	lo cual resulta cierto de los resultados anteriores.
+\end{proof}
+
+\begin{lemma}
+	\label{nosequeponer}
+	Sea $\tau$ un tiempo de paro con respecto a $(\mathcal{F}_t)_{t \geq 0}$ y $\theta$ una función que es $\mathcal{F}_{\tau}$-medible, de tal manera que $\theta \geq \tau$, entonces $\theta$ es un tiempo de paro con respecto a la filtración $\mathcal{F}_t)_{t \geq 0}$.
+\end{lemma}
+\begin{proof}
+	Consideremos el conjunto $\{ \theta \leq t \}$, como $\theta \geq t$ tenemos que
+	\begin{align*}
+		\{\theta \leq t\} = \{\theta \leq t\} \cap \{\tau \leq t\},
+	\end{align*}
+	pero como $\theta$ es una función $\mathcal{F}_{\tau}$-medible sabemos que todo conjunto $B$ en $\mathcal{F}_{\tau}$ cumple $B \cap \{\tau \leq t\} \in \mathcal{F}_t$, lo cual muestra que $\theta$ es un tiempo de paro.
+\end{proof}
+
+\begin{lemma}
+	Sean $\tau$ y $\theta$ dos dos tiempos de paro con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$, entonces la suma de ambos es un tiempo de paro con respecto a la misma filtración.
+\end{lemma}
+\begin{proof}
+	Recordemos del Lema \ref{paromaxmin} que si $\tau$ y $\theta$ son tiempos de paro respecto a la misma filtración entonces $\tau \vee \theta$ también lo es. Tenemos que $\tau \vee \theta \leq \tau + \theta$, con al ayuda del Lema \ref{sigmaparadasubset} podemos ver fácilmente que $\mathcal{F}_{\tau}, \mathcal{F}_{\theta} \subset \mathcal{F}_{\tau \vee \theta}$. 
+
+	Por lo tanto, al ser $\tau$ una variable $\mathcal{F}_{\tau}$-medible y $\theta$ una variable $\mathcal{F}_{\theta}$-medible concluimos que $\tau + \theta \in \mathcal{F}_{\tau \vee \theta}$. Del Lema \ref{nosequeponer} concluimos que $\tau + \theta$ es un tiempo de paro.
+\end{proof}
+
+\begin{lemma}
+	Considere un tiempo de paro $\tau$ con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$ entonces existe una sucesión decreciente $(\tau_n)_{n \geq 1}$ de tiempo de paro discretos tal que $\lim_{n \rightarrow \infty} \tau_n = \tau$.
+\end{lemma}
+\begin{proof}
+	
 \end{proof}
 
 \section{Martingalas a tiempo continuo}
