@@ -1,0 +1,55 @@
+En el presente capítulo estudiamos las propiedades y resultados principales de tiempos de paro y martingalas a tiempo continuo. Muchos de los resultados se han sido vistos en el Capítulo 1, sin embargo, es necesario presentar nuevos conceptos para poder analizar los procesos estocásticos a tiempo continuo. Las herramientas que se presentan en este capítulo serán las necesarias para poder resolver el Problema de Paro Óptimo a tiempo continuo. \\
+
+En principio, se presentan nuevos conceptos referentes a los procesos estocásticos a tiempo continuo, para después analizar los tiempos de paro y las martingalas. Al final del capítulo se dan algunas aplicaciones de las propiedades de martingalas para el movimiento Browniano. 
+
+\section{Conceptos fundamentales}
+
+\begin{definition}
+	Considere un espacio de probabilidad $(\Omega, \mathcal{F}, \mathbb{P})$. Una filtración a tiempo continuo es una familia de sub-$\sigma$-álgebras $(\mathcal{F}_t)_{t \geq 0}$ cada una perteneciente a $\mathcal{F}$, de tal manera que $\mathcal{F}_s \subset \mathcal{F}_t$ si y solo si $s \leq t$. Al sistema $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \mathbb{P})$ se le conoce como espacio de probabilidad filtrado.
+\end{definition}
+
+Recordemos que la filtración canónica asociada al proceso estocástico $X = (X_t, t \geq 0)$ está definida como $\mathcal{F}_t = \sigma(X_s : s \leq t)$. Definamos los siguientes conceptos.
+
+\begin{align*}
+	\mathcal{F}_{t^{-}} = \sigma \left( \bigcup_{s < t} \mathcal{F}_s \right), \hspace{0.3cm} \mathcal{F}_{t^{+}} = \bigcap_{s > t} \mathcal{F}_s, \hspace{0.3cm} \text{ para toda } t \geq 0.
+\end{align*}
+
+De las definiciones anteriores es claro ver que $\mathcal{F}_{t^{-}} \subset \mathcal{F}_t \subset \mathcal{F}_{t^{+}}$. \\
+
+Como se ha visto hasta el momento, el concepto de medibilidad, resulta claro cuando se fija una tiempo $t$, entonces se dice que $X_t$ es una función $\mathcal{F}$-medible, sin embargo, hemos observado que un proceso estocástico continuo depende de dos variables $(t, \omega)$, por lo que; si el evento $\omega$ es fijo, se contamos con ninguna propiedad que pueda decirnos si las trayectorias del proceso son medibles. Para ello, es conveniente contar con alguna característica de medibilidad conjunta. \\
+
+\begin{definition}
+	Un proceso estocástico $X = (X_t, t \geq 0)$ con espacio de estados $(E, \mathcal{E})$ se dice medible, si para toda $A \in \mathcal{E}$, el conjunto
+	\begin{align*}
+	\{ (t, \omega) : X_t (\omega) \in A \},
+	\end{align*}
+	Pertenece a la $\sigma$-álgebra producto $\mathcal{B} [0, \infty)] \times \mathcal{F}$, es decir,
+	\begin{align*}
+	(t, \omega) \rightarrow X_t(\omega) : ([0, \infty) \times \Omega, \ \mathcal{B}(0, \infty) \times \mathcal{F} ) \rightarrow (E, \mathcal{E}).
+	\end{align*}
+\end{definition}
+
+Del Teorema de Fubuni sabemos que \\
+
+Aquí va el Teorema de Tonell-Fubini. \\
+
+En consecuencia, sabemos que las trayectorias de un proceso medible, son funciones $\mathcal{B}[0, \infty)$-medibles. El hecho de introducir un concepto de filtración continua, nos permitirá definir conceptos más interesantes y útiles que el de proceso medible.
+
+\begin{definition}
+	Considere un espacio de probabilidad filtrado  $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \mathbb{P})$ y un proceso estocástico $(X_t, t \geq 0)$ definido en  $(\Omega, \mathcal{F}, \mathbb{P})$. Se dice que el proceso es adaptado a la filtración $(\mathcal{F}_t)_{t \geq 0}$ si para toda $t \geq 0$ la variable aleatoria $X_t$ es $\mathcal{F}_t$-medible.
+\end{definition}
+
+La siguiente definición es fundamental para el estudios de los procesos a tiempo continuo.
+
+\begin{definition}[Proceso Progresivo]
+	Sea $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \mathbb{P})$ un espacio de probabilidad filtrado y sea $(X_t, t geq 0)$ un proceso estocástico definido en $(\Omega, \mathcal{F}, \mathbb{P})$, con un espacio de estados $(E, \mathcal{E})$. Decimos que el proceso es progresivamente medible, o simplemente, progresivo, si para toda $t \geq 0$
+	\begin{align*}
+		[0, t] \times \Omega \rightarrow E \\
+		(s, \omega) \rightarrow X_s (\omega).
+	\end{align*}
+	es $\mathcal{B}[0, t] \times \mathcal{F}_t$-medible.
+\end{definition}
+
+\section{Tiempos de paro a tiempo continuo}
+\section{Martingalas a tiempo continuo}
+\section{Aplicaciones al Movimiento Browniano}
