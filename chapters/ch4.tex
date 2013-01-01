@@ -131,5 +131,86 @@ Por lo que $\mathcal{G}_t  = \mathcal{G}_{t^{+}}$, lo que quiere decir, que la f
 \end{definition}
 
 \section{Tiempos de paro a tiempo continuo}
+En esta sección introduciremos la noción de un tiempo de paro, pero esta vez a tiempo continuo.Las propiedades de los tiempos de paro discretos son similares a las que a continuación veremos, pero aún así es conveniente realizar definiciones detalladas de los conceptos.
+
+\begin{definition}
+	En un espacio de probabilidad filtrado $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \mathbb{P})$, una función $\tau : \Omega \rightarrow [0, \infty]$ se llama tiempo de paro con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$ si
+	\begin{enumerate}
+		\item $\tau$ es $\mathcal{F}_{\infty}$-medible.
+		\item El conjunto $\{ \tau \leq t \}$ pertenece a $\mathcal{F}_t$, para toda $t \geq 0$.
+	\end{enumerate}
+\end{definition}
+
+Resulta claro ver que, si $\tau$ es una función constante, entonces es un tiempo de paro. Si consideramos a $k$, una constante positiva, y además $t \in [0, k)$, el conjunto $\{\tau + k \leq t\} = \emptyset$ el cual esta en $\mathcal{F}_t$, por otro lado, si $t \in [k, \infty)$ entonces
+\begin{align*}
+\{ \tau + k \leq t \} = \{ \tau \leq t - k \} \in \mathcal{F}_{t-k} \subseteq \mathcal{F}_{t}.
+\end{align*}
+Lo cual implica que $\tau + k$ es un tiempo de paro.
+
+\begin{proposition}
+	\label{paroequivalente}
+	Si la filtración $(\mathcal{F}_t)_{t \geq 0}$ es continua por la derecha, entonces $\tau$ es un tiempo de paro si y solo si $\{\tau < t\}$ pertenece a $\mathcal{F}_t$, para toda $t \geq 0$.
+\end{proposition}
+\begin{proof}
+	Suponiendo que $\tau$ es un tiempo de paro. para un tiempo fijo $s < t$ se tiene
+	\begin{align*}
+	\{ \tau \leq s \} \in \mathcal{F}_s,
+	\end{align*}
+	Pero como, $\mathcal{F}_t$ es filtración, entonces para toda $t \geq 0$ se tiene que $\mathcal{F}_s \subset \mathcal{F}_t$, por lo tanto, $\{ \tau \leq s \} \in \mathcal{F}_t$. Entonces 
+	\begin{align*}
+	\{ \tau < t \} = \bigcup_{s < t} \{ \tau \leq s \} \in \mathcal{F}_t, \hspace{0.3cm} \text{ para } t \geq 0.
+	\end{align*}
+	
+	Por otra parte, si suponemos que $\{ \tau < t \} \in \mathcal{F}_t$, para toda $t \geq 0$, podemos ver que 
+	\begin{align*}
+	\{\tau \leq t \} = \bigcap_{s > t} \{\tau > s\} \in \mathcal{F}_{t^{+}}.
+	\end{align*}
+	Como $(\mathcal{F}_t)_{t \geq 0}$ es un filtración continua por la derecha sabemos que $\mathcal{F}_{t^{+}} = \mathcal{F}_t$. Se tiene entonces que $\tau$ es un tiempo de paro.
+\end{proof}
+
+La siguiente definición nos será útil al analizar cuando un proceso aleatorio entra por primera vez en un conjunto. 
+\begin{definition}
+	Se define al tiempo de entrada del proceso $(X_t, t \geq 0)$ al conjunto $A$, como
+	\begin{align*}
+	\tau_A (\omega) = 
+	\begin{cases}
+	\inf \{ t \geq 0 : X_t (\omega) \in A \}, & \text{ si } \{ t \geq 0 : X_t (\omega) \in A \} \neq \emptyset, \\
+	\infty, & \text{ si } \{ t \geq 0 : X_t (\omega) \in A \} = \emptyset.
+	\end{cases}
+	\end{align*}
+\end{definition}
+
+Veamos ahora que, bajo ciertas condiciones dadas a la filtración, al proceso y al conjunto, el tiempo de entrada es un tiempo de paro.
+\begin{proposition}
+	Sea $X = (X_t, t \geq 0)$ un proceso estocástico adaptado a la filtración $(\mathcal{F}_t)_{t \geq 0}$, y con un espacio de estados $(E, \mathcal{B}(E))$, donde $E$ es un espacio métrico y sea $A \in\mathcal{B}(E)$.
+	\begin{enumerate}
+		\item Si $X$ es continuo por la derecha, $(\mathcal{F}_t)_{t \geq 0}$ es continua por la derecha y $A$ es un conjunto abierto, entonces $\tau_A$ es un tiempo de paro con respecto a $(\mathcal{F}_t)_{t \geq 0}$.
+		\item Si $X$ es continuo y $A$ es un conjunto cerrado, entonces $\tau_A$ es un tiempo de paro con respecto a $(\mathcal{F}_t)_{t \geq 0}$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	Consideremos los elementos $\omega \in \Omega_0$ tales que, la trayectoria del proceso $X$ es continua por la derecha, con $\mathbb{P}(\Omega-0) = 1$. Sea
+	\begin{align*}
+	C_t : = \bigcup_{s \in \mathbb{Q}_{+}} \left\lbrace X_s \in A : s < t \right\rbrace \hspace{0.3cm} \text{ para } t \geq 0 \text{ fija}, 
+	\end{align*}
+	donde $A$ s un conjunto abierto de $\mathcal{B}(E)$. Como $X$ es adaptado a $(\mathcal{F}_t)_{t \geq 0}$ tenemos que $X_t$ es $\mathcal{F}_t$-medible para toda $t \geq 0$, es decir, para cualquier $A \in \mathcal{B}(E)$
+	\begin{align*}
+	\{ \omega \in \Omega \mid X_t (\omega) \in A \} \in \mathcal{F}_t,
+	\end{align*}
+	por lo que $C_t \in \mathcal{F}_t$. Ya que la filtración es continua por la derecha y de la Proposición \ref{paroequivalente}, basta demostrar que $\{\tau_A < t\} = C_t$ para probar que $\tau_A$ es un tiempo de paro. \\
+	
+	Veamos que se cumplen las siguientes condiciones. Por un lado, si $\omega \in C_t$, de la definición misma de $C_t$ sabemos que existe $s \in \mathbb{Q}_{+}$ con $s < t$, tal que $X_s(\omega) \in A$. Por lo que, $\tau_A = \inf \{ t \geq 0 : X_t (\omega) \in A \} \leq s < t$, es decir, $\omega in \{\tau_A < t\}$. Por otro lado, si $\omega \in \{\tau_A < t\}$, entonces existe un tiempo $t_0 < t$ tal que $X_{t_0} (\omega) \in A$. 
+	
+	Como el proceso es continuo por la derecha y $A$ es abierto, existe $\epsilon > 0$ tal que
+	\begin{align*}
+	s \in \mathbb{Q}\cap [t_0, t_0 + \epsilon) \text{ y } X_s(\omega) \in A.
+	\end{align*}
+	De ambos argumentos, tenemos que 
+	\begin{align*}
+	\{ \tau_A < t \} = C_t \in \mathcal{F}_t.
+	\end{align*}
+	Lo que significa que, $\tau_A$ es un tiempo de paro respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$.
+\end{proof}
+
 \section{Martingalas a tiempo continuo}
 \section{Aplicaciones al Movimiento Browniano}
