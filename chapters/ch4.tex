@@ -50,6 +50,86 @@ La siguiente definición es fundamental para el estudios de los procesos a tiemp
 	es $\mathcal{B}[0, t] \times \mathcal{F}_t$-medible.
 \end{definition}
 
+De las definiciones anteriores podemos afirmar que todo proceso aleatorio es adaptado a su filtración canónica y de la misma manera, decir que un proceso progresivamente medible es siempre adaptado. Sin embargo, en general no se puede suponer cierto que un proceso adaptado es un proceso progresivo, a menos que este sea continuo por la derecha o por la izquierda, como se verá en el siguiente teorema. \\
+
+\begin{theorem}
+	Sea $(X = X_t, t \geq 0)$ un proceso estocástico con valores en un espacio métrico $(E, \mathcal{E})$, adaptado a la filtración $(\mathcal{F}_t)_{t \geq 0}$ y continuo por la derecha (o por la izquierda), entonces $X$ es progresivo.
+\end{theorem}
+\begin{proof}
+	Demostraremos el caso en que $X$ es continuo por la derecha, pues cuando es continuo por la izquierda, se realiza una prueba similiar. Para verificar que un proceso es progresivo basta ver que para cada conjunto $A \in \mathcal{B}(E)$
+	\begin{align}
+	\{ (s, \omega) \in [0, t] \times \Omega : X_s(\omega) \in A \} \in \mathcal{B}[0, t] \times \mathcal{F}_t, \label{progre}
+	\end{align}
+	Si definimos al proceso continuo en función de un proceso discreto podremos verificar la condición deseada y por la continuidad de $X$, lograremos probar la afirmación. Consideremos entonces para cada $n \geq 1$, $k \in \{ 0, 1, \ldots, 2^n - 1 \}$ y $s \in [0, t]$ el siguiente proceso
+	\begin{align*}
+	X_s^n (\omega) = 
+	\begin{cases}
+	X_{\frac{(k+1)t}{2^n}} (\omega), & \text{ si } \frac{kt}{2^n} < s \leq \frac{(k+1)t}{2^n}; \\
+	X_0 (\omega), & \text{ si } s = 0.
+	\end{cases}
+	\end{align*}
+	De la continuidad de $X$ sabemos que $\lim_{n \rightarrow \infty} X_s^n (\omega) = X_s (\omega)$ para toda $(s, \omega) \in [0, t] \times \Omega$. \\
+	
+	Por último, veamos que (\ref{progre}) se cumple para $X_s^n$, al conjunto
+	\begin{align*}
+	\{ (s, \omega) \in [0, t] \times \Omega : X_s(\omega) \in A \},
+	\end{align*}
+	lo podemos escribir de tal manera que cada uno de sus elementos pertenezca a $\mathcal{B}[0, t] \times \mathcal{F}_t$, por ejemplo
+	\begin{align*}
+	\bigcup_{k = 0}^{2^n - 1} \left\{ \left( \frac{kt}{2^n}, \frac{(k+1)t}{2^n} \right] \times \left\{ X_{\frac{(k+1)t}{2^n} \in A} \right\}  \right\} \bigcup\left\{ \{0\} \times \{X_0(\omega) \in A\} \right\}.
+	\end{align*}
+	Del argumento anterior podemos afirmar que $X$ es un proceso progresivo.
+\end{proof}
+
+El siguiente concepto será la base para la definición de una $\sigma$-álgebra ligada a los proceso progresivamente medibles, además de ser un concepto útil en el trabajo posterior.
+
+\begin{definition}
+	Se dice que un conjunto $A \subset \mathbb{R}_{+} \times \Omega$ es progresivamente medible si el proceso asociado a $A$
+	\begin{align*}
+	X_t(\omega) = 1_A (t, \omega) =
+	\begin{cases}
+	1, & \text{ si } (t, \omega) \in A; \\
+	0, & \text{ si } (t, \omega) \notin A
+	\end{cases}
+	\end{align*}
+	es progresivamente medible.
+\end{definition}
+
+\begin{proposition}
+	La familia de conjuntos progresivamente medibles forma un $\sigma$-álgebra conocida como $\sigma$-álgebra progresiva.
+\end{proposition}
+\begin{proof}
+	Aquí va la demostración que no he terminado.
+\end{proof}
+
+La siguiente proposición muestra la relación entre la $\sigma$-álgebra progresiva y los procesos progresivamente medibles.
+
+\begin{proposition}
+	Sea $(X_t, t \geq 0)$ un proceso estocástico definido en $(\Omega, \mathcal{F}, \mathbb{P})$, con un espacio de estados $(E, \mathcal{E})$. El proceso $X$ es progresivamente medible si y solo si $(t, \omega) \rightarrow X_t(\omega)$ es medible con respecto a la $\sigma$-álgebra progresiva.
+\end{proposition}
+\begin{proof}
+	Aquí va otra demostración que no he entendido gracias a la medibilidad con respecto a la $\sigma$-álgebra progresiva.
+\end{proof}
+
+Antes de entrar de lleno al estudio de los tiempos de paro a tiempo continuo, consideremos las siguientes definiciones.
+\begin{definition}
+	Una filtración $(\mathcal{F}_t)_{t \geq 0}$ se llama continua por la derecha si $\mathcal{F}_t = \mathcal{F}_{t^{+}} = \cap_{s > t} \mathcal{F}_s$, para toda $t \geq 0$.
+\end{definition}
+
+Consideremos a la filtración $(\mathcal{F}_{t^{+}})_{t \geq 0}$ y veamos que es continua por la derecha. Para facilitar el argumento, renombremos a $\mathcal{F}_{t_{+}}$ por $\mathcal{G}_t$, por lo que tenemos, por definición que $\mathcal{G}_t \subseteq \mathcal{G}_{t^{+}}$, más aún
+	\begin{align*}
+	\mathcal{G}_{t^{+}} = \bigcap_{s < t} \mathcal{G}_s = \bigcap_{s < t} \mathcal{F}_{s^{+}} = \bigcap_{s < t}  \left( \bigcap_{u < s} \mathcal{F}_u \right) \subseteq \bigcap_{s < t} \mathcal{F}_s = \mathcal{F}_{t^{+}} = \mathcal{G}_t
+	\end{align*}
+Por lo que $\mathcal{G}_t  = \mathcal{G}_{t^{+}}$, lo que quiere decir, que la filtración $(\mathcal{F}_{t_{+}})_{t \geq 0}$ es continua por la derecha. \\
+
+\begin{definition}
+	Sea $(\mathcal{F}_t )_{t \geq 0}$ una filtración. Si $\mathcal{F}_0$ contiene a todos los conjuntos $\mathbb{P}$-nulos entonces decimos que es una filtración completa.
+\end{definition}
+
+\begin{definition}
+	Decimos que la filtración $(\mathcal{F}_t )_{t \geq 0}$ Cumple con las condiciones habituales si es continua por la derecha y es completa.
+\end{definition}
+
 \section{Tiempos de paro a tiempo continuo}
 \section{Martingalas a tiempo continuo}
 \section{Aplicaciones al Movimiento Browniano}
