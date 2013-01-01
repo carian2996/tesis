@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  31 DEC 2012 23:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  31 DEC 2012 18:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1185,19 +1185,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 122--124
 
  []
 
-)
+LaTeX Info: Redefining \. on input line 167.
+LaTeX Info: Redefining \% on input line 167.
+[58]
+Underfull \hbox (badness 10000) in paragraph at lines 199--201
+
+ []
+
+LaTeX Info: Redefining \. on input line 211.
+LaTeX Info: Redefining \% on input line 211.
+[59])
 LaTeX Info: Redefining \. on input line 53.
 LaTeX Info: Redefining \% on input line 53.
- [58]
+ [60]
 Cap\'{\i }tulo 5.
-(./chapters/ch5.tex) (./chapters/biblio.tex [59
+(./chapters/ch5.tex) (./chapters/biblio.tex [61
 
 ]
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
- [60
+ [62
 
-]) [61] (./main.aux
+]) [63] (./main.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 )
@@ -1209,10 +1218,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3477 strings out of 493117
- 44735 string characters out of 6135433
- 124211 words of memory out of 5000000
- 6846 multiletter control sequences out of 15000+600000
+ 3478 strings out of 493117
+ 44752 string characters out of 6135433
+ 124222 words of memory out of 5000000
+ 6847 multiletter control sequences out of 15000+600000
  14723 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,20n,30p,865b,465s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1236,10 +1245,10 @@ ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/
 exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2014/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/201
 4/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on main.pdf (71 pages, 551131 bytes).
+Output written on main.pdf (73 pages, 558741 bytes).
 PDF statistics:
- 320 PDF objects out of 1000 (max. 8388607)
- 221 compressed objects within 3 object streams
+ 328 PDF objects out of 1000 (max. 8388607)
+ 227 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
