@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  15 JUN 2015 20:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  31 DEC 2012 22:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1139,16 +1139,41 @@ LaTeX Info: Redefining \. on input line 50.
 LaTeX Info: Redefining \% on input line 50.
  [54]
 Cap\'{\i }tulo 4.
-(./chapters/ch4.tex) [55
+(./chapters/ch4.tex
+Underfull \hbox (badness 10000) in paragraph at lines 1--2
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 17--18
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--20
+
+ []
+
+[55
 
 ]
+Underfull \hbox (badness 10000) in paragraph at lines 32--33
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 34--35
+
+ []
+
+)
 LaTeX Info: Redefining \. on input line 53.
 LaTeX Info: Redefining \% on input line 53.
- [56
+ [56]
+Cap\'{\i }tulo 5.
+(./chapters/ch5.tex) (./chapters/biblio.tex [57
 
 ]
-Cap\'{\i }tulo 5.
-(./chapters/ch5.tex) (./chapters/biblio.tex [57]
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
  [58
@@ -1192,7 +1217,7 @@ ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/
 exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2014/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/201
 4/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on main.pdf (69 pages, 548879 bytes).
+Output written on main.pdf (69 pages, 553844 bytes).
 PDF statistics:
  314 PDF objects out of 1000 (max. 8388607)
  217 compressed objects within 3 object streams
