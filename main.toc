@@ -20,6 +20,6 @@
 \contentsline {chapter}{\numberline {4}Martingalas continuas}{55}
 \contentsline {section}{\numberline {4.1}Conceptos fundamentales}{55}
 \contentsline {section}{\numberline {4.2}Tiempos de paro a tiempo continuo}{58}
-\contentsline {section}{\numberline {4.3}Martingalas a tiempo continuo}{61}
-\contentsline {section}{\numberline {4.4}Aplicaciones al Movimiento Browniano}{61}
+\contentsline {section}{\numberline {4.3}Martingalas a tiempo continuo}{62}
+\contentsline {section}{\numberline {4.4}Aplicaciones al Movimiento Browniano}{62}
 \contentsline {chapter}{\numberline {5}Proceso Poisson Compuesto}{63}
