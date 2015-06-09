@@ -1,0 +1,58 @@
+\title{thesis}
+\documentclass[a4paper]{book}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
+\DeclareMathOperator*{\esssup}{esssup}
+
+% Estilos de teoremas
+\newtheorem{theorem}{Teorema}[chapter]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}{Proposición}[chapter]
+\newtheorem{corollary}[theorem]{Corolario}
+
+% Estilos de definiciones
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[chapter]
+\newtheorem{example}{Ejemplo}[chapter]
+\theoremstyle{remark}
+\newtheorem{remark}{Observación}
+
+\begin{document}
+
+\frontmatter
+
+\input{chapters/portada}
+
+\input{chapters/agradecimientos}
+
+\tableofcontents
+
+\chapter{Prefacio}
+\input{chapters/pref}
+
+\mainmatter
+
+\chapter{Martingalas}
+\input{chapters/ch1}
+
+\chapter{Problema de Paro Óptimo}
+\input{chapters/ch2}
+
+\chapter{Movimiento Browniano}
+\input{chapters/ch3}
+
+\chapter{Martingalas continuas}
+\input{chapters/ch4}
+
+\chapter{Proceso Poisson Compuesto}
+\input{chapters/ch5}
+
+\input{chapters/biblio}
+
+\end{document}
