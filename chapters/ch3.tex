@@ -76,11 +76,11 @@ Para toda $\lambda \in \mathbb{R}$. Del Teorema de Mapeo Continuo \cite[p.~21]{b
 	\begin{align*}
 	|\varphi_{X_n} (\lambda)| = \exp \left\{- \frac{\sigma_n^2}{2} \lambda^2 \right\} \rightarrow |\varphi_X (\lambda)|, \hspace{0.3cm} \text{ para toda } \lambda \in \mathbb{R}.
 	\end{align*}
-Lo anterior, implica que  $\sigma_n^2 \rightarrow \sigma^2 \in [0, \infty)$. \\
+Lo anterior, implica que  $\sigma_n^2 \rightarrow \sigma^2 \in [0, \infty)$, al ser una convergencia que no depende de $\lambda$. \\
 
 Ahora, comprobemos que la sucesión de medias $(m_n, n \geq 1)$ es acotada, para esto, supongamos que existe una subsucesión $(n_k, k \geq 0)$ de tal manera que $m_{n_k}$ diverge, es decir, $m_{n_k} \rightarrow \infty$ siempre que $k \rightarrow \infty$. \\ 
 
-Consideremos un punto $b$ de continuidad de la función de distribución de $X$, tal que, $b > a$, para toda $a \in \mathbb{R}$. Además, notemos que si $\sup_n |m_n| = + \infty$ entonces $m_n$ es la mediana de $X_n$, por lo que 
+Consideremos un punto $b$ de continuidad de la función de distribución de $X$, tal que, $b > a$, para toda $a \in \mathbb{R}$. Tenemos entonces
 	\begin{align*}
 	F_X (a) < F_X (b) = \lim_{k \rightarrow \infty} F_{X_{n_k}} (b) \leq \limsup_{k \rightarrow \infty} F_{X_{n_k}} (m_{n_k}) = \frac{1}{2}, 
 	\end{align*}
