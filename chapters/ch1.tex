@@ -235,13 +235,13 @@ Consideremos un espacio de probabilidad dado $(\Omega, \mathcal{F}, \mathbb{P})$
 	\end{enumerate}
 \end{definition}
 
-Si $(X_n, n \geq 0)$ es una submartingala, entonces definimos el proceso $(- X_n, n \geq 0)$, para toda $n \geq 0$, es una \emph{supermartingala}. La sucesión $(X_n, n \geq 0)$ es una martingala si y solo si es una submartingala y al mismo tiempo una supermartingala. \\
+Si $(X_n, n \geq 0)$ es una submartingala, entonces definimos al proceso $(- X_n, n \geq 0)$, para toda $n \geq 0$, es una \emph{supermartingala}. La sucesión $(X_n, n \geq 0)$ es una martingala si y solo si es una submartingala y al mismo tiempo una supermartingala. \\
 
 Recordemos que la desigualdad de Jensen nos asegura lo siguiente \cite[p.~205]{jacodprotter}: si una función $\phi: \mathbb{R} \rightarrow \mathbb{R}$ es convexa, y las variables aleatorias $X$ y $\phi(X)$ son integrables, entonces para cualquier $\sigma$-algebra $\mathcal{F}$ se tiene que $\phi(\mathbb{E}[X \mid \mathcal{F}]) \leq \mathbb{E}[\phi(X) \mid \mathcal{F}]$. A través de este resultado podemos ligar las Definiciones \ref{martingala} y \ref{submartin} con la siguiente proposición.
 
 \begin{proposition}
 \label{convexa}
-	Si $(X_n, n \geq 0)$ una martingala, coni $\phi$ una función convexa y $\phi(X_n)$ es integrable para toda $n$, entonces $(\phi(X_n), n \geq 0)$ es una submartingala.
+	Si $(X_n, n \geq 0)$ es una martingala, coni $\phi$ una función convexa y $\phi(X_n)$ es integrable para toda $n$, entonces $(\phi(X_n), n \geq 0)$ es una submartingala.
 \end{proposition}
 \begin{proof}
 	Sea $m \leq n$, tenemos que $\mathbb{E}[X_n \mid \mathcal{F}_m] = X_m$, c.s., entonces al aplicar $\phi(\mathbb{E}[X_n \mid \mathcal{F}_m]) = \phi(X_m)$, c.s. y como $\phi$ es una función convexa podemos concluir de la desigualdad de Jensen
@@ -337,11 +337,11 @@ A continuación mostramos las principales desigualdades para martingalas, las cu
 \begin{align*}
 	M_n^{*} = \sup_{j \leq n} |M_j|.
 \end{align*}
-Es claro que $M_n^{*} \leq M_{n+1}^{*}$, entonces tenemos que $\mathbb{E}[M_n^{*}] \leq \mathbb{E}[M_{n+1}^{*}]$ para toda $n$, además 
+Es claro que $M_n^{*} \leq M_{n+1}^{*}$, entonces para toda $m \leq n$ se tiene que $M_m^{*} = \mathbb{E}[M_m^{*} \mid \mathcal{F}_m] \leq \mathbb{E}[M_{n}^{*} \mid \mathcal{F}_m]$ c.s., además 
 \begin{align*}
 	M_n^{*} = \sup_{j \leq n} |M_j| \leq \sum_{j=0}^n |M_j|.
 \end{align*}
-Por lo tanto, $\mathbb{E}[M_n^{*} ]\leq \mathbb{E}[\sum_{j=0}^n |M_j|] < \infty$. Con estas condiciones, recordemos que el Teorema \ref{condmartin} nos asegura que el proceso $(M_n^{*}, n \geq 0)$ es una submartingala. Estamos interesados en conocer la probabilidad de que el valor $M_n^{*}$ supere una cantidad $\alpha$. \\
+Por lo tanto, $\mathbb{E}[M_n^{*} ]\leq \mathbb{E}[\sum_{j=0}^n |M_j|] < \infty$. Con estas condiciones, aseguramos que el proceso $(M_n^{*}, n \geq 0)$ es una submartingala. Estamos interesados en conocer la probabilidad de que el valor $M_n^{*}$ supere una cantidad $\alpha$. \\
 
 Recordemos que la \emph{Desigualdad de Markov} afirma que \cite[p.~29]{jacodprotter} para una variable aleatoria $X: \Omega \rightarrow \mathbb{R}$ se tiene que $\mathbb{P}(|X| \geq \alpha) \leq \mathbb{E}[|X|]/\alpha$ para toda $\alpha > 0$, entonces
 \begin{align}
@@ -363,9 +363,8 @@ En el caso donde $(M_n, n \geq 0)$ no solo cumple con las condiciones mencionada
 	\end{align*}
 	Veamos que sin importar que caso consideremos para $(M_n, n \geq 0)$ (martingala o submartingala positiva), $(|M_n|, n \geq 0)$ es una submartingala. \\ 
 	
-	Si $M$ una martingala, por la Proposición \ref{convexa} tenemos que $(|M_n|, n \geq 0)$ es una submartingala. \\
-	
-	Por otro lado, si $M$ es una submartingala positiva entonces $M_m \leq \mathbb{E}[M_n \mid \mathcal{F}_m]$ c.s. para toda $m \leq n$, además, como $M$ es positiva para toda $n$ tenemos que $M_n > 0$, entonces, $|M_n|$ es creciente para toda $n$, ya que $\phi(x) = |x|$ es una función convexa y creciente en $\mathbb{R}_{+}$, por lo tanto
+	Si $M$ una martingala, por la Proposición \ref{convexa} tenemos que $(|M_n|, n \geq 0)$ es una submartingala. Por otro lado, si $M$ es una submartingala positiva entonces resulta que $|M_n| = M_n$ para toda $n$. Por lo que $(|M_n|, n \geq 0)$ es una submartingala.
+	% $M_m \leq \mathbb{E}[M_n \mid \mathcal{F}_m]$ c.s. para toda $m \leq n$, además, como $M$ es positiva para toda $n$ tenemos que $M_n > 0$, entonces, $|M_n|$ es creciente para toda $n$, ya que $\phi(x) = |x|$ es una función convexa y creciente en $\mathbb{R}_{+}$, por lo tanto
 	\begin{align}
 	|M_m| \leq  |\mathbb{E}[M_n \mid \mathcal{F}_m]|. \label{corrJC1}
 	\end{align}
@@ -381,7 +380,7 @@ De (\ref{corrJC1}) y (\ref{corrJC2}) tenemos que $(|M_n|, n \geq 0)$ es una subm
 	\end{align}
 Utilizando la desigualdad de Markov tenemos que 
 	\begin{align}
-		\mathbb{P}(\tau \leq n, |M_{\tau}| \geq \alpha) \leq \mathbb{E} \left[\frac{|M_{\tau}|}{\alpha}  1_{\{\tau \leq n\}} \right]. \label{aae}
+		\mathbb{P}(\tau \leq n, |M_{\tau}| \geq \alpha) = \mathbb{P}(M_n^{*} \geq \alpha)  \leq \frac{\mathbb{E}[M_n^{*}]}{\alpha} = \mathbb{E} \left[\frac{|M_{\tau}|}{\alpha}  1_{\{\tau \leq n\}} \right]. \label{aae}
 	\end{align}
 Veamos por otro lado, en el conjunto $\{ \tau \leq n\}$ tenemos que $M_{\tau} = M_{\tau \wedge n}$. De (\ref{aad}) y (\ref{aae}) tenemos que
 	\begin{align*}
@@ -395,7 +394,8 @@ Por lo tanto
 	\begin{align}
 		\mathbb{P}(M_n^{*} \geq \alpha) \leq \frac{1}{\alpha} \mathbb{E}[|M_{\tau}|  1_{\{\tau \leq n\}}] \leq \frac{\mathbb{E}[|M_{\tau \wedge n}|]}{\alpha}. \label{aaf}
 	\end{align}
-	Por último, recordemos que de la Proposición \ref{espconst} y las observaciones de la Proposición \ref{convexa} tenemos que la propiedad de submartingala se mantiene aún usando tiempos aleatorios, y por lo tanto obtenemos la siguiente desigualdad para el tiempo de paro $(\tau \wedge n)$
+	Por último, con una prueba análoga de la Proposición \ref{espconst} se sabe que para un tiempo de paro $\tau$ acotado por $c \in \mathbb{N}$ y una submartingala $(X_n, n \geq 0)$ se tiene que $\mathbb{E}[X_{\tau}] \leq \mathbb{E}[X_{c}]$. Entonces, 
+	%recordemos que de la Proposición \ref{espconst} y las observaciones de la Proposición \ref{convexa} tenemos que la propiedad de submartingala se mantiene aún usando tiempos aleatorios, y por lo tanto obtenemos la siguiente desigualdad para el tiempo de paro $(\tau \wedge n)$
 	\begin{align}
 		\frac{\mathbb{E}[|M_{\tau \wedge n}|]}{\alpha} \leq \frac{\mathbb{E}[|M_{n}|]}{\alpha} \label{aag}
 	\end{align}
@@ -434,7 +434,7 @@ Del teorema de Fubini,
 
 \begin{theorem}[Desigualdad de Doob en $L^p$ para Martingalas]
 \label{lp}
-	Sea $M = (M_n, n \geq 0)$ una martingala o una submartingala positiva. Sea $1 < p < \infty$. Entonces existe una constante $c$ que depende solamente de $p$ tal que
+	Sea $M = (M_n, n \geq 0)$ una martingala o una submartingala positiva. Sea $1 < p < \infty$, entonces existe una constante $c$ que depende solamente de $p$ tal que
 	\begin{align*}
 		\mathbb{E}[(M_n^{*})^p] \leq c\mathbb{E}[|M_n|^p].
 	\end{align*}
@@ -455,7 +455,7 @@ Del teorema de Fubini,
 	\end{align}
 	Entonces de (\ref{aah}) tenemos, 
 	\begin{align*}
-		M_n^{*} = \sup_{j \leq n} M_j \leq \sup_{j \leq n} Z_j + \frac{\alpha}{2} = Z_n^{*} + \frac{\alpha}{2}.
+		M_n^{*} = \sup_{j \leq n} |M_j| \leq \sup_{j \leq n} |Z_j| + \frac{\alpha}{2} = Z_n^{*} + \frac{\alpha}{2}.
 	\end{align*}
 	Por lo tanto, 
 	\begin{align}
@@ -464,12 +464,12 @@ Del teorema de Fubini,
 	Aplicando la Primera Desigualdad de Doob (Teorema \ref{primera}) a (\ref{aai}) 
 	\begin{align*}
 		\mathbb{P}(M_n^{*} > \alpha) & \leq \mathbb{P}(Z_n^{*} > \frac{\alpha}{2}) \\
-		& \leq \frac{2}{\alpha} \mathbb{E}[|Z_n|] = \frac{2}{\alpha} \mathbb{E}[|X_n|] \\
+		& \leq \frac{2}{\alpha} \mathbb{E}[|Z_n|] \leq \frac{2}{\alpha} \mathbb{E}[|X_n|] \ (\text{Jensen}) \\
 		& = \frac{2}{\alpha} \mathbb{E}[|M_n|1_{\{|M_n| > \frac{\alpha}{2}\}}].
 	\end{align*}
 	Con este último resultado podemos aplicar a la igualdad del Lema \ref{repint} y verificar la desigualdad deseada
 	\begin{align*}
-		\mathbb{E}[X^p] & = \int_0^{\infty} p \lambda^{p-1} \mathbb{P}(X > \lambda) d\lambda \\
+		\mathbb{E}[(M_n^{*})^p] & = \int_0^{\infty} p \lambda^{p-1} \mathbb{P}(M_n^{*} > \lambda) d\lambda \\
 		& \leq \int_0^{\infty} p \lambda^{p-1}  \frac{2}{\lambda} \mathbb{E}[|M_n|1_{\{|M_n| > \frac{\lambda}{2}\}}] d\lambda.
 	\end{align*}
 	Usando el Teorema de Fubini y realizando los cálculos de la integral obtenemos
@@ -483,7 +483,7 @@ Del teorema de Fubini,
 	\mathbb{E}[(M_n^{*})^p] \leq c\mathbb{E}[|M_n|^p], \hspace{0.3cm} \text{con} \hspace{0.3cm} c \leq \frac{2^p p}{p-1}.
 	\end{align*} 
 	
-Para el caso en que $M$ es una supermartingala positiva se procede con la misma demostración, con el conocimiento de que $|M|$ es una supermartingala (Teorema \ref{primera}).
+Para el caso en que $M$ es una submartingala positiva se procede con la misma demostración, con el conocimiento de que $|M|$ es una submartingala (Teorema \ref{primera}).
 \end{proof}
 
 Con respecto al resultado anterior, hemos mostrado la relación existente entre la constante $c$ y el valor $p$, sin embargo, se puede verificar que $c^{\frac{1}{p}} = \frac{p}{p-1}$ y entonces podemos escribir la desigualdad en términos de normas $L^p$.
@@ -494,7 +494,7 @@ Con respecto al resultado anterior, hemos mostrado la relación existente entre 
 	\begin{align*}
 		||M_n^{*}||_p \leq q ||M_n||_p.
 	\end{align*}
-donde $||X_n||_p = (\mathbb{E}[|X_n|^p])^{\frac{1}{p}}$ y $q = \frac{p}{p-1} $.
+donde $||M_n||_p = (\mathbb{E}[|M_n|^p])^{\frac{1}{p}}$ y $q = \frac{p}{p-1} $.
 \end{theorem}
 
 Esta desigualdad nos será de gran ayuda a la hora de demostrar uno de los resultados más importantes en teoría de martingalas, el Teorema de Convergencia en Martingalas. Pero antes de demostrar el Teorema \ref{lp2} verifiquemos los siguientes resultados.
@@ -510,22 +510,24 @@ Sea $X = (X_n, n \geq 0)$ una submartingala y $Y = (Y_n, n \geq 0)$ una supermar
 \begin{proof}
 Si definimos a $\tau$ de la siguiente manera
 	\begin{align*}
-	\inf \{k \leq n \mid X_k \leq \lambda\}
+	\tau = \inf \{k \leq n \mid X_k \geq \lambda\}
 	\end{align*}
 Con $\tau = n$, si $X_n^{*} > \lambda$
 Entonces tenemos que, como $X$ es una martingala
 	\begin{align*}
 	0 \leq \mathbb{E}[X_0^{+}] & \leq \mathbb{E}[X_{\tau}^{+}] \\
 	& = \mathbb{E}[X_{\tau}^{+} 1_{\{X_n^{*} \leq \lambda\}}] + \mathbb{E}[X_{\tau}^{+} 1_{\{X_n^{*} > \lambda\}}] \\
-	& \leq \mathbb{E}[\lambda  1_{\{X_n^{*} \leq \lambda\}}] + \mathbb{E}[X_{\tau} 1_{\{X_n^{*} > \lambda\}}] \\
-	& = \lambda  \mathbb{P}(X_n^{*} \leq \lambda) + \mathbb{E}[X_n 1_{\{X_n^{*} > \lambda\}}] \\
-	& = \lambda  (1 - \mathbb{P}(X_n^{*} > \lambda)) + \mathbb{E}[X_n 1_{\{X_n^{*} > \lambda\}}] \\
-	& \leq - \lambda \mathbb{P}(X_n^{*} > \lambda) + \mathbb{E}[X_n 1_{\{X_n^{*} > \lambda\}}].
+	& \leq \mathbb{E}[\lambda  1_{\{X_n^{*} \leq \lambda\}}] + \mathbb{E}[X_{\tau}^{+} 1_{\{X_n^{*} > \lambda\}}] \\
+	& = \lambda  \mathbb{P}(X_n^{*} \leq \lambda) + \mathbb{E}[X_n^{+} 1_{\{X_n^{*} > \lambda\}}] \\
+	& = \lambda  (1 - \mathbb{P}(X_n^{*} > \lambda)) + \mathbb{E}[X_n^{+} 1_{\{X_n^{*} > \lambda\}}] \\
+	& \leq - \lambda \mathbb{P}(X_n^{*} > \lambda) + \mathbb{E}[X_n^{+} 1_{\{X_n^{*} > \lambda\}}].
 	\end{align*}
 
-Por lo tanto $\lambda  \mathbb{P}(X_n^{*} > \lambda) \leq \mathbb{E}[X_n^{+} 1_{\{X_n^{*} > \lambda\}}]$. Consideremos ahora el caso donde $Y$ es una supermartingala. Definamos a $\tau$ como $\inf \{k \leq n \mid X_k \geq \lambda\}$, donde $\tau = n$ si $X_n^{*} < \lambda$
+Por lo tanto $\lambda  \mathbb{P}(X_n^{*} > \lambda) \leq \mathbb{E}[X_n^{+} 1_{\{X_n^{*} > \lambda\}}]$. \\
+
+Consideremos ahora el caso donde $Y$ es una supermartingala. Definamos a $\tau$ como $\inf \{k \leq n \mid X_k \geq \lambda\}$, donde $\tau = n$ si $X_n^{*} < \lambda$
 	\begin{align*}
-	\mathbb{E}[Y_1] & \geq \mathbb{E}[Y_{\tau}] \\
+	\mathbb{E}[Y_0] & \geq \mathbb{E}[Y_{\tau}] \\
 	& = \mathbb{E}[Y_{\tau} 1_{\{Y_n^{*} > \lambda\}}] + \mathbb{E}[Y_{\tau} 1_{\{Y_n^{*} \leq \lambda\}}] \\
 	& \geq \mathbb{E}[\lambda  1_{\{Y_n^{*} > \lambda\}}] + \mathbb{E}[Y_{\tau} 1_{\{Y_n^{*} \leq \lambda\}}] \\
 	& = \lambda  \mathbb{P}(Y_n^{*} > \lambda) + \mathbb{E}[Y_n 1_{\{Y_n^{*} \leq \lambda\}}].
@@ -536,7 +538,7 @@ Con el lema anterior podemos verificar el Teorema \ref{lp2}
 \begin{proof}
 Verifiquemos el caso para una submartingala positiva. Supongamos en primer lugar que
 	\begin{align}
-	||M_n^{*}|| = \mathbb{E}[|M_n^{*}|^{\frac{1}{p}}]^p < \infty. \label{aal}
+	||M_n^{*}||_p = \mathbb{E}[|M_n^{*}|^{\frac{1}{p}}]^p < \infty. \label{aal}
 	\end{align}
 Del Lema \ref{repint} tenemos que para toda $p > 1$
 	\begin{align*}
@@ -570,7 +572,7 @@ Por otro lado, si (\ref{aal}) no se cumple, entonces en (\ref{aam}) consideramos
 	\end{align*}
 Entonces, del hecho de que $\mathbb{E}[M_n^{*} \wedge C]^p \leq C^p < \infty$, tenemos
 	\begin{align*}
-		\mathbb{E}[M_n^{*}]^p \leq q^p\mathbb{E}[M_n]^p \leq q^p ||M_n||_p^p.
+		\mathbb{E}[M_n^{*} \wedge c]^p \leq q^p ||M_n||_p^n.
 	\end{align*}
 Por lo tanto, 
 	\begin{align*}
@@ -581,7 +583,7 @@ Por último, el caso en que $M$ es una martingala se reduce a la demostración a
 
 Ahora introducimos el concepto de \emph{cruces ascendentes}, donde utilizaremos la notación de Doob. Sea $(X_n, n \geq 0)$ una submartingala, y sea $a < b$. El número de cruces ascendentes de un intervalo $[a, b]$ es el número de veces en que el proceso comienza por debajo del valor de $a$ y después de algunos pasos salta a algún valor por encima de $b$. Está noción puede ser expresada más adecuadamente usando tiempos de paro. Definamos
 \begin{align*}
-	\tau_0 = 0
+	\tau_0 = 0,
 \end{align*}
 inductivamente para $j \geq 0$:
 	\begin{align*}
@@ -630,7 +632,7 @@ Tomando la esperanza en ambos lados de (\ref{aaq}) y con el hecho de que $\eta_{
 \end{proof}
 
 \section{Teoremas de Convergencia de Martingalas}
-En esta última sección presentamos resultados respecto a la convergencia de martingalas, así como el concepto de \emph{uniformemente integrables} para una colección de variables aleatorias, el cual tiene una relación fuerte con la convergencia de las martingalas. Concluimos el primer capítulo con la prueba del Teorema del Límite Central de Martingalas análogo al conocido Teorema del Límite Central, pero mostrando las bondades de trabajar con las propiedades de las martingalas.
+En esta última sección presentamos resultados respecto a la convergencia de martingalas, así como el concepto de \emph{uniformemente integrables} para una colección de variables aleatorias, el cual tiene una relación fuerte con la convergencia de martingalas. Concluimos el primer capítulo con la prueba del Teorema del Límite Central de Martingalas análogo al conocido Teorema del Límite Central, pero mostrando las bondades de trabajar con las propiedades de las martingalas.
 
 \begin{theorem}[Teorema de Convergencia de Martingalas]
 \label{conver1}
@@ -671,14 +673,14 @@ Por lo tanto, $\mathbb{P}(\liminf_n X_n < \limsup_n X_n ) = 0$. Entonces $\mathb
 Veamos que $X = \lim_n X_n \in L^1$. Como $X_n$ es un submartingala entonces tenemos que $\mathbb{E}[X_0] \leq \mathbb{E}[X_n]$, por lo tanto
 	\begin{align}
 	\mathbb{E}[|X_n|] & = \mathbb{E}[X_n^{+}] + \mathbb{E}[X_n^{-}] \nonumber \\
-	& = 2\mathbb{E}[X_n^{+}] + \mathbb{E}[X_n] \nonumber \\
-	& \leq 2\mathbb{E}[X_n^{+}] + \mathbb{E}[X_0]. \label{aar}
+	& = 2\mathbb{E}[X_n^{+}] - \mathbb{E}[X_n] \nonumber \\
+	& \leq 2\mathbb{E}[X_n^{+}] - \mathbb{E}[X_0]. \label{aar}
 	\end{align}
 Entonces usando el Lema de Fatou \cite[p.~205]{jacodprotter} y nuestra desigualdad (\ref{aar}), además de que por hipótesis $\sup_n \mathbb{E}[X_n^{+}] < \infty$,
 	\begin{align*}
 	\mathbb{E}\left[\lim_n |X_n|\right] \leq \liminf_{n \rightarrow \infty} \mathbb{E}[|X_n|] \leq 2 \sup_n \mathbb{E}[X_n^{+}] - \mathbb{E}[X_0] < \infty,
 	\end{align*}
-lo que implica que $X_n$ converge a un límite $X$ finito y además $\mathbb{E}[X] \leq \infty$, es decir $X \in L^1$.
+lo que implica que $X_n$ converge a un límite $X$ finito y además $\mathbb{E}[X] < \infty$, es decir $X \in L^1$.
 \end{proof}
 
 \begin{corollary}
@@ -796,11 +798,11 @@ Combinando los resultados (\ref{aas}), (\ref{aat}) y (\ref{aau}) obtenemos la de
 	\end{align*}
 Sin embargo, 
 	\begin{align*}
-	|\mathbb{E}[M_n 1_{\Lambda}] - \mathbb{E}[M_{\infty} 1_{\Lambda}]| & \leq |\mathbb{E}[(M_n - M_{\infty}) 1_{\Lambda}]| \\
-	& \leq \mathbb{E}[|(M_n - M_{\infty}) 1_{\Lambda}|] \\
-	& \leq \mathbb{E}[|M_n - M_{\infty}|],
+	|\mathbb{E}[M_m 1_{\Lambda}] - \mathbb{E}[M_{\infty} 1_{\Lambda}]| & \leq |\mathbb{E}[(M_m - M_{\infty}) 1_{\Lambda}]| \\
+	& \leq \mathbb{E}[|(M_m - M_{\infty}) 1_{\Lambda}|] \\
+	& \leq \mathbb{E}[|M_m - M_{\infty}|],
 	\end{align*}
-Donde $\mathbb{E}[|M_n - M_{\infty}|] \rightarrow 0$ cuando $n \rightarrow 0$, por lo tanto, $\mathbb{E}[M_{\infty} \mid \mathcal{F}_n] = M_n$ c.s.
+Donde $\mathbb{E}[|M_n - M_{\infty}|] \rightarrow 0$ cuando $n \rightarrow 0$, por lo tanto, $\mathbb{E}[M_{\infty} \mid \mathcal{F}_m] = M_m$ c.s.
 
 \item Sabemos $(M_n, n \geq 0)$ es una martingala. Para una variable $Y \in L^1$, con $c > 0$ tenemos que
 	\begin{align*}
@@ -808,7 +810,7 @@ Donde $\mathbb{E}[|M_n - M_{\infty}|] \rightarrow 0$ cuando $n \rightarrow 0$, p
 	\end{align*}
 ya que el evento $\{|M_n| > c\}$ pertenece a $\mathcal{F}_n$. Por lo tanto, para cualquier constante $d > 0$ se tiene
 	\begin{align*}
-	\mathbb{E}\left[|M_n| 1_{\{|M_n > c|\}}\right] & \leq \mathbb{E}\left[|Y|1_{\{|M_n > c|\}}\right] \\
+	\mathbb{E}\left[|M_n| 1_{\{|M_n > c|\}}\right] & = \mathbb{E}\left[|Y|1_{\{|M_n > c|\}}\right] \\
 	& \leq \mathbb{E}\left[|Y|1_{\{|Y > d|\}} \right] + d\mathbb{P}(|M_n| > c) \\
 	& \leq \mathbb{E}\left[|Y|1_{\{|Y > d|\}} \right] + \frac{d}{c}\mathbb{E}[|M_n|].
 	\end{align*}
@@ -855,7 +857,7 @@ Del Lema de Fatou y por el hecho de que $X_{-n}^{+} \geq 1$ y $X_{-n}^{+} \right
 	\end{align*}
 Implicando que $X^{+} \in L^1$ y por el mismo argumento aplicado a la martingala $(-X_n)$ se muestra que $X^{-} \in L^1$, entonces $X \in L^1$. \\
 
-La convergencia en $L^1$ es una implicación del Teorema \ref{conver1}, pues se demostró que, si $X_{-n} \rightarrow X$, si $X \in L^1$ y además $(X_{-n})$ es uniformemente integrable, entonces $X_{-n} \rightarrow X$ en $L^1$.
+La convergencia en $L^1$ es una implicación del Teorema \ref{conver1}, pues se demostró que, si $X_{-n} \rightarrow X$ c.s., si $X \in L^1$ y además $(X_{-n})$ es uniformemente integrable, entonces $X_{-n} \rightarrow X$ en $L^1$.
 \end{proof}
 
 Los Teoremas de Convergencia de Martingalas probados hasta ahora (Teoremas \ref{conver1} y \ref{conver2}) son resultados de convergencia fuerte: todas las variables aleatorias están definidas en el mismo espacio de probabilidad y convergen fuertemente a variables aleatorias del mismo espacio, casi seguramente y en $L^1$. \\ 
@@ -893,23 +895,23 @@ Además como $|\bar{X}_j| \leq |X_j|$ y $S_p = \sum_{i=1}^p X_i$, para $1 \leq p
 	\begin{align}
 	\mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_p} \right] & = \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} (S_{p-1} + X_p) } \right] \label{aay} \\
 	& = \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_{p-1}} e^{iu \frac{1}{\sqrt{n}} X_p} \right] \nonumber \\ 
-	& = \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_{p-1}} \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} X_p} \bigg| \mathcal{F}_{n-1} \right]\right] \nonumber \\ 
+	& = \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_{p-1}} \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} X_p} \bigg| \mathcal{F}_{p-1} \right]\right] \nonumber \\ 
 	& = \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_{p-1}} \varphi_{n, p} (u) \right] \nonumber.
 	\end{align}
 Usando (\ref{aay}) y (\ref{aax}) tenemos
 	\begin{align*}
-	\mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_p} \right] = \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_{p-1}} \left[ 1 - \frac{u^2}{2n} - \frac{iu^3}{6n^{\frac{3}{2}}} \bar{X}_j^3 \right]\right].
+	\mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_p} \right] = \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_{p-1}} \left[ 1 - \frac{u^2}{2n} - \frac{iu^3}{6n^{\frac{3}{2}}} \mathbb{E}[\bar{X}_j^3 \mid \mathcal{F}_{j-1}] \right]\right].
 	\end{align*}
 Desarrollando la ecuación,
 	\begin{align}
-	\mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_p} - \left(1 - \frac{u^2}{2n}\right)e^{iu \frac{1}{\sqrt{n}} S_{p-1}}\right] = \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_{p-1}} \frac{iu^3}{6n^{\frac{3}{2}}} \bar{X}_j^3 \right]. \label{aaz}
+	\mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_p} - \left(1 - \frac{u^2}{2n}\right)e^{iu \frac{1}{\sqrt{n}} S_{p-1}}\right] = \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_{p-1}} \frac{iu^3}{6n^{\frac{3}{2}}} \mathbb{E}[\bar{X}_j^3 \mid \mathcal{F}_{j-1}] \right]. \label{aaz}
 	\end{align}
 Tomando el módulo en ambos lados de (\ref{aaz}) y usando la hipótesis (3)
 	\begin{align*}
-	\left| \mathbb{E} \left[e^{iu \frac{1}{\sqrt{n}} S_p} - \left(1 - \frac{u^2}{2n}\right) e^{iu \frac{1}{\sqrt{n}} S_{p-1}} \right]\right| & \leq \mathbb{E} \left[ | e^{iu \frac{1}{\sqrt{n}} S_{p1}} | \frac{|u|^3}{6n^{\frac{3}{2}}} \mathbb{E}[\bar{X}_j^3 \mid \mathcal{F}_{j-1}] \right] \\
+	\left| \mathbb{E} \left[e^{iu \frac{1}{\sqrt{n}} S_p} - \left(1 - \frac{u^2}{2n}\right) e^{iu \frac{1}{\sqrt{n}} S_{p-1}} \right]\right| & \leq \mathbb{E} \left[ | e^{iu \frac{1}{\sqrt{n}} S_{p1}} | \frac{|u|^3}{6n^{\frac{3}{2}}} \mathbb{E}[| \bar{X}_j^3 | \mid \mathcal{F}_{j-1}] \right] \\
 	& \leq K \frac{|u|^3}{6n^{\frac{3}{2}}}.
 	\end{align*} 
-Si fijamos el valor de $u \in \mathbb{R}$ y hacemos tender a $n \rightarrow \infty$, eventualmente $n \geq u^2/2$ y es por esto que para una $n$ suficientemente grande tenemos que $0 \leq 1 - u^2/2 \leq 1$. Si multiplicamos el lado izquierdo de desigualdad anterior por $(1 - u^2/2)^{n-p}$ para una $n$ suficientemente grande
+Si fijamos el valor de $u \in \mathbb{R}$ y hacemos tender a $n \rightarrow \infty$, eventualmente $n \geq u^2/2$ y es por esto que para una $n$ suficientemente grande tenemos que $0 \leq 1 - \frac{u^2}{2} \leq 1$. Si multiplicamos el lado izquierdo de desigualdad anterior por $(1 - u^2/2)^{n-p}$ para una $n$ suficientemente grande
 	\begin{align*}
 	\left| \left(1 - \frac{u^2}{2}\right)^{n-p} \mathbb{E} \left[e^{iu \frac{1}{\sqrt{n}} S_p} - \left(1 - \frac{u^2}{2n}\right)^{n-p+1}\right]\mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_{p-1}} \right] \right| \leq K \frac{|u|^3}{6n^{\frac{3}{2}}}.
 	\end{align*}
@@ -934,7 +936,7 @@ Usando la regla de L'Hôpital \cite[p.~215]{bartle}, tenemos
 Por el Teorema de Continuidad de Lévy \cite[p.~166]{jacodprotter}, el cual nos permite relacionar la convergencia puntal (de las funciones características) con la convergencia en distribución, tenemos que $S_n/\sqrt{n}$ converge en distribución  $Z$, donde la función característica de $Z$ es $e^{-(u^2)/2}$, la cual es una función característica de una variable aleatoria con distribución $N(0, 1)$.
 \end{proof}
 
-La proposición anterior se establece de forma similar al Teorema del Límite Central \cite[p.~181]{jacodprotter} para variables independientes e idénticamente distribuidas $X_n$, con sumas parciales $S_n$. La condición $(1)$ implica que $(S_n)$ es una martingala, pues $X_n = S_n - S_{n-1}$. 
+La proposición anterior se establece de forma similar en el Teorema del Límite Central \cite[p.~181]{jacodprotter} para variables independientes e idénticamente distribuidas $X_n$, con sumas parciales $S_n$. La condición $(1)$ implica que $(S_n)$ es una martingala, pues $X_n = S_n - S_{n-1}$. 
 
 % Por otro lado, un martingala arbitraria $(S_n)$ es una sucesión de sumas parciales asociada con las variables aleatorias $X_n = S_n - S_{n-1}$ y esto también satisface $(1)$.
 
