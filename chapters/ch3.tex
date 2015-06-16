@@ -80,7 +80,7 @@ Lo anterior, implica que  $\sigma_n^2 \rightarrow \sigma^2 \in [0, \infty)$, al 
 
 Ahora, comprobemos que la sucesión de medias $(m_n, n \geq 1)$ es acotada, para esto, supongamos que existe una subsucesión $(n_k, k \geq 0)$ de tal manera que $m_{n_k}$ diverge, es decir, $m_{n_k} \rightarrow \infty$ siempre que $k \rightarrow \infty$. \\ 
 
-Consideremos un punto $b$ de continuidad de la función de distribución de $X$, tal que, $b > a$, para toda $a \in \mathbb{R}$. Tenemos entonces
+Consideremos un punto $b$ de continuidad de la función de distribución de $X$, tal que, $b > a$, para toda $a \in \mathbb{R}$. Al distribuirse de manera normal las variables $X_n$, tenemos que
 	\begin{align*}
 	F_X (a) < F_X (b) = \lim_{k \rightarrow \infty} F_{X_{n_k}} (b) \leq \limsup_{k \rightarrow \infty} F_{X_{n_k}} (m_{n_k}) = \frac{1}{2}, 
 	\end{align*}
@@ -276,7 +276,7 @@ Veamos que, para toda $n \geq 0$, el vector $(X_n(k / 2^n), 0 \leq k \leq 2^n)$ 
 	\begin{align}
 		\mathbb{E} \left[ X_n \left( \frac{k}{2^n} \right) X_n \left( \frac{\ell}{2^n} \right) \right] = \frac{k}{2^n} \wedge \frac{\ell}{2^n}. \label{abv}
 	\end{align}
-Para $n = 0$ tenemos que $(X_0 (0), X_0 (1))$ efectivamente es un vector Gaussiano centrado, más aún
+Para $n = 0$ tenemos que $X_0$ es lineal y su extremo $X_0(1)$ es una variable aleatoria Gaussiana centrada; en otras palabras, cualquier $X_0(1)$ es una combinación lineal de variables Gaussianas, más aún
 	\begin{align*}
 		\mathbb{E} \left[ X_0 (0) X_0 (1) \right] & = \mathbb{E} \left[ 0 \cdot X_0 (1) \right] \\
 		& = 0 \\
