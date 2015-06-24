@@ -212,5 +212,27 @@ Veamos ahora que, bajo ciertas condiciones dadas a la filtración, al proceso y 
 	Lo que significa que, $\tau_A$ es un tiempo de paro respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$.
 \end{proof}
 
+\begin{definition}
+	Sea $\tau$ un tiempo de paro con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$. La $\sigma$-álgebra de eventos anteriores a $\tau$ está dada por 
+	\begin{align*}
+	\mathcal{F}_{\tau} = \left\{ A \in \mathcal{F}_{\infty} : \forall t \in \mathbb{R}_{+}, \ A \cap \{\tau \leq t\} \in \mathcal{F}_t \right\}.
+	\end{align*}
+\end{definition}
+La prueba de que efectivamente, $\mathcal{F}_{\tau}$ es una $\sigma$-álgebra es análoga a la Proposición \ref{algebraaleatoria} del Capítulo 1. Veamos el siguiente resultado, relacionado a la $\sigma$-álgebra parada definida arriba.
+\begin{proposition}
+Considere las siguientes definiciones
+\begin{align*}
+	\mathcal{F}_{\tau^{+}} & = \left\{ A \in \mathcal{F}_{\infty} : \forall t \in \mathbb{R}_{+}, \ A \cap \{\tau < t\} \in \mathcal{F}_t \right\}, \\
+	\mathcal{F}_{\tau^{-}} & = \sigma \left\{ A \cap \{\tau > t\} : t \geq 0, \ A \in \mathcal{F}_t \right\}.
+\end{align*}
+Entonces, 
+\begin{enumerate}
+	\item $\mathcal{F}_{\tau^{+}}$ es una $\sigma$-álgebra.
+	\item $\mathcal{F}_{\tau^{-}} \subset \mathcal{F}_{\tau} \subset \mathcal{F}_{\tau^{+}}$.
+	\item Si $(\mathcal{F}_t)_{t \geq 0}$ es continua por la derecha, entonces $\mathcal{F}_{\tau} = \mathcal{F}_{\tau^{+}}$.
+	\item Si $\tau = t$, entonces $\mathcal{F}_{\tau} = \mathcal{F}_t$ y $\mathcal{F}_{\tau^{+}} = \mathcal{F}_{t^{+}}$.
+\end{enumerate}
+\end{proposition}
+
 \section{Martingalas a tiempo continuo}
 \section{Aplicaciones al Movimiento Browniano}
