@@ -323,7 +323,7 @@ A continuación, se muestran pequeños resultados que nos daran útiles herramie
 	\begin{align*}
 		A \cap \{ \theta \leq \tau\} \cap \{\tau \leq t\} = A \cap \{\theta \leq t\} \cap \{\theta \wedge t \leq \tau \wedge t\} \cap \{\tau \leq t\}.
 	\end{align*}
-	Sabemos que $A \cap \{\theta \leq t\} \in \mathcal{F}_t$, pues $A \in \mathcal{F}_{\theta}$, como $\tau$ es un tiempo de paro, $\{\tau \leq t\} \in \mathcal{F}_t$, por último, $\theta \wedge t$ y $\tau \wedge t$ son variables aleatorias $\mathcal{F}_t$-medibles, por lo tanto
+	Sabemos que $A \cap \{\theta \leq t\} \in \mathcal{F}_t$, pues $A \in \mathcal{F}_{\theta}$, como $\tau$ es un tiempo de paro, $\{\tau \leq t\} \in \mathcal{F}_t$, por último, $\theta \wedge t$ y $\tau \wedge t$ son variables aleatorias $\mathcal{F}_t$-medirles, por lo tanto
 	\begin{align*}
 		A \cap \{ \theta \leq \tau\} \cap \{\tau \leq t\} \in \mathcal{F}_t.
 	\end{align*}
@@ -347,7 +347,7 @@ Pues ambos son disjuntos, ahora veamos que ambos son elementos de $\mathcal{F}_t
 
 \begin{lemma}
 	\label{nosequeponer}
-	Sea $\tau$ un tiempo de paro con respecto a $(\mathcal{F}_t)_{t \geq 0}$ y $\theta$ una función que es $\mathcal{F}_{\tau}$-medible, de tal manera que $\theta \geq \tau$, entonces $\theta$ es un tiempo de paro con respecto a la filtración $\mathcal{F}_t)_{t \geq 0}$.
+	Sea $\tau$ un tiempo de paro con respecto a $(\mathcal{F}_t)_{t \geq 0}$ y $\theta$ una función que es $\mathcal{F}_{\tau}$-medible, de tal manera que $\theta \geq \tau$, entonces $\theta$ es un tiempo de paro con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$.
 \end{lemma}
 \begin{proof}
 	Consideremos el conjunto $\{ \theta \leq t \}$, como $\theta \geq t$ tenemos que
@@ -370,10 +370,144 @@ Pues ambos son disjuntos, ahora veamos que ambos son elementos de $\mathcal{F}_t
 	Considere un tiempo de paro $\tau$ con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$ entonces existe una sucesión decreciente $(\tau_n)_{n \geq 1}$ de tiempo de paro discretos tal que $\lim_{n \rightarrow \infty} \tau_n = \tau$.
 \end{lemma}
 \begin{proof}
-	
+	Vamos a definir una sucesión de tiempos aleatorios decrecientes, después veamos que se cumple con las condiciones de tiempo de paro. Se define el tiempo aleatorio $\tau_n (\omega)$ como
+	\begin{align*}
+		\tau_n (\omega) =
+		\begin{cases}
+			\frac{k}{2^n}, & \text{ si } \frac{k-1}{2^n} \leq \tau(\omega) < \frac{k}{2^n}, \ k = \{1, 2, \ldots\}; \\
+			\infty & \text{ si } \tau(\omega) = \infty.
+		\end{cases}
+	\end{align*}
+    Por definición tenemos que $\tau_{n+1} \leq \tau_n$ y además también sabemos que $\tau_n$ es $\mathcal{F}_{\tau}$-medible para toda $n$. Como $\tau_n \geq 0$, por el Lema \ref{nosequeponer}, $\tau_n$ es un tiempo de paro con respecto a $(\mathcal{F}_t)_{t \geq 0}$. Luego, 
+    \begin{align*}
+		|\tau_n - \tau| \leq \frac{1}{2^n} \xrightarrow{n \rightarrow \infty} 0,
+	\end{align*}
+    por lo que $\lim_{n \rightarrow \infty} \tau_n = \tau$.
+\end{proof}
+
+Para terminar con esta sección, consideremos analizar procesos estocásticos dado un tiempo aleatorio. Definiremos un ``proceso parado'' y estudiaremos algunas de sus propiedades que serán útiles más adelante a la hora de ver resultados con respecto Martingalas Continuas.
+
+\begin{definition}
+	Consideremos un proceso aleatorio $(X_t, t \geq 0)$ y un tiempo de paro $\tau$, y definamos la función $X_{\tau}$, siempre y cuando $\{\tau < \infty\}$ como
+    \begin{align*}
+    X_{\tau}(\omega) = X_{\tau(\omega)}(\omega).
+    \end{align*}
+\end{definition}
+Veamos ahora que, si $(X_t, t \geq 0)$ es un proceso medible y el tiempo de paro finito, entonces, $X_{\tau}$ resulta una variable aleatoria.
+
+\begin{theorem}
+	Sea $(X_t, t \geq 0)$ un proceso progresivamente medible con respecto a la filtración $(\mathcal{F}_t)_{t \geq 0}$ y con espacio de estados $(E, \mathcal{E})$, y sea $\tau$ un tiempo de paro con respecto a la misma filtración. Entonces
+    \begin{enumerate}
+    \item La variable aleatoria $X_{\tau}$ definida en el conjunto $\{\tau < \infty\} \in $, es $\mathcal{F}_{\tau}$-medible.
+    \item El ``proceso parado'' $(X_{t \wedge \tau}, t \geq 0)$ es progresivamente medible con respecto a $(\mathcal{F}_t)_{t \geq 0}$.
+    \item El ``proceso parado'' $(X_{t \wedge \tau}, t \geq 0)$ es adaptado a $(\mathcal{F}_t)_{t \geq 0}$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\noindent Para verificar que el proceso $X_{\tau}$ es $\mathcal{F}_{\tau}$-medible, veamos que para cualquier $A \in \mathcal{E}$ y $t \geq 0$, el evento $\{X_{\tau} \in A\} \cap \{\tau \leq t\}$ es un elemento de $\mathcal{F}_t$. Luego,
+	\begin{align*}
+    \{X_{\tau} \in A\} \cap \{\tau \leq t\} = \{X_{\tau \wedge t} \in A\} \cap \{\tau \leq t\}.
+    \end{align*}
+    Por lo que, mostrando el segundo resultado, mostramos el primero. \\
+
+Para mostrar la tercera parte, observemos que, del Lema \ref{paromaxmin} tenemos que $\tau \wedge t$ es un tiempo de paro, y del inciso 1, sabemos que es medible con respecto a $(\mathcal{F}_{\tau \wedge t})_{t \geq 0}$, por lo que, si mostramos la segunda parte, sabemos que todo proceso progresivamente medible es adaptado. \\
+
+Basta entonces mostrar la segunda parte del teorema. Para afirmar que $(X_{t \wedge \tau}, t \geq 0)$ es un proceso progresivamente medible respecto a $(\mathcal{F}_{\tau \wedge t})_{t \geq 0}$ tenemos que mostrar que la aplicación
+\begin{align*}
+	(s, \omega) \in [0, t] \times \Omega \mapsto X_{s \wedge \tau} (\omega) \in E,
+\end{align*}
+es $\mathcal{B}[0, t] \times \mathcal{F}_t$-medible. Podemos descomponer al ``proceso parado'' $X_{s \wedge \tau} (\omega)$, para un tiempo $s \leq t$ como
+\begin{align*}
+	X_{s \wedge \tau} (\omega) = X(s \wedge \tau (\omega), \omega) = X \circ \Psi (s, \omega),
+\end{align*}
+esto cierto para un mapeo $\Psi$, por hipótesis sabemos que $X$ es un proceso progresivamente medible, por lo que si mostramos una aplicación que sea progresivamente medible y que cumpla con la anterior composición habremos mostrado el resultado. Consideremos entonces la función $\varphi (s, \omega) = s \wedge \tau(\omega)$ y un tiempo $r \leq t$, entonces veamos que 
+\begin{align*}
+	(\varphi \leq r) & = \{ (s, \omega) \in [0, t] \times \Omega : s \wedge \tau(\omega) \leq r \} \\
+    & = ([0, r] \times \Omega) \cup ([0, t] \times \{ \tau (\omega) \leq r \}) \in \mathcal{B}[0, t] \times \mathcal{F}_t.
+\end{align*}
+Si definimos a $\Psi: [0, t] \times \Omega \mapsto [0, t] \times \Omega$ de la siguiente manera
+\begin{align*}
+	(s, \omega) \mapsto (\varphi(\omega), \omega).
+\end{align*}
+Podemos observar que este mapeo cumple que para cada intervalo $I \in [0, t]$ y para todo conjunto $A \in \mathcal{F}_t$ se tiene que
+\begin{align*}
+	\Psi^{-1}(I \times A) = \{ (s, \omega) : \varphi(s, \omega) \in I, \omega \in A \} = \varphi^{-1}(I) \cap ([o, t] \times A) \in \mathcal{B}[0, t] \times \mathcal{F}_t.
+\end{align*}
+Por lo tanto, sabemos que el mapeo es $\Psi$ es $\mathcal{B}[0, t] \times \mathcal{F}_t$-medible, lo cual termina de mostrar segunda parte del resultado.
 \end{proof}
 
 \section{Martingalas a tiempo continuo}
+En esta sección mostraremos algunas propiedades ya vistas en el Capítulo I, ahora extendidas con una noción de tiempo continuo. Cabe destacar algunos resultados nuevos e importantes dentro de esta sección, como serán las desigualdades maximales a tiempo continuo, los cruces que realiza un proceso a lo largo de su trayectoria, así como las condiciones para la continuidad de éstas. Finalizaremos extenderemos el Teorema de Paro de Doob a tiempo continuo. \\
+
+\begin{definition}
+	Sea $(X_t, t \geq 0)$ un proceso adaptado a la filtración $(\mathcal{F}_t)_{t \geq 0}$.
+    \begin{enumerate}
+	\item Decimos que el proceso $(X_t, t \geq 0)$ es una submartingala si
+    	\begin{enumerate}
+		\item para toda $t \geq 0$, $\mathbb{E}[X_t^{+}] < \infty$,
+        \item para cada $0 \leq s < t < \infty$,
+        \begin{align*}
+			\mathbb{E}[X_t \mid \mathcal{F}_s] \geq X_s.
+		\end{align*}
+		\end{enumerate}
+    \item El proceso $(X_t, t \geq 0)$ es una supermartingala si el proceso $(-X_t, t \geq 0)$ es una submartingala.
+    \item Finalmente, decimos que el proceso $(X_t, t \geq 0)$ es una martingala si es una submartingala y supermartingala, es decir, si
+    \begin{enumerate}
+	\item para toda $t \geq 0$, $\mathbb{E}[|X_t|] < \infty$,
+    \item para cada $0 \leq s < t < \infty$,
+ 	   \begin{align*}
+			\mathbb{E}[X_t \mid \mathcal{F}_s] = X_s.
+		\end{align*}
+	\end{enumerate}
+	\end{enumerate}
+\end{definition}
+
+De la definición anterior podemos ver a continuación algunos empleos de martingalas con enfoque browniano. Considere un movimiento Browniano estándar $B = (B_t, t \geq 0)$ y una filtración asociada $(\mathcal{F}_t)_{t \geq 0}$, donde consideraremos la filtración canónica. \\
+
+Recordemos del Capítulo 3, que el movimiento Browniano posee la propiedad de Markov, de la cual concluimos que $B_t - B_s$ es independiente de $\mathcal{F}_s$, para toda $t > s$. Ahora, tenemos que
+\begin{align*}
+	\mathcal{E}[B_t \mid \mathcal{F}_s] & = \mathbb{E}[B_t + (B_s - B_s) \mid \mathcal{F}_s] \\
+    & = \mathbb{E}[B_t - B_s \mid \mathcal{F}_s] + \mathbb{E}[B_s \mid \mathcal{F}_s] \\
+    & = \mathbb{E}[B_t - B_s \mid \mathcal{F}_s] + B_s \\
+    & = \mathbb{E}[B_t - B_s] + B_s = B_s.
+\end{align*}
+
+Veamos también que, el proceso $(B_t^2 - t, t \geq 0)$ es martingala. Considere un tiempo $t > s$, de la propiedad de Markov,nuevamente vemos que
+\begin{align*}
+	\mathbb{E} \left[B_t^2 - B_s^2 \mid \mathcal{F}_s \right] & = \mathbb{E}\left[B_t^2 \mid \mathcal{F}_s\right] - \mathbb{E}\left[B_s^2 \mid \mathcal{F}_s\right] \\
+    & = \mathbb{E} \left[ \left(B_t - B_s + B_s \right)^2 \mid \mathcal{F}_s \right] - B_s^2 \\
+    & = \mathbb{E} \left[ \left(B_t - B_s \right)^2 + 2 B_s \left(B_t - B_s \right) + B_s^2 \mid \mathcal{F}_s \right] - B_s^2 \\
+    & = B_s^2 + \mathbb{E} \left[ \left(B_t - B_s \right)^2 \right] + 2B_s \mathbb{E} \left[B_t - B_s \right] - B_s^2 \\
+    & = t - s.
+\end{align*}
+
+Lo cual implica que $(B_t^2 - t, t \geq 0)$ es una martingala. Ahora, observemos algunas propiedades de las martingalas a tiempo continua. \\
+
+\begin{enumerate}
+	\item De la misma manera que en la Proposición \ref{convexa}, si $(X_t, t \geq 0)$ es una martingala y $f$ es una función convexa tal que para toda $t \geq 0$, con $\mathbb{E}[|f(X_t)|] < \infty$, entonces $(f(X_t), t \geq 0)$ es una submartingala. \\
+    
+    \item Veamos que si $(X_t, t \geq 0)$ es una submartingala y $f$ es una función convexa y creciente tal que para toda $t \geq 0$, con $\mathbb{E}[|f(X_t)|] < \infty$, entonces podemos afirmar que $(f(X_t), t \geq 0)$ es una submartingala, de la desigualdad de Jensen valida para esperanza condicional.
+    \begin{align*}
+		f(X_s) \leq f \left( \mathbb{E} [X_t \mid \mathcal{F}_s] \right) \leq \mathbb{E} [f(X_t) \mid \mathcal{F}_s].
+	\end{align*}
+    
+    \item De la observación anterior podemos ver que para dos tiempos $s, t$ tales que $s \leq t$ se tiene que
+    \begin{align*}
+		\mathbb{E} [X_S^{+}] \leq \mathbb{E} [X_t^{+}],
+	\end{align*}
+    además, de la definición de submartingala tenemos que $\mathbb{E}[X_0] \leq \mathbb{E}[X_s ]$, lo cual implica que
+    \begin{align*}
+		\sup_{s \in [0, t]} \mathbb{E} \left[ |X_s| \right] \leq 
+	\end{align*}
+    
+    \item Aquí falta una parte de las observaciones.
+\end{enumerate}
+
+\subsection{Desigualdades Maximales}
+
+
+
 \section{Aplicaciones al Movimiento Browniano}
 
 
