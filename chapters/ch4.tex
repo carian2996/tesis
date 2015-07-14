@@ -505,7 +505,71 @@ Lo cual implica que $(B_t^2 - t, t \geq 0)$ es una martingala. Ahora, observemos
 \end{enumerate}
 
 \subsection{Desigualdades Maximales}
+Antes de enunciar un resultado importante para martingalas continuas, como lo son las Desigualdades de Doob, conviene recordar algunas proposiciones ya vistas en el primer capítulo.
 
+Veamos que las desigualdades requeridas son válidas en el caso discreto, después, se comprueba que lo son para un subconjunto numerable de un intervalo $[0, T]$ y finalmente, se utiliza la continuidad por la derecha para aproximar y obtener el resultado deseado.
+
+\begin{proposition}
+	Sea $(X_n, n \in J)$, donde $J = \{0, 1, \ldots, N\}$, una submartingala integrable y $\lambda > 0$, entonces
+    \begin{align*}
+		\mathbb{P} \left( \sup_{n \in J} X_n \geq \lambda \right) \leq \frac{1}{\lambda} \mathbb{E}\left[ X_N 1_{\{ \sup_{n \in J} X_n \geq \lambda\}} \right] \leq \frac{1}{\lambda} \mathbb{E}\left[ |X_N| \right].
+	\end{align*}
+\end{proposition}
+\begin{proof}
+	La demostración se sigue del Teorema \ref{primera}.
+\end{proof}
+
+\begin{proposition}
+	Considere $(X_n, n \in J)$, donde $J = \{0, 1, \ldots, N\}$ es una martingala o submartingala positiva y $\lambda > 0$. Si $\mathbb{E}[|X_N|^p] < \infty$ para alguna $p \geq 1$, entonces
+    \begin{align*}
+		\lambda^p \mathbb{P} \left( \sup_{n \in J} |X_n| \geq \lambda \right) \leq \mathbb{E}[|X_N|^p],
+	\end{align*}
+y además, para $p > 1$ se tiene que
+	\begin{align*}
+		\mathbb{E} [|X_N|^p] \leq \mathbb{E} \left[ \sup_{n \in J} |X_n|^p \right] \leq \left( \frac{p}{p-1} \right)^p \mathbb{E}[|X_N|^p].
+	\end{align*}
+\end{proposition}
+\begin{proof}
+	La demostración se sigue de los Teoremas \ref{lp} y \ref{lp2}.
+\end{proof}
+
+\begin{proposition}
+\label{lp3}
+	Sea $(X_t, t \in [0, T])$ una martingala tal que para $p \geq 1$, el $\sup_{s \in [0, T]} \mathbb{E}[|X_s|^p] < \infty$. Entonces para un conjunto $D \subset [0, T] numerable$, $\lambda > 0$ y $p \geq 1$,
+    \begin{align*}
+    \lambda^p \mathbb{P} \left( \sup_{t \in D} |X_t| \geq \lambda \right)  \leq \sup_{t \in [0, T]} \mathbb{E}[|X_t|^p], 
+    \end{align*}
+y, además, para $p > 1$ se tiene que
+	\begin{align*}
+	\mathbb{E} \left[ \sup_{t \in D} |X_t|^p \right] \leq \left( \frac{p}{p-1} \right)^p \sup_{t \in [0, T]} \mathbb{E}[|X_t|^p].
+	\end{align*}
+\end{proposition}
+
+\begin{proof}
+	Aquí va la primera parte de la demostración que aún no he entendido. \\
+    
+    Para probar la segunda desigualdad, veamos que, de la Proposición \ref{lp3} sabemos que para $p > 1$
+    \begin{align*}
+		\mathbb{E} \left[ \sup_{t \in D_n} |X_t|^p \right] \leq \left( \frac{p}{p-1} \right)^p \mathbb{E} [|X_N|^p].
+	\end{align*}
+Sin embargo, para un conjunto finito numerable $D_n$, tenemos que $\mathbb{E} [|X_N|^p] = \sup_{t \in D_n} \mathbb{E}[|X_t|^p]$. Por lo tanto,
+	\begin{align}
+	\mathbb{E} \left[ \sup_{t \in D_n} |X_t|^p \right] & \leq \left( \frac{p}{p-1} \right)^p \sup_{t \in D_n} \mathbb{E}[|X_t|^p] \nonumber \\
+    & \leq \left( \frac{p}{p-1} \right)^p \sup_{t \in [0, T]} \mathbb{E}[|X_t|^p], \label{ach}
+	\end{align}
+para toda $n \in \mathbb{N}$. De la primera parte de la demostración, sabemos que
+	\begin{align*}
+		\left( \sup_{t \in D} |X_t| \right)^p = \lim_{n \rightarrow \infty} \left( \sup_{t \in D_n} |X_t| \right)^p,
+	\end{align*}
+aplicando el Teorema de Convergencia Monótona obtenemos
+	\begin{align*}
+		\mathbb{E} \left[ \sup_{t \in D} |X_t|^p \right] = \lim{n \rightarrow \infty} \mathbb{E} \left[ \sup_{t \in D_n} |X_t|^p \right],
+	\end{align*}
+por lo tanto, de (\ref{ach}) tenemos que
+	\begin{align*}
+		\mathbb{E} \left[ \sup_{t \in D} |X_t|^p \right] \leq \left( \frac{p}{p-1} \right)^p \sup_{t \in [0, T]} \mathbb{E}[|X_t|^p].
+	\end{align*}
+\end{proof}
 
 
 \section{Aplicaciones al Movimiento Browniano}
