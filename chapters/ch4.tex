@@ -571,8 +571,117 @@ por lo tanto, de (\ref{ach}) tenemos que
 	\end{align*}
 \end{proof}
 
+Con los resultados anteriores, podemos demostrar las desigualdades de Doob para cualquier intervalo $[0, T]$.
+
+\begin{theorem}[Desigualdades de Doob]
+	Sea $(X_t, t\in [0, T])$ una martingala continua por la derecha (o por la izquierda) tal que para $p \geq 1$, con $\sup_{s \in [0, T]} \mathbb{E}[|X_t|^p] < \infty$. Entonces para $\lambda > 0$ y $p \geq 1$ tenemos, 
+    \begin{align*}
+    \lambda^p \mathbb{P} \left( \sup_{t \in [0, T]} |X_t| \geq \lambda \right)  \leq \sup_{t \in [0, T]} \mathbb{E}[|X_t|^p], 
+    \end{align*}
+y, además, para $p > 1$ se tiene que
+	\begin{align*}
+	\mathbb{E} \left[ \sup_{t \in [0, T]} |X_t|^p \right] \leq \left( \frac{p}{p-1} \right)^p \sup_{t \in [0, T]} \mathbb{E}[|X_t|^p].
+	\end{align*}
+\end{theorem}
+\begin{proof}
+	De la Proposición \ref{lp3} sabemos que ambas desigualdades se cumplen para todo conjunto $I \subset [0, T]$ numerable. Si tomamos a una sucesión $I_n \subset [0,T]$ de tal manera que $I_n$ sea una sucesión decreciente con $\cap_{n \geq 1} I_n = [0, T]$ entonces para $\lambda > 0$ y $p \geq 1$ tenemos,
+    \begin{align*}
+		\lambda^p \mathbb{P} \left( \sup_{t \in [0, T]} |X_t| \geq \lambda \right) & = \lim_{n \rightarrow \infty} \lambda^p \mathbb{P} \left( \sup_{t \in I_n} |X_t| \geq \lambda \right) \\ 
+        & \leq \sup_{t \in [0, T]} \mathbb{E}[|X_t|^p], 
+	\end{align*}
+y para $p > 1$
+    \begin{align*}
+		\mathbb{E} \left[ \sup_{t \in [0, T]} |X_t|^p \right] & = \lim_{n \rightarrow \infty} \mathbb{E} \left[ \sup_{t \in I_n} |X_t|^p \right] \\
+        & \leq \left( \frac{p}{p-1} \right)^p \sup_{t \in [0, T]} \mathbb{E}[|X_t|^p].
+	\end{align*}
+\end{proof}
+
+\subsection{Regularidad de Trayectorias}
+Con los resultados vistos hasta ahora para martingalas continuas, podemos estudiar la regularidad de las trayectorias, es decir, obtener las condiciones bajo las cuales una submartingala va a tener trayectorias continuas por la derecha. De igual manera, observar propiedades de convergencia en martingalas continuas. \\
+
+Definamos en primer lugar, los siguientes conceptos. Sea $(X_t, t \geq 0)$ un proceso estocásticos con el espacio de estados $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$. Sean $a$ y $b$ dos números reales donde $a < b$ y con $I \subset [0, \infty)$. Para un subconjunto $F = \{t_1 < t_2, \ldots, t_d\}$ finito de $I$, se definen los tiempos
+\begin{align*}
+	s_1(\omega) & = \inf \{t_i : X_{t_i} > b\}, \\
+    s_2(\omega) & = \inf \{t_i > s_1 : X_{t_i} < a\}, \\
+    \vdots \\
+    s_{2n + 1}(\omega) & = \inf \{ t_i > s_{2n} : X_{t_i} > b \}, \\
+    s_{2n + 2}(\omega) & = \inf \{ t_i > s_{2n + 1} : X_{t_i} < a \}, \\
+\end{align*}
+y por convención tendremos que $\inf(\emptyset) = t_d$. Notemos que, si el conjunto $\{t_i > s_1 : X_{t_i} < a\}$ es no vacío, podemos afirmar que el proceso cruz por abajo el intervalo $[a, b]$, por lo que si definimos a
+\begin{align*}
+	D(X, F, [a, b]) = \sup \left\{ n : s_{2n} < t_d \right\},
+\end{align*}
+entonces, podemos decir que el número de veces que cruza por abajo del intervalo $[a, b]$ el proceso $(X_t, t \geq 0)$ está representado por
+\begin{align}
+	D(X, I, [a, b]) = \sup \left\{ D(X, F, [a, b]) : F \subset I, I \text{ finito }. \right\}
+\end{align}
+La función definida anteriormente resulta ser una variable aleatoria cuando el conjunto $I$ es numerable, y además cumple lo siguiente.
+
+\begin{proposition}
+	Sea $(X_t, t \geq 0)$ una submartingala, $I$ un conjunto numerable, entonces
+    \begin{align*}
+		\mathbb{E} \left[ D(X, I, [a, b]) \right] \leq \frac{1}{(b-a)} \sup_{t \in I} \mathbb{E} \left[ (X_t - b)^{+} \right].
+	\end{align*}
+\end{proposition}
+\begin{proof}
+	Considere el caso donde $I$ es un subconjunto numerable y finito. Tomando a $I$ como $\{t_1 < t_2 < \cdots, t_d\}$. Por definición sabemos que
+    \begin{align*}
+		s_{2i-1} (\omega) & = \inf \{ t_{2i-1} : X_{t_{2i-1}} > b \}, \\
+        s_{2i} (\omega) & = \inf \{ t_{2i} : X_{t_{2i}} < a \},
+	\end{align*}
+son tiempos de paro con respecto a $(\mathcal{F}_{t_{2i-1}})_{t{_2i-1} \in I}$ y $(\mathcal{F}_{t_{2i}})_{t{_2i} \in I}$, respectivamente. Si definimos al conjunto $A_k$ como $\{ s_k < t_d \}$, entonces, $A_k \in \mathcal{F}_{s_k}$, y además
+	\begin{align*}
+		A_k = \{ s_k < t_d \} \supset \{ s_{k+1} < t_d \} = A_{k+1},
+	\end{align*}
+ya que $s_k \leq s_{k+1}$. \\
+
+En el conjunto $A_{2n - 1} = \{ s_{2n - 1} \}$ tenemos que $X_{s_{2n - 1}} > b$ y en $A_{2n}$ se tiene $X_{s_{2n}} < a$, por lo tanto
+	\begin{align*}
+		0 \leq \mathbb{E} \left[ X_{s_{2n - 1}} - b, A_{2n - 1} \right] \leq \mathbb{E} \left[ X_{s_{2n}} - b, A_{2n - 1} \right].
+	\end{align*}
+Al ser $(A_k)_{k \geq 1}$ una sucesión de conjunto decreciente, se tiene que $A_{2n}$ y $A_{2n - 1} \setminus A_{2n}$ son conjuntos disjuntos a pares. Obtenemos entonces, 
+	\begin{align*}
+		0 \leq \mathbb{E} \left[ X_{s_{2n - 1}} - b,\ A_{2n - 1} \right] & \leq \mathbb{E} \left[ X_{s_{2n}} - b, \ A_{2n - 1} \right] \\
+        & = \mathbb{E} \left[ X_{s_{2n}} - b, \ A_{2n} \right] + \mathbb{E} \left[ X_{s_{2n}} - b, \ A_{2n - 1} \setminus A_{2n} \right] \\
+        & = \mathbb{E} \left[ X_{s_{2n}}, \ A_{2n} \right] - b \mathbb{P} (A_{2n}) + \mathbb{E} \left[ X_{s_{2n}} - b, \ A_{2n - 1} \setminus A_{2n} \right] \\
+        & \leq (a - b) \mathbb{P} (A_{2n}) + \mathbb{E} \left[ X_{s_{2n}} - b, \ A_{2n - 1} \setminus A_{2n} \right],
+	\end{align*}
+donde la última desigualdad se da por el Teorema de Paro Opcional de Doob para tiempo discreto. Recordemos que en el conjunto $A_{2n}^{c}$, el tiempo $s_{2n}$ es igual a $t_d$, entonces
+	\begin{align*}
+		(b - a) \mathbb{P}(A_{2n}) \leq \mathbb{E} \left[ (X_{s_{2n}} - b)^{+}, \ A_{2n - 1} \setminus A_{2n} \right] = \mathbb{E} \left[ (X_{t_d} - b)^{+}, \ A_{2n - 1} \setminus A_{2n} \right].
+	\end{align*}
+De la construcción de $s_k$ podemos ver que $\mathbb{P}(A_{2n}) = \mathbb{P} \{ s_{2n} < t_D \}$ es equivalente a la probabilidad de que el proceso $X$ cruce $n$ veces o más el intervalo $[a, b]$, por lo que se tiene la siguiente desigualdad
+	\begin{align*}
+		\sum_{n = 1}^{\infty} (b-a) \mathbb{P} \left( D(X, I, [a, b]) \geq n \right) \leq \sum_{n = 1}^{\infty} \mathbb{E} \left[ (X_{t_d} - b )^{+}, \ A_{2n - 1} \setminus A_{2n} \right],
+	\end{align*}
+lo que es equivalente a 
+	\begin{align*}
+		(b-a) \mathbb{E} \left[ D(X, I, [a, b]) \right] \leq \mathbb{E} \left[ (X_{t_d} - b )^{+} \right].
+	\end{align*}
+\end{proof}
+
+
+\subsection{Teorema de Paro de Doob}
+
 
 \section{Aplicaciones al Movimiento Browniano}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
