@@ -15,4 +15,4 @@ Se contiene:
 
 Los files que contiene 'images' son los necesarios para la creación de la portada.
 
-Todos los archivos están escritos en TeX. Todos los derechos reservados. 2015.
+Todos los archivos están escritos en TeX. Todos los derechos reservados. 2017.
