@@ -1,14 +1,22 @@
-\title{thesis}
+\title{tesis}
 \documentclass[a4paper]{book}
-
+ 
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amsfonts}
+\usepackage{accents}
+\usepackage{fancyhdr, blindtext}
+
+
+\newcommand{\changefont}{%
+    \fontsize{9}{11}\selectfont
+}
 
 \DeclareMathOperator*{\esssup}{esssup}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
 
 % Estilos de teoremas
 \newtheorem{theorem}{Teorema}[chapter]
@@ -23,6 +31,14 @@
 \theoremstyle{remark}
 \newtheorem{remark}{Observación}
 
+\fancyhf{}
+\fancyhead[LE]{\slshape \rightmark} %section
+\fancyfoot[C]{\changefont \thepage}
+\fancyhead[RO]{\slshape \leftmark} % chapter
+\fancyfoot[C]{\changefont \thepage}
+
+\pagestyle{fancy}
+
 \begin{document}
 
 \frontmatter
@@ -33,24 +49,24 @@
 
 \tableofcontents
 
-\chapter{Prefacio}
-\input{chapters/pref}
+\chapter{Introducción}
+\input{chapters/intro}
 
-\mainmatter
+\mainmatter 
 
 \chapter{Martingalas}
 \input{chapters/ch1}
 
-\chapter{Problema de Paro Óptimo}
+\chapter{Problema de Paro Óptimo: Tiempo Discreto}
 \input{chapters/ch2}
 
 \chapter{Movimiento Browniano}
 \input{chapters/ch3}
 
-\chapter{Martingalas continuas}
+\chapter{Martingalas Continuas}
 \input{chapters/ch4}
 
-\chapter{Proceso Poisson Compuesto}
+\chapter{Problema de Paro Óptimo: Tiempo Continuo}
 \input{chapters/ch5}
 
 \input{chapters/biblio}

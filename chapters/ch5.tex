@@ -1,0 +1,484 @@
+Para finalizar este trabajo, analizamos el caso a tiempo continuo de los problemas de paro óptimo. Consideremos los resultados vistos hasta ahora y tomemos el caso de una cadena de Markov. Recordemos del Capítulo 2, la definición del tiempo de paro candidato $\tau_P$ como
+\begin{align*}
+	\tau_P = \inf \{ n \geq 0 : X_n \in P \},
+\end{align*}
+donde $P$ es la región de paro, es decir, $P = \{ x \in E : V(x) = G(x) \}$. De la definición sabemos que se requiere cierto conocimiento \emph{a priori} de la función $V(x)$, la cual está definida por
+\begin{align*}
+	V(x) = \mathbb{E}_x [G(X_{\tau_P})].
+\end{align*}
+En otras palabras, debemos tener un conocimiento de $\tau_P$ para poder conocer el valor de $V(x)$. De ambas dependencias, resulta difícil dar una solución sistemática al problema de paro óptimo en este caso. Por lo tanto, se recurre a una técnica con un enfoque que requiere cierta intuición para proponer una solución a este tipo de problemas y después poder verificar que, efectivamente, la propuesta sea óptima. \\
+
+Para ejemplificar este tipo de técnicas, consideremos problemas de paro óptimo de la siguiente forma
+\begin{align}
+	v(x) = \sup_{\tau \in \mathcal{T}} \mathbb{E}_x [e^{-q \tau} G(Y_{\tau})], \label{problema_paro}
+\end{align}
+donde $Y = \{ Y_t : t \geq 0 \}$, esta definido como
+\begin{align}
+	Y_t = at + \sigma B_t + \sum_{i = 1}^{N_t} X_i, \hspace{0.3cm} \text{para } t \geq 0, \label{levy_salto}
+\end{align}
+donde $(X_i)$ son variables aleatorias negativas independientes e identicamente distribuidas, $N_t$ es un proceso Poisson con parámetro $\lambda$, $B_t$ un movimiento Browniano, $\sigma \geq 0$ y $a \in \mathbb{R}$. Además, $G$ es una función no negativa medible, $q \geq 0$ y $\mathcal{T}$ es la familia de tiempos de paro con respecto a la filtración $\mathbb{F} = \{ \mathcal{F}_t : t \geq 0 \}$ donde $\mathcal{F}_t = \sigma\{ Y_u : u \leq t \}$. \\
+
+El proceso $Y$ definido anteriormente pertenece a una familia de procesos estocásticos la cual es bastante importante para las aplicaciones, gracias a que se pueden calcular muchos de sus funcionales. Esta familia es conocida como procesos de Lévy.
+
+\begin{definition}[Proceso de Lévy] 
+  Un proceso $X = \{ X_t : t \geq 0 \}$ se dice que es un proceso de Lévy si tiene las siguientes propiedades
+  \begin{enumerate}
+  	\item Las trayectorias de $X$ son casi seguramente continuas por la derecha con límites por la izquierda.
+    \item $X_0 = 0$ casi seguramente.
+    \item Para los tiempos $0 \leq s \leq t$, los incrementos $X_t - X_s$ son estacionarios, es decir, $X_t - X_s$ tiene la misma distribución que $X_{t-s}$.
+    \item Para los tiempos $0 \leq s \leq t$, los incrementos $X_t - X_s$ son independientes de $\sigma \{ X_u : u \leq s \}$.
+  \end{enumerate}
+\end{definition}
+
+Vamos a denotar por $\mathbb{P}_y$ como ley del proceso $Y$ empezando en $y$, es decir, $\mathbb{P}(Y_0 = y) = 1$. \\
+
+Podemos ver de (\ref{levy_salto}), que $Y_0 = 0$ c.s. De la misma manera, sabemos que el proceso es continuo con saltos negativos de intensidad $X_i$, por lo que el proceso es continuo por la derecha con límites por la izquierda. Los incrementos que presenta el proceso son de la forma
+\begin{align}
+	\tilde{Y}_t = Y_{t+s} - Y_s & = \left( a(t+s) + \sigma B_{t+s} + \sum_{i = 1}^{N_{t+s}} X_i \right) - \left( as + \sigma B_s + \sum_{i = 1}^{N_s} X_i \right) \nonumber \\
+    & = at + \sigma (B_{t+s} - B_{s}) + \left( \sum_{i = 1}^{N_{t+s}} X_i - \sum_{i = 1}^{N_s} X_i \right) \nonumber \\
+    & = at + \sigma (B_{t+s} - B_{s}) + \sum_{i = N_s}^{N_{t+s}} X_i  \nonumber \\
+    & = at + \sigma (B_{t+s} - B_{s}) + \sum_{i = 0}^{N_{t+s} - N_s} X_{N_s + i}. \label{poisson}
+\end{align}
+Como $B_{t+s} - B_s$ y $N_{t+s} - N_s$ tienen la misma distribución que $B_t$ y $N_t$, para $t \in \mathbb{R}_{+}$, observamos que (\ref{poisson}) tiene la misma distribución que $Y_t$. Además como $B$ y $N$ tienen incrementos independientes y $X_i$ son independiente identicamente distribuidas, $Y_t - Y_s$ es independiente de $\mathcal{F}_s$. 
+
+De los argumentos anteriores, tenemos que el proceso $Y$ es un proceso de Lévy. \\
+
+De las propiedades de estacionariedad e independencia que presenta el proceso $Y$ en sus incrementos, podemos verificar que posee la propiedad de Markov. \\
+
+Recordemos que la propiedad de Markov expresada en términos de $Y$ establece que para cualquier tiempo $s > 0$, el proceso $\widehat{Y}_t = (Y_{t+s}, \ t \geq 0)$ condicionado bajo $\mathcal{F}_s$, resulta ser un proceso de Lévy que comienza en $Y_s$.
+
+\begin{proposition}
+Consideremos al proceso $Y$ definido en (\ref{levy_salto}). Entonces el proceso $Y$ posee la propiedad de Markov.
+\end{proposition}
+\begin{proof}
+Para mostrar que el proceso $Y$ cumple con la propiedad de Markov, definamos para una $s > 0$ fija al proceso $\widehat{Y}_t = (Y_{t+s}, \ t \geq 0)$ y al condicionar el proceso con respecto a $\mathcal{F}_s$ se tiene un proceso que comienza en $Y_s$. \\
+
+Para toda $t \geq 0$ tenemos que $\widehat{Y}_t = Y_t + (Y_s - Y_s) = \tilde{Y}_t + Y_s$. Podemos considerar un número finito de tiempos pues al utilizar el Lema de Clases Monótonas se extiende el resultado a la $\sigma$-álgebra completa. Consideremos los siguientes tiempos tales que $t_1 \leq t_2 \leq \ldots \leq t_n$ y $f : \mathbb{R}^n \rightarrow \mathbb{R}$ tenemos que
+\begin{align*}
+\mathbb{E} \left[ f \left( \widehat{Y}_{t_1}, \ldots, \widehat{Y}_{t_n} \right) \bigg| \mathcal{F}_s \right] & = \mathbb{E} \left[ f \left( \tilde{Y}_{t_1} + Y_s, \ldots, \tilde{Y}_{t_n} + Y_s \right) \bigg| \mathcal{F}_s \right],
+\end{align*}
+
+Haciendo un abuso de notación y tomando $\{ Y_s = y \}$, vemos
+\begin{align*}
+\mathbb{E} \left[ f \left( \tilde{Y}_{t_1} + Y_s, \ldots, \tilde{Y}_{t_n} + Y_s \right) \bigg| \mathcal{F}_s \right] & = \mathbb{E} \left[ f \left( \tilde{Y}_{t_1} + y, \ldots, \tilde{Y}_{t_n} + y \right) \right] \hspace{0.5cm} \{ Y_s = y \},
+\end{align*}
+
+De las propiedades discutidas en (\ref{levy_salto}) sabemos que $\tilde{Y}_{t}$ se distribuye de la misma manera que $Y_t$, entonces
+\begin{align*}
+\mathbb{E} \left[ f \left( \widehat{Y}_{t_1}, \ldots, \widehat{Y}_{t_n} \right) \bigg| \mathcal{F}_s \right] & = \mathbb{E} \left[ f \left( \tilde{Y}_{t_1} + y, \ldots, \tilde{Y}_{t_n} + y \right) \right] \hspace{0.5cm} \{ Y_s = y \}, \\
+& = \mathbb{E} \left[ f \left( Y_{t_1} + y, \ldots, Y_{t_n} + y \right) \right] \hspace{0.5cm} \{ Y_s = y \}, \\
+& = \mathbb{E}_y \left[ f \left( Y_{t_1}, \ldots, Y_{t_n} \right) \right]
+\end{align*}
+
+Donde $\mathbb{E}_y$ representa el valor esperado del proceso respecto a la ley $\mathbb{P}_y$, y $Y$ es aleatorio con valor $Y_s$.
+\end{proof}
+
+La propiedad fuerte de Markov considera un tiempo de paro $\tau$ y $\tilde{Y}_{t} = Y_{t + \tau} - Y_{\tau}$ para toda $t \geq 0$. Al condicionar el proceso $\tilde{Y}_{t}$ con respecto al evento $\{ \tau < \infty \}$, entonces el proceso es independiente de $\mathcal{F}_{\tau}$.
+
+\begin{proposition}
+El proceso $Y$, definido en (\ref{levy_salto}) posee la propiedad fuerte de Markov.
+\end{proposition}
+\begin{proof}
+La demostración de la propiedad fuerte de Markov básicamente es la misma que en el Teorema \ref{markov-fuerte}. La prueba se basa en considerar un evento $A \in \mathcal{F}_{\tau}$ con una sucesión de tiempos finitos tales que $t_1 \leq t_2 \leq \ldots \leq t_n$ y una función continua y acotada $f: \mathbb{R}^{+} \rightarrow \mathbb{R}$ tal que
+\begin{align*}
+\mathbb{E} \left[ 1_A f \left( Y_{t_1 + \tau} - Y_{\tau}, \ldots, Y_{t_n + \tau} - Y_{\tau} \right) \right] = \mathbb{P}(A) \mathbb{E} \left[ f \left( Y_{t_1}, \ldots, Y_{t_n} \right) \right],
+\end{align*}
+para después extender este resultado al proceso completo con respecto a la $\sigma$-álgebra $\mathcal{F}_{\tau}$ utilizando el Lema de Clases Monótonas. \\
+
+Si se considera una sucesión de números como en el Teorema \ref{markov-fuerte} de tal forma que podamos aproximarnos a $ f\left( Y_{t_1 + \tau} - Y_{\tau}, \ldots, Y_{t_n + \tau} - Y_{\tau} \right)$, por la continuidad a la derecha y límites por la izquierda del proceso $Y$ tenemos que
+\begin{align*}
+\sum_{i = 1}^{\infty} 1_{ \{ \frac{i-1}{2^m} < \tau \leq \frac{i}{2^m} \} } f \left( Y_{\frac{i}{2^m} + t_1} - Y_{\frac{i}{2^m}}, \ldots, Y_{\frac{i}{2^m} + t_n} - Y_{\frac{i}{2^m}}  \right) \xrightarrow{m \rightarrow \infty} f \left( \tilde{Y}_{t_1}, \ldots, \tilde{Y}_{t_n} \right),
+\end{align*}
+donde $\tilde{Y}_{t_j} = Y_{t_j + \tau} - Y_{\tau}$. Luego, del Teorema de Convergencia Monótona, 
+\begin{align}
+	\mathbb{E} & \left[1_A f \left( \tilde{Y}_{t_1}, \ldots, \tilde{Y}_{t_n} \right) \right] \nonumber \\
+	& = \lim_{m \rightarrow \infty} \sum_{i = 1}^{\infty} \mathbb{E} \left[ 1_{ A \cap \{\frac{i-1}{2^m} < \tau \leq \frac{i}{2^m}\}} f \left( Y_{\frac{i}{2^m} + t_1} - Y_{\frac{i}{2^m}}, \ldots, Y_{\frac{i}{2^m} + t_n} - Y_{\frac{i}{2^m}}  \right) \right]. \label{iphone}
+\end{align}
+
+Para poder aplicar la propiedad de Markov en la igualdad anterior, notemos que si $A \in \mathcal{F}_{\tau}$ entonces, casi seguramente $A \cap \{\frac{i-1}{2^m} < \tau \leq \frac{i}{2^m}\} \in \mathcal{F}_{i/2^m}$, entonces
+\begin{align*}
+	\mathbb{E} & \left[ 1_{ A \cap \{\frac{i-1}{2^m} < \tau \leq \frac{i}{2^m}\}} f \left( Y_{\frac{i}{2^m} + t_1} - Y_{\frac{i}{2^m}}, \ldots, Y_{\frac{i}{2^m} + t_n} - Y_{\frac{i}{2^m}}  \right) \right] \\
+	& = \mathbb{E} \left[ 1_{ A \cap \{\frac{i-1}{2^m} < \tau \leq \frac{i}{2^m}\}} \mathbb{E} \left[ f \left( Y_{\frac{i}{2^m} + t_1} - Y_{\frac{i}{2^m}}, \ldots, Y_{\frac{i}{2^m} + t_n} - Y_{\frac{i}{2^m}}  \right) \bigg| \mathcal{F}_{ \frac{i}{2^m} } \right] \right] \\
+	& = \mathbb{P} \left( A \cap \left\{ \frac{i-1}{2^m} < \tau \leq \frac{i}{2^m} \right\} \right) \mathbb{E} \left[ f \left( Y_{t_1}, \ldots, Y_{t_n} \right) \right].
+	\end{align*}
+Por lo tanto, sustituyendo en (\ref{iphone})
+	\begin{align*}
+	\mathbb{E} \left[ 1_A f \left( \tilde{Y}_{t_1}, \ldots, \tilde{Y}_{t_n} \right) \right] = \mathbb{P} (A) \mathbb{E} \left[ f \left( Y_{t_1}, \ldots, Y_{t_n} \right) \right], 
+	\end{align*}
+\end{proof}
+
+\section{Condiciones Suficientes para la Optimización}
+Ahora presentamos las condiciones suficientes para poder verificar que una solución propuesta es la óptima para resolver el problema de paro óptimo de la forma (\ref{problema_paro}), considerando a $G$ como una función sobre un proceso de Markov de dos dimensiones $(t, Y_t)$, es decir, una función de espacio y tiempo, donde $G$ es no negativa y medible.\\
+
+
+\begin{lemma}
+\label{condiciones_solucion}
+	Considere el problema de paro óptimo definido en (\ref{problema_paro}), para $q \geq 0$, con el supuesto de que para toda $y \in \mathbb{R}$, existe casi seguramente $\lim_{t \rightarrow \infty} e^{-qt} G(Y_t)$ y además
+    \begin{align}
+		\mathbb{P}_y \left( \lim_{t \uparrow \infty} e^{-qt} G(Y_t) < \infty \right) = 1. \label{condicion1}
+	\end{align}
+    Si consideramos a $\tau^{*} \in \mathcal{T}$ como una estrategia candidata para el problema de paro óptimo (\ref{problema_paro}) y sea 
+    \begin{align*}
+		v^{*}(y) = \mathbb{E}_y [e^{-q \tau^{*}} G(Y_{\tau^{*}})].
+	\end{align*}
+Entonces, $(v^{*}, \tau^{*})$ es una solución si
+  \begin{enumerate}
+  	\item $v^{*}(y) \geq G(y)$ para toda $y \in \mathbb{R}$.
+    \item El proceso $\{ e^{-qt} v^{*}(Y_t) : t \geq 0 \}$ es una supermartingala continua por la derecha.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+Queremos observar que nuestra solución propuesta $(v^{*}, \tau^{*})$ es óptima, es decir, queremos mostrar que para toda $y \in \mathbb{R}$ la siguiente igualdad se cumple
+\begin{align}
+	v^{*}(y) = \sup_{\tau \in \mathcal{T}} \mathbb{E}_y \left[ e^{-q \tau} G(Y_{\tau}) \right]. \label{pd_condsuf}
+\end{align}
+De la definición de $v^{*}(y)$ se tiene que para toda $y \in \mathbb{R}$
+\begin{align*}
+	\sup_{\tau \in \mathcal{T}} \mathbb{E}_y \left[ e^{-q \tau} G(Y_{\tau}) \right] \geq v^{*}(y).
+\end{align*}
+Por otra parte, sabemos que el proceso $\{ e^{-qt} v^{*}(Y_t) : t \geq 0 \}$ es una supermartingala continua por la derecha, entonces utilizando el Teorema de Paro Opcional de Doob tenemos que para todo $t \geq 0$, $y \in \mathbb{R}$ y $\sigma \in \mathcal{T}$
+\begin{align*}
+	v^{*}(y) \geq \mathbb{E}_y \left[ e^{-q(t \wedge \sigma)} v^{*}(Y_{t \wedge \sigma}) \right],
+\end{align*}
+en particular tenemos que, 
+\begin{align*}
+	v^{*}(y) & \geq \liminf_{t \uparrow \infty} \mathbb{E}_y \left[ e^{-q(t \wedge \sigma)} v^{*}(Y_{t \wedge \sigma}) \right], 
+\end{align*}
+usando el hecho anterior y además que $v^{*}(y) \geq G(y)$ para toda $y$, el Lema de Fatou y la condición de no negativdad de la función $G$, vemos
+\begin{align*}
+	v^{*}(y) & \geq \liminf_{t \uparrow \infty} \mathbb{E}_y \left[ e^{-q(t \wedge \sigma)} v^{*}(Y_{t \wedge \sigma}) \right] \\
+    & \geq \liminf_{t \uparrow \infty} \mathbb{E}_y \left[ e^{-q(t \wedge \sigma)} G(Y_{t \wedge \sigma}) \right] \\
+    & \geq \mathbb{E}_y \left[ \liminf_{t \uparrow \infty} e^{-q(t \wedge \sigma)} G(Y_{t \wedge \sigma}) \right] \\
+    & = \mathbb{E}_y \left[ e^{-q \sigma} G(Y_{\sigma}) \right],
+\end{align*}
+puesto que $\sigma \in \mathcal{T}$ es arbitraria, tenemos que para toda $y \in \mathbb{R}$
+\begin{align*}
+	 v^{*}(y) \geq \sup_{\tau \in \mathcal{T}} \mathbb{E}_y \left[ e^{-q \tau} G(Y_{\tau}) \right].
+\end{align*}
+De ambas desigualdades, vemos que se cumple (\ref{pd_condsuf}).
+\end{proof}
+
+Si consideramos las condiciones que se piden en el Lema \ref{condiciones_solucion}, podemos notar que para una función monótona creciente $G$ y $q > 0$, una clase de posibles soluciones son aquellas donde se supere algún umbral establecido. \\
+
+Supongamos entonces que, $G$ es una función monótona creciente, si tomamos el tiempo $\tau$ en donde $Y_t$ se maximiza, entonces también ocurrirá para $G(Y_{\tau})$. Recordemos que la clase de problemas que estamos considerando, son aquellos donde la función $G$ tiene un factor de descuento exponencial, por lo tanto, no debería de transcurrir mucho tiempo para que el umbral que se estableció sea alcanzado. 
+
+Ambas condiciones nos sugieren la existencia de un umbral, el cual posiblemente depende del tiempo, donde uno debería detenerse si se quiere maximizar el valor esperado de la ganancia. Si al tiempo $t > 0$ no se ha superado el umbral de paro, y el proceso $Y_t = y$, entonces cualquier tiempo de paro futuro dependerá solamente de la trayectoria del proceso a partir de este punto, teniendo un valor esperado de 
+\begin{align}
+	e^{-qt} \mathbb{E}_y \left[ e^{-q \tau} G(Y_{\tau}) \right]. \label{valor_esperado}
+\end{align}
+Optimizar (\ref{valor_esperado}) resulta ser un problema igual a (\ref{problema_paro}), además, no tiene ninguna utilidad considerar los tiempos de paro anteriores a $t$, gracias a la propiedad de Markov. \\
+
+Los argumentos anteriores sugieren que el umbral no varía con respecto al tiempo, y entonces, las posibles soluciones son de la forma
+\begin{align*}
+	\tau_x^{*} = \inf \{ t > 0 : Y_t \in [x, \infty), x \in \mathbb{R} \}.
+\end{align*}
+El mismo razonamiento aplica en el caso donde $G$ es una función monótona decreciente. Considerar solamente a la función como monótona no asegura que la estrategia del umbral sea óptima, es por esta misma razón, lo que hace muy difícil poder hacer rigurosas las intuiciones anteriores. Las estrategias ``óptimas'' que se consideran para problemas de paro óptimo en particular, pueden variar enormemente si se cambia la naturaleza del problema. 
+
+Se ha mostrado (véase \cite{avram}, \cite{kyprianou2}) que existen ciertas familias de problemas para las cuales, sus soluciones coinciden en varios aspectos, aunque resulta muy sencillo modificar el problema de tal manera que ninguna de las soluciones propuestas sea aplicable. Es por estas razones que vamos a considerar un problema de paro óptimo en particular. 
+
+\section[Problema de McKean u Opción Americana]{Problema de Paro Óptimo de McKean u Opción Americana}
+El problema de paro óptimo de McKean está dado por
+\begin{align}
+	v(y) = \sup_{\tau \in \mathcal{T}} \mathbb{E}_y \left[ e^{-q \tau} (K - e^{Y_{\tau}})^{+} \right], \label{mckean}
+\end{align}
+donde $q > 0$, $\mathcal{T}$ es la familia de tiempos de paro respecto a $\mathbb{F}$ y $(K - e^{Y_{\tau}})^{+} = \max(K - e^{Y_{\tau}}, 0)$. \\
+
+El contexto de este problema puede ser visto como la venta de un activo con cierto riesgo a un valor específico. Donde $K$ es el precio fijo que se pacta para vender el activo, y el proceso $Y$, en este caso, sigue un movimiento Browniano con saltos negativos como se definió en (\ref{levy_salto}). El objetivo del problema es maximizar la ganancia que se puede esperar al momento de detenerse y obtener la mayor diferencia respecto al precio pactado $K$ con el precio del mercado $e^{Y_{\tau}}$. Este tipo de procesos son conocidos en finanzas como opciones americanas.  
+
+Antes de entrar de lleno a la solución, veamos un resultado que será de utilidad a la hora de resolver el problema de McKean. Definamos para $y \in \mathbb{R}$ los tiempos de primera pasada, como
+\begin{align*}
+	\tau_{y}^{+} := \inf \{ t > 0 : Y_t > y \} \hspace{0.3cm} \text{y} \hspace{0.3cm} \tau_{y}^{-} := \inf \{ t > 0 : Y_t < y \}.
+\end{align*}
+Además, escribamos $\bar{Y}_t = \sup_{s \leq t} Y_s$.
+
+\begin{lemma}
+Para toda $q > 0$, $\beta \geq 0$ y $z \geq 0$, tenemos que
+\begin{align}
+	\mathbb{E} \left[ e^{-q \tau_{z}^{+} - \beta Y_{\tau_{z}^{+}}} 1_{ \{ \tau_{z}^{+} < \infty \} } \right] = \frac{\mathbb{E} \left[ e^{- \beta \bar{Y}_{e_q}} 1_{ \{ \bar{Y}_{e_q} > z \} } \right]}{\mathbb{E} \left[ e^{- \beta \bar{Y}_{e_q}} \right]}, \label{lema_mckean}
+\end{align}
+con $e_q$ como una variable aleatoria que es independiente de $Y$ y tiene una distribución exponencial.
+\end{lemma}
+\begin{proof}
+Primero, supongamos que $q, \beta, z > 0$ y veamos que, si $\bar{Y}_{e_q} > z$ entonces el momento en que supero a $z$ ocurrió antes que $e_q$, es decir $\tau_z^{+} < e_q$, por lo tanto
+\begin{align*}
+	\mathbb{E} \left[ e^{- \beta \bar{Y}_{e_q}} 1_{ \{ \bar{Y}_{e_q} > y \}} \right]  & = \mathbb{E} \left[ e^{- \beta \bar{Y}_{e_q}} 1_{\{\tau_z^{+} < e_q\}} \right] \\
+    & = \mathbb{E} \left[ e^{- \beta ( \bar{Y}_{e_q} + Y_{\tau_z^{+}} - Y_{\tau_z^{+}} )} 1_{\{\tau_z^{+} < e_q\}} \right] \\
+    & = \mathbb{E} \left[ \mathbb{E} \left[ 1_{\{\tau_z^{+} < e_q\}} e^{- \beta Y_{\tau_z^{+}}} e^{ - \beta (\bar{Y}_{e_q} - Y_{\tau_z^{+}})} \bigg|  \mathcal{F}_{\tau_z^{+}} \right] \right] \\
+    & = \mathbb{E} \left[ 1_{\{\tau_z^{+} < e_q\}} e^{- \beta Y_{\tau_z^{+}}} \mathbb{E} \left[ e^{- \beta (\bar{Y}_{e_q} - Y_{\tau_z^{+}})} \bigg|  \mathcal{F}_{\tau_y^{+}} \right] \right]
+\end{align*}
+
+De nuestra última expresión, consideremos la variable aleatoria $\bar{Y}_{e_q} - \bar{Y}_{\tau_z^{+}}$, vemos que 
+\begin{align*}
+	\bar{Y}_{e_q} - \bar{Y}_{\tau_z^{+}} & = \sup_{s \leq e_q} Y_s - Y_{\tau_z^{+}} \\
+    & = \sup_{u \leq e_q - \tau_z^{+}} \left( Y_{u + \tau_z^{+}} - Y_{\tau_z^{+}} \right)
+\end{align*}
+
+Al ser $e_q$ una variable aleatoria que se distribuye exponencialmente, sabemos que posee la propiedad de pérdida de memoria, al estar condicionada sobre $\mathcal{F}_{\tau_y^{+}}$ y el evento $\{ \tau_z^{+} < e_q \}$ se tiene que $e_q - \tau_z^{+}$ se distribuye exponencialmente. Por otra parte de (\ref{poisson}) sabemos que $Y_{u + \tau_z^{+}} - Y_{\tau_z^{+}}$ tiene la misma distribución que $Y_{u}$. \\
+
+Entonces, sabemos que $\bar{Y}_{e_q} - \bar{Y}_{\tau_z^{+}}$ tiene la misma distribución que $\bar{Y}_{e_q}$. Por lo tanto, tenemos que
+\begin{align}
+	\mathbb{E} \left[ e^{- \beta \bar{Y}_{e_q}} 1_{\{\bar{Y}_{e_q} > y\}} \right]  & = \mathbb{E} \left[ 1_{\{\tau_z^{+} < e_q\}} e^{- \beta Y_{\tau_z^{+}}} \mathbb{E} \left[ e^{- \beta (\bar{Y}_{e_q} - Y_{\tau_z^{+}})} \bigg| \mathcal{F}_{\tau_z^{+}} \right] \right] \nonumber \\
+    & = \mathbb{E} \left[ 1_{\{\tau_z^{+} < e_q\}} e^{- \beta Y_{\tau_z^{+}}} \mathbb{E} \left[ e^{- \beta \bar{Y}_{e_q}} \right] \right] \nonumber \\
+    & = \mathbb{E} \left[ 1_{\{\tau_z^{+} < e_q\}} e^{- \beta Y_{\tau_z^{+}}}  \right] \mathbb{E} \left[ e^{- \beta \bar{Y}_{e_q}} \right]. \label{lema_1}
+\end{align}
+Utilizando las propiedades de la esperanza condicional, tenemos que
+\begin{align}
+	\mathbb{E} \left[ 1_{\{\tau_z^{+} < e_q\}} e^{- \beta Y_{\tau_z^{+}}}  \right] & = \mathbb{E} \left[ e^{- \beta Y_{\tau_z^{+}}} \mathbb{E} \left[ 1_{ \{ \tau_z^{+} < e_q \}} \bigg| \mathcal{F}_{\tau_z^{+}} \right] \right] \nonumber \\
+    & = \mathbb{E} \left[ e^{- \beta Y_{\tau_z^{+}}} \mathbb{P} \left( \tau_z^{+} < e_q \bigg| \mathcal{F}_{\tau_z^{+}} \right) \right] \nonumber \\
+    & = \mathbb{E} \left[ e^{- \beta Y_{\tau_z^{+}}} \int_{\tau_z^{+}}^{\infty} q e^{-qs} ds \right] \nonumber \\
+    & = \mathbb{E} \left[ e^{- \beta Y_{\tau_z^{+}}} e^{-q \tau_z^{+}} \right]. \label{lema_2}
+\end{align}
+Sustituyendo (\ref{lema_2}) en (\ref{lema_1}) tenemos
+\begin{align*}
+	\mathbb{E} \left[ e^{- \beta \bar{Y}_{e_q}} 1_{\{\bar{Y}_{e_q} > z\}} \right]  & = \mathbb{E} \left[ e^{- q \tau_z^{+} - \beta Y_{\tau_z^{+}}} \right] \mathbb{E} \left[ e^{- \beta \bar{Y}_{e_q}} \right],
+\end{align*}
+lo cual muestra la igualdad (\ref{lema_mckean}).
+\end{proof}
+
+Con el anterior Lema, procedamos a mostrar la solución al problema de McKean. Definimos a $\ubar{Y}_t = \inf_{s \leq t} Y_s$.
+
+\begin{theorem}[Solución al problema de McKean]
+\label{solu_mckean}
+La solución a (\ref{mckean}) bajo los supuestos establecidos está dada por
+\begin{align*}
+v(y) = \frac{ \mathbb{E}  \left[ \left( K \mathbb{E}\left[ e^{\ubar{Y}_{e_q}} \right] - e^{y + \ubar{Y}_{e_q}}  \right)^{+} \right] }{ \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] },
+\end{align*}
+y el tiempo de paro óptimo está dado por
+\begin{align*}
+\tau^{*} = \inf \{ t > 0 : Y_t < y^{*} \},
+\end{align*}
+donde, 
+\begin{align*}
+y^{*} = \log \left( K \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] \right).
+\end{align*}
+Recordemos que $e_q$ es una variable aleatoria independiente de $Y$, con una distribución exponencial de intensidad $q$.
+\end{theorem}
+\begin{proof}
+Recordemos que para poder utilizar el Lema \ref{condiciones_solucion} se tiene que verificar la condición (\ref{condicion1}). Esto resulta fácil de ver puesto que $G(Y_t) = (K - e^{Y_t})^{+}$. Siguiendo las condiciones que menciona el mismo Lema \ref{condiciones_solucion}, definamos las funciones de acotamiento
+\begin{align}
+v_{y'}(y) = \mathbb{E}_y \left[ e^{-q \tau_{y'}^{-}} \left( K - e^{Y_{\tau_{y'}^{-}}} \right)^{+} \right]. \label{f_acotada}
+\end{align}
+Veamos que utilizando el Lema \ref{condiciones_solucion} la solución al Problema de McKean está dado de la forma (\ref{f_acotada}), para una elección adecuada del valor de $y'$, es decir, $y' < \log(K)$. \\
+
+Utilizando el Lema \ref{lema_mckean}, sustituimos $Y$ por $-Y$ y obtenemos el resultado análogo para el primer tiempo de entrada a un umbral negativo.
+\begin{align}
+	\mathbb{E}_y \left[ e^{-q \tau_{y'}^{-} + \beta Y_{\tau_{y'}^{-}}} 1_{\{\tau_{y'}^{-} < \infty\}} \right] = \frac{\mathbb{E} \left[ e^{\beta (\ubar{Y}_{e_q} + y)} 1_{\{ - \ubar{Y}_{e_q} > y - y'\}} \right]}{\mathbb{E} \left[ e^{\beta \ubar{Y}_{e_q}} \right]}, \label{mckean_eq1}
+\end{align}
+para $q, \beta \geq 0$ y $y-y' \geq 0$, entonces se sigue que
+\begin{align}
+v_{y'}(y) & = \mathbb{E}_y \left[ K e^{-q \tau_{y'}^{-}}  - e^{-q \tau_{y'}^{-} + Y_{\tau_{y'}^{-}}} \right] \nonumber \\
+	& = \mathbb{E}_y \left[ K e^{-q \tau_{y'}^{-}} \right] - \mathbb{E}_y \left[ e^{-q \tau_{y'}^{-} + Y_{\tau_{y'}^{-}}} \right] \nonumber \\
+	& = \mathbb{E} \left[ K 1_{\{ - \ubar{Y}_{e_q} > y - y'\}} \right] - \frac{\mathbb{E} \left[ e^{\ubar{Y}_{e_q} + y} 1_{\{ - \ubar{Y}_{e_q} > y - y'\}} \right]}{\mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right]} \nonumber \\
+	& = \frac{ \mathbb{E} \left[K 1_{\{\ubar{Y}_{e_q} > y - y'\}} \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] \right] }{\mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right]} - \frac{\mathbb{E} \left[ e^{\ubar{Y}_{e_q} + y} 1_{\{ - \ubar{Y}_{e_q} > y - y'\}} \right]}{\mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right]} \nonumber \\
+	& = \frac{ \mathbb{E} \left[ \left( K  \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] - e^{\ubar{Y}_{e_q} + y} \right) 1_{\{ - \ubar{Y}_{e_q} > y - y'\}} \right] }{ \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] }. \label{mckean_eq2}
+\end{align}
+
+La parte positiva puede ser excluida pues solo consideramos valores $y' < \log(K)$. Para asegurar que la solución efectivamente es de la forma (\ref{f_acotada}), verifiquemos los dos supuestos que se mencionan en el Lema \ref{condiciones_solucion}. \\
+
+\textit{1. Cota inferior.} Comprobemos que $v_y(x) \geq (K - e^{x})^{+}$. Para ésto, primero notemos que de la misma definición de $v_y(x)$ en (\ref{f_acotada}) podemos afirmar que $v_y(x) \geq 0$. Por otra parte, podemos manipular la expresión (\ref{mckean_eq2}) para modificar la condición en la función indicadora y así obtener
+\begin{align}
+v_{y'}(y) & = \frac{ \mathbb{E} \left[ \left( K  \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] - e^{\ubar{Y}_{e_q} + y} \right) \left( 1 - 1_{\{ - \ubar{Y}_{e_q} \leq y - y'\}} \right) \right] }{ \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] }. \nonumber \\
+	& = \frac{ \left( K \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] - e^{\ubar{Y}_{e_q} + y} \right) + \mathbb{E} \left[ \left( e^{\ubar{Y}_{e_q} + y} - K  \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] \right)  1_{\{ - \ubar{Y}_{e_q} \leq y - y'\}}  \right] }{ \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] }. \nonumber \\
+    & = \frac{ \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} (K - e^{y}) \right] }{ \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] } + \frac{ \mathbb{E} \left[ \left( e^{\ubar{Y}_{e_q} + y} - K  \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] \right) 1_{\{ - \ubar{Y}_{e_q} \leq y - y'\}} \right] }{ \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] }. \nonumber \\
+	& = (K - e^{y}) + \frac{ \mathbb{E} \left[ \left( e^{\ubar{Y}_{e_q} + y} - K  \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] \right) 1_{\{ - \ubar{Y}_{e_q} \leq y - y' \}} \right] }{ \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] }. \label{cont_mckean}
+\end{align}
+De la ecuación anterior tenemos que una condición suficiente para que $v_{y'}(y) \geq (K - e^{y})$ es
+\begin{align}
+e^{y'} \geq K \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right]. \label{mckean_eq3}
+\end{align}
+
+\textit{2. Condición de supermartingala.} Consideremos una variable aleatoria $I$ con la misma distribución que $\ubar{Y}_{e_q}$. En el evento $\{ t < e_q \}$ se puede describir a $\ubar{Y}_{e_q}$ desde el tiempo $t$. Si el valor mínimo del proceso ocurre antes del tiempo $t$ entonces $\ubar{Y}_{e_q} = \ubar{Y}_{t}$. 
+
+Por otro lado, si el mínimo del proceso ocurre después del tiempo $t$ entonces podemos representar ese mínimo y manipularlo de la siguiente manera usando la propiedad de Markov del proceso $Y$ y recordando que el remanente en una diferencia de tiempos exponenciales es un tiempo exponencial
+\begin{align*}
+	\inf_{s \in (t, e_q]} Y_s & = \inf_{s \in (t, e_q]} (Y_s + Y_t - Y_t) \\
+	& = \inf_{u \in (0, e_q - t]} (Y_{u+t} - Y_t + Y_t) \\
+    & = \inf_{u \in (0, \bar{e}_q]} (\bar{Y}_u + Y_t) \\
+    & = Y_t + \inf_{u \in (0, \bar{e}_q]} \bar{Y}_u\\
+    & = Y_t + I.
+\end{align*}
+donde $\bar{e}_q = e_q - t$ es un tiempo exponencial y $\tilde{Y}_u = Y_{u+t} - Y_t$. Por lo que, tomando en mínimo para considerar ambos casos se tiene que
+\begin{align*}
+	\ubar{Y}_{e_q} = \ubar{Y}_t \wedge (Y_t + I).
+\end{align*}
+En particular se sigue que, en $\{ t < e_q \}$, $\ubar{Y}_{e_q} \leq Y_t + I$. Ahora supongamos que 
+\begin{align}
+e^y \leq K \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right], \label{mckean_eq4}
+\end{align}
+entonces para toda $y \in \mathbb{R}$ y utilizando la igualdad (\ref{cont_mckean}) tenemos
+\begin{align*}
+v_{y'}(y) & = (K - e^{y}) + \frac{ \mathbb{E} \left[ \left( e^{\ubar{Y}_{e_q} + y} - K \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] \right) 1_{\{ - \ubar{Y}_{e_q} \leq y - y'\}} \right] }{ \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] } \\
+	& = (K - e^{y}) + \frac{ \mathbb{E} \left[ 1_{\{ t < e_q \}} \mathbb{E} \left[ \left( e^{\ubar{Y}_{e_q} + y} - K \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] \right) 1_{\{ - \ubar{Y}_{e_q} \leq y - y'\}} \big| \mathcal{F}_t \right] \right] }{ \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] } \\
+& + \frac{ \mathbb{E} \left[ 1_{\{ t \geq e_q \}} \mathbb{E} \left[ \left( e^{\ubar{Y}_{e_q} + y} - K \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] \right) 1_{\{ - \ubar{Y}_{e_q} \leq y - y'\}} \big| \mathcal{F}_t \right] \right] }{ \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] } \\
+& \geq \frac{\mathbb{E} \left[ 1_{ \{t < e_q \}} \mathbb{E} \left[ \left( K  \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] - e^{Y_t + I + y} \right) 1_{\{ - (Y_t + I) > y - y'\}} \big| \mathcal{
+F}_t \right] \right]}{ \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] }.
+\end{align*}
+
+Notemos que cuando $\{t < e_q\}$ se tiene que $\ubar{Y}_{e_q} \leq Y_t + I$, además, obtenemos la primera desigualdad al quitar los términos que son positivos. Luego, ocupando la propiedad de Markov del proceso $Y$ obtenemos,
+\begin{align*}
+	v_{y'}(y) & \geq \frac{\mathbb{E} \left[ 1_{ \{t < e_q \}} \mathbb{E}_{Y_t} \left[ \left( K  \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] - e^{I + y} \right) 1_{\{ - I > y - y'\}} \right] \right]}{ \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] } \\
+	& \geq \mathbb{E} \left[ e^{- q t} v_{y'}(Y_t + y) \right] = \mathbb{E}_y \left[ e^{- q t} v_{y'}(Y_t) \right].
+\end{align*}
+
+La última desigualdad corresponde a la definición de $v_{y'}(y)$ y al hecho de que $e_q$ es una variable aleatoria exponencial independiente de $Y$. \\
+
+Utilizando la propiedad de Markov, así como la última desigualdad y las propiedades de incrementos estacionarios e independientes del proceso $Y$ para tiempos $0 \leq s \leq t < \infty$ llegamos a que
+\begin{align*}
+\mathbb{E} \left[ e^{-qt} v_{y'}(Y_t) \big| \mathcal{F}_s \right] & = e^{-qs} \mathbb{E}_{Y_s} \left[ e^{-q(t-s)} v_{y'}(Y_{t-s}) \right] \\
+& \leq e^{-qs} v_{y'}(Y_s)
+\end{align*}
+mostrando que $\{ e^{-qt} v_{y'}(Y_t) : t \geq 0 \}$ es una supermartingala. La continuidad por la derecha de las trayectorias se sigue de la continuidad de las trayectorias de $Y$ y la continuidad de $v_{y'}$ se puede concluir fácilmente de (\ref{cont_mckean}). \\
+
+Notemos por último que, las condiciones \textit{1} y \textit{2} se satisfacen siempre y cuando se cumplan (\ref{mckean_eq3}) y (\ref{mckean_eq4}), es decir, cuando 
+\begin{align*}
+y' = \log \left( K \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} \right] \right).
+\end{align*}
+\end{proof}
+
+\section{Smooth Fit contra Continuous Fit}
+De la condición $1$ del Lema \ref{condiciones_solucion} sabemos que la solución al problema (\ref{mckean}) está acotada inferiormente por la función de ganancia $G$, y más aún es igual a la función de ganancia en aquellos puntos donde la distribución de $Y_{\tau^{*}}$ se concentra. \\
+
+Recurriendo a las propiedades de las trayectorias del proceso $Y$ se pueden verificar varias maneras en las que la función $v$ se aproxima a la función de ganancia $G$, nos referiremos a esta aproximación diciendo que $v$ se \textit{ajusta} a $G$. Resulta que el problema de paro óptimo de McKean es un excelente ejemplo para exponer un conflicto que ocurre cuando una solución se trata de \textit{ajustar} a la función de ganancia. \\
+
+Decimos que existe una condición de \textit{continuous fit} al punto $y^{*}$ si los límites (puntuales) por la derecha y por la izquierda de $v$ en $y^{*}$ existen y además son iguales. Por otro lado, si las derivadas derechas e izquierdas de $v$ en el límite $y^{*}$ son iguales, decimos que existe una condición de \textit{smooth fit} en el punto $Y^{*}$. Ahora explicaremos más a detalle este problema que surge en (\ref{mckean}). \\
+
+\begin{theorem}
+La función $v(\log(y))$ es convexa para $y > 0$ y en particular existe \textit{continuous fit} de $v$ en $y^{*}$. La derivada derecha en $y^{*}$ está dada por 
+\begin{align*}
+v'(y^{*} +) = - e^{y^{*}} + K \mathbb{P} \left( \ubar{Y}_{e_q} = 0 \right).
+\end{align*}
+Por lo tanto, la solución al problema de paro óptimo muestra la existencia de \textit{smooth fit} en $y^{*}$ si y solo si $0$ entra inmediatamente a $(- \infty, 0)$.
+\end{theorem}
+\begin{proof}
+Podemos ver que para dos números positivos $a, b$, la función $y \mapsto (a - by)^{+}$ es convexa, por lo que para la función de valor óptimo $v$ se tiene que es convexa con $y' = e^{y}$. Además, tomar el supremo es una operación subaditiva, entonces $v(\log(y))$ es una función convexa en $y$. Como toda función convexa es continua, $v$ es continua. \\
+
+Ahora, estudiaremos la condición de \textit{smooth fit}, donde estableceremos las condiciones necesarias y suficientes para esta propiedad. Consideremos aquellos valores $y < y^{*} = \log \left( K \mathbb{E} \left[ \exp \{ \ubar{Y}_{e_q} \} \right]  \right)$, por lo tanto
+\begin{align*}
+v(y) = K - e^{y},
+\end{align*}
+y por ende, la derivada por la izquierda resulta ser
+\begin{align*}
+v'(y^{*} - ) = - e^{y^{*}},
+\end{align*}
+para establecer la condición de \textit{smooth fit} es necesario mostrar que $v'(y^{*} - ) = v'(y^{*} + ) = - e^{y^{*}}$. Recordemos que $y^{*} = \log (K \mathbb{E} [ \exp \{ \ubar{Y}_{e_q} \} ])$, por lo tanto tenemos que $e^{y^{*}} = K \mathbb{E} [ e^{ \ubar{Y}_{e_q} } ]$, del Teorema \ref{solu_mckean} tenemos que
+\begin{align*}
+v(y) & = \frac{ \mathbb{E} \left[ \left( e^{y^{*}} - e^{y + \ubar{Y}_{e_q}}  \right) 1_{\{ - \ubar{Y}_{e_q} > y - y^{*}\}} \right] }{ e^{y^{*}} / K } \\
+	& = K e^{ - y^{*}} \mathbb{E} \left[ \left( e^{y^{*}} - e^{y + \ubar{Y}_{e_q}}  \right) 1_{\{ - \ubar{Y}_{e_q} > y - y^{*}\}} \right] \\
+	& = K \mathbb{E} \left[ \left( 1 - e^{y + \ubar{Y}_{e_q} - y^{*}}  \right) 1_{\{ - \ubar{Y}_{e_q} > y - y^{*}\}} \right] \\
+	& = - K \mathbb{E} \left[ \left( e^{y + \ubar{Y}_{e_q} - y^{*}} - 1  \right) 1_{\{ - \ubar{Y}_{e_q} > y - y^{*}\}} \right].
+\end{align*}
+Luego, al añadir un cero y desarrollar obtenemos
+\begin{align*}
+v(y) & = - K \mathbb{E} \left[ \left( e^{y + \ubar{Y}_{e_q} - y^{*}} + \left( e^{\ubar{Y}_{e_q}} - e^{\ubar{Y}_{e_q}} \right) - 1  \right) 1_{\{ - \ubar{Y}_{e_q} > y - y^{*}\}} \right] \\
+	& = - K \mathbb{E} \left[ \left( e^{y + \ubar{Y}_{e_q} - y^{*}} - e^{\ubar{Y}_{e_q}}  \right) 1_{\{ - \ubar{Y}_{e_q} > y - y^{*}\}} \right] - K \mathbb{E} \left[ \left( e^{\ubar{Y}_{e_q}} - 1  \right) 1_{\{ - \ubar{Y}_{e_q} > y - y^{*}\}} \right] \\
+	& = - K \left( e^{y - y^{*}} - 1 \right) \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} 1_{\{ - \ubar{Y}_{e_q} > y - y^{*}\}} \right] - K \mathbb{E} \left[ \left( e^{\ubar{Y}_{e_q}} - 1  \right) 1_{\{ - \ubar{Y}_{e_q} > y - y^{*}\}} \right].
+\end{align*}
+Recordemos que $e^{y^{*}} = K \mathbb{E}[e^{\ubar{Y}_{e_q}}]$, entonces de la igualdad anterior podemos analizar la derivada por la derecha de $v$ como
+\begin{align}
+\frac{v(y) - (K - e^{y^{*}})}{y - y^{*}} & = \frac{v(y) + K(\mathbb{E}[e^{\ubar{Y}_{e_q}}] - 1)}{y - y^{*}} \nonumber \\
+	& = - K \frac{\left( e^{y - y^{*}} - 1 \right)}{y - y^{*}} \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} 1_{\{ - \ubar{Y}_{e_q} > y - y^{*}\}} \right] \nonumber \\ 
+	& + K \frac{\mathbb{E} \left[ \left( e^{\ubar{Y}_{e_q}} - 1  \right) 1_{\{ - \ubar{Y}_{e_q} \leq y - y^{*}\}} \right]}{y - y^{*}}. \label{smooth_1}
+\end{align}
+Para poder estudiar en base al límite la anterior expresión, consideremos simplificar la notación llamando $A_y$ al primer término de la suma y $B_y$ al segundo. Es claro entonces que, 
+\begin{align*}
+\lim_{y \downarrow y^{*}} A_y = - K \mathbb{E} \left[ e^{\ubar{Y}_{e_q}} 1_{\{ - \ubar{Y}_{e_q} > 0\}} \right].
+\end{align*}
+Por otra parte, consideremos remover del valor esperado en $B$ la posibilidad de que la distribución de $\ubar{Y}_{e_q}$ tome un valor igual a $0$, asumiendo que $\exp \{ \ubar{Y}_{e_q} \} -  1 = 0$ en $\{ \ubar{Y}_{e_q} = 0 \}$. Se tiene entonces
+\begin{align*}
+\lim_{y \downarrow y^{*}} B_y & = K \frac{\mathbb{E} \left[ \left( e^{\ubar{Y}_{e_q}} - 1  \right) 1_{\{ 0 < - \ubar{Y}_{e_q} \leq y - y^{*}\}} \right]}{y - y^{*}} \\
+	& = K \int_{ (0, y - y^{*} ] } \frac{e^{-z} - 1}{y - y^{*}} \mathbb{P} \left( \ubar{Y}_{e_q} \in \text{d}z \right) \\
+	& = K \frac{e^{y - y^{*}} - 1}{y - y^{*}} \mathbb{P} \left( 0 < - \ubar{Y}_{e_q} \leq y - y^{*} \right) \\
+	& + \frac{K}{y - y^{*}} \int_0^{y - y^{*}} e^{-z} \mathbb{P} \left( 0 < - \ubar{Y}_{e_q} \leq z \right) \text{ d}z,
+\end{align*}
+lo que nos conduce a que $\lim_{y \downarrow y^{*}} B_y = 0$. De (\ref{smooth_1}) y recordando que podemos escribir a $\mathbb{E}[e^{\ubar{Y}_{e_q}}]$ como $e^{y^{*}}$, podemos ver que la derivada por la derecha está definida como
+\begin{align*}
+v'(y^{*} + ) = - e^{y^{*}} + K \mathbb{P} \left( - \ubar{Y}_{e_q} = 0 \right).
+\end{align*}
+Finalmente, para que exista la igualdad en ambas derivadas, y por ende, la condición de \textit{smooth fit} es necesario y suficiente que $\mathbb{P} \left( - \ubar{Y}_{e_q} = 0 \right) = 0$, en otras palabras, un proceso $Y = (Y_t, t \geq 0)$ posee \textit{smooth fit} si y solo si el proceso entra inmediatamente en $(- \infty, 0)$.
+\end{proof}
+
+Para finalizar el contenido de este capítulo, analicemos brevemente la condición que se concluyó en el Teorema anterior. El resultado previo nos indica que no puede existir la posibilidad de tener \textit{smooth fit} si la distribución de $-\ubar{Y}_{e_q}$ toma en cuenta al evento $\{ -\ubar{Y}_{e_q} = 0 \}$. \\
+
+A continuación damos un ejemplo en donde este evento este presente. De hecho, podemos considerar un proceso Poisson compuesto con tendencia positiva y saltos negativos
+\begin{align*}
+Y_t = ct + \sum_{i=1}^{N_t} \xi_i,
+\end{align*}
+donde $c > 0$, $(N_t, t \geq 0)$ es una proceso Poisson y $(\xi_i, i \geq 1)$ son variables aleatorias negativas, independientes e identicamente distribuidas. Podemos considerar a $T_1$ como el primer salto del proceso, y entonces, el evento $\{ T_1 > t \}$ es equivalente a decir que antes del tiempo $t$ no ha ocurrido ningún salto, por lo que
+\begin{align*}
+\mathbb{P} (-\ubar{Y}_{e_q} = 0) \geq \mathbb{P} (T_1 > e_q) = e^{-\lambda e_q} > 0,
+\end{align*}
+donde $\lambda$ es el parámetro de intensidad de los intervalos para los saltos del proceso. \\
+
+Por otro lado, cuando el proceso no entra inmediatamente en $(- \infty, 0)$ es equivalente a
+\begin{align*}
+\mathbb{P} (\tau^{-}_{0} > 0) = \mathbb{P} (\inf \{ t > 0 : Y_t < 0 \} > 0) = 1.
+\end{align*}
+
+Finalmente, analicemos el caso en que tenemos presencia del movimiento Browniano, es decir, cuando $Y_t$ es un proceso de Lévy como se definió en (\ref{levy_salto}). Veamos que $\mathbb{P}( - \ubar{Y}_{e_q} = 0) = 0$ con $e_q$ como una variable aleatoria independiente de $Y$ y que tiene una distribución exponencial. \\
+
+Al ser $e_q$ una variable independiente de $Y$ para todo $t \geq 0$, observemos que podemos escribir 
+\begin{align*}
+	\mathbb{P} \left( \underline{Y}_{e_q} = 0 \right) = \int_0^{\infty} ds \lambda e^{- q s} \mathbb{P} \left( \inf_{u \in (0, s]} Y_u = 0 \right).
+\end{align*}
+
+Por lo que, si determinamos que $\mathbb{P}( \underline{Y}_s = 0) = 0$ para toda $s$, habremos probado que el proceso $Y$ posee la propiedad de \textit{smooth fit}. Entonces, veamos que podemos considerar dos casos en la probabilidad anterior
+\begin{align}
+	\mathbb{P} \left(\inf_{u \in (0, s]} Y_u = 0\right) & = \mathbb{P}\left( \inf_{u \in (0, s]} Y_u = 0, s \leq T_1 \right) \nonumber \\
+    & + \mathbb{P}\left( \inf_{u \in (0, s]} Y_u = 0, s > T_1 \right). \label{correcJCsmooth}
+\end{align}
+
+Veamos que el lado de derecho de la identidad (\ref{correcJCsmooth}) es igual a cero. Notemos que $\mathbb{P}(\tau_0^{-} > T_1)$ es mayor igual que el segundo miembro de la parte derecha de la identidad (\ref{correcJCsmooth}), donde $\tau_0^{-}$ es el primer momento en que $Y < 0$. Por lo tanto, queremos observar que $\mathbb{P}(\tau_0^{-} > T_1) = 0$, tenemos entonces que
+\begin{align*}
+	\mathbb{P}(\tau_0^{-} > T_1) & = \mathbb{P}\left( \inf_{s \in (0, T_1)} Y_s = 0 \right).
+\end{align*}
+
+Al considerar solo el intervalo hasta justo antes de que ocurra el primer salto negativo, tenemos que
+\begin{align*}
+	\mathbb{P}(\tau_0^{-} > T_1) & = \mathbb{P}\left( \inf_{s \in (0, T_1)} as + \sigma B_s = 0 \right) \\
+    & = \int_0^{\infty} ds \lambda e^{- \lambda s} \mathbb{P} \left( \inf_{u \in (0, s)} au + \sigma B_u = 0 \right).
+\end{align*}
+
+La última igualdad ocurre bajo el supuesto de que $T_1$ es una variable que se distribuye exponencialmente con parámetro $\lambda$ y es independiente del proceso $Y$. Por lo que basta ver que
+\begin{align}
+	\mathbb{P} \left( \inf_{u \in (0, s)} au + \sigma B_u = 0 \right) = 0. \label{antesdeT12}
+\end{align}
+
+Recordemos de la Proposición \ref{martin_continuas} que 
+\begin{align*}
+	M_t^{(\lambda)} = \exp \left\{ \lambda B_t - \frac{\lambda^2}{2} t \right\} \hspace{0.3cm} \text{ para } \lambda \in \mathbb{R},
+\end{align*}
+es una martingala y además $\mathbb{E}[M_t^{(\lambda)}] = 1$. Esto nos permite definir una nueva medida de probabilidad
+\begin{align*}
+	\mathbb{P}^{(\lambda)} \left(\Lambda \right) = \mathbb{E} \left[ M_t^{(\lambda)} 1_{\Lambda} \right] \hspace{0.3cm} \text{ para todo } \Lambda \in \mathcal{F}_t.
+\end{align*}
+
+Analicemos al proceso $(\sigma B_s - as, s \geq 0)$ bajo la medida $\mathbb{P}^{(\lambda)}$ y observemos que
+\begin{align*}
+	\mathbb{E}^{(\lambda)} \left[ e^{\theta (\sigma B_s - as)} \right] & = \mathbb{E} \left[ \exp \left\{ \theta \sigma B_s - \theta a s +  \lambda B_s - \frac{\lambda^2}{2} s \right\} \right] \\
+    & = \exp \left\{ - \theta a s - \frac{\lambda^2}{2} s \right\} \mathbb{E} \left[ e^{ (\theta \sigma +  \lambda) B_s } \right].
+\end{align*}
+
+De (\ref{asdfghjk}) sabemos que $\mathbb{E} \left[ e^{ \theta B_t } \right] = e^{t\theta^2 / 2}$, entonces
+\begin{align*}
+	\mathbb{E}^{(\lambda)} \left[ e^{\theta (\sigma B_s - as)} \right] & = \exp \left\{ - \theta a s - \frac{\lambda^2}{2} s \right\} \exp \left\{ \frac{(\theta \sigma +  \lambda)^2}{2} s \right\} \\
+    & = \exp \left\{ - \theta a s + \frac{ \theta^2 }{2} \sigma^2 s + \theta \sigma \lambda s \right\}.
+\end{align*}
+
+Luego, tomando $\lambda = a/\sigma$ tenemos que
+\begin{align*}
+	\mathbb{E}^{(a/\sigma)} \left[ e^{\theta (\sigma B_s - as)} \right] = e^{ \frac{ (\theta \sigma)^2 }{2} s}.
+\end{align*}
+
+Por lo que $(\sigma B_s - as, s \geq 0)$ bajo la medida $\mathbb{P}^{(a/\sigma)}$ es un movimiento Browniano con varianza $\sigma^2$. En otras palabras, $(\sigma B_s, s \geq 0)$ bajo $\mathbb{P}^{(a/\sigma)}$ es un movimiento Browniano con varianza $\sigma^2$ y deriva $a$. Entonces, podemos concluir que 
+\begin{align*}
+	\mathbb{E}^{a/\sigma} \left[ 1_{ \{ \inf_{u \in (0, s)} \sigma B_u = 0 \}} \right] & = \mathbb{E} \left[ 1_{\{ \inf_{u \in (0, s)} \sigma B_u = 0 \}} M_t^{a/\sigma} \right] \\
+    & = 0.
+\end{align*}
+La última desigualdad se da por el hecho de que el movimiento Browniano entra inmediatamente a $(- \infty, 0)$, por lo que la función indicadora es igual a $0$. Lo anterior implica que $\mathbb{P}(\tau_0^{-} > T_1) = 0$ y entonces el segundo miembro de la parte derecha de la identidad (\ref{correcJCsmooth}) es igual a $0$. Finalmente notemos que el primer miembro de la parte derecha de la identidad (\ref{correcJCsmooth}) es menor o igual que la probabilidad definida en (\ref{antesdeT12}), la cual es igual a $0$. Por lo tanto, 
+\begin{align*}
+	\mathbb{P} \left(-\inf_{u \in (0, s]} Y_u = 0\right) = 0, 
+\end{align*}
+es decir, se tiene la condición de \textit{smooth fit} para el proceso 
+\begin{align*}
+	Y_t = at + \sigma B_t + \sum_{i=1}^{N_t} X_i.
+\end{align*}

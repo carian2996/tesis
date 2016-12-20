@@ -1,10 +1,9 @@
 En el presente capítulo, enfocaremos nuestra atención al estudio del movimiento Browniano. Desde su construcción, por el método de Lévy; hasta sus propiedades trayectoriales y más importante aún, verificando que este proceso cumple con la Propiedad de Markov. \\
 
+\section{Variables Aleatorias Gaussianas}
 Conviene recordar algunas propiedades importantes de las variables aleatorias Gaussianas, las cuales estarán presentes en la construcción del movimiento Browniano. \\
 
-\section{Variables Aleatorias Gaussianas}
-
-Decimos que $X$ se distribuye como una variable aleatoria Guassiana con media cero y varianza unitaria si su transformada de Fourier satisface la siguiente igualdad
+Decimos que $X$ se distribuye como una variable aleatoria Gaussiana con media cero y varianza unitaria si su transformada de Fourier satisface la siguiente igualdad
 	\begin{align*}
 	\varphi_X (\lambda) := \mathbb{E}\left[ \exp \{ i \lambda X \} \right] = \exp \{ \lambda^2/2 \}, \hspace{0.5cm} \forall \lambda \in \mathbb{R}.
 	\end{align*}
@@ -12,9 +11,9 @@ Decimos que $X$ se distribuye como una variable aleatoria Guassiana con media ce
 De igual manera, las siguientes desigualdades serán una valiosa herramienta en la construcción del movimiento Browniano.
 
 \begin{proposition}
-Sea $X$ una variable aleatoria Gaussiana centrada y con varianza unitaria, entonces para todo $x > 0$ se tienen las siguientes desigualdades % \cite[p.~349]{mortersperes}
+Sea $X$ una variable aleatoria Gaussiana centrada y con varianza unitaria, entonces para todo $x > 0$ se tienen las siguientes desigualdades.
 	\begin{align*}
-	\frac{1}{\sqrt{2 \pi}} \left( \frac{1}{x} - \frac{1}{x^3} \right) e^{-x^2 / 2} \leq \mathbb{P} (X & > x) \leq \frac{1}{\sqrt{2 \pi}} \frac{1}{x} e^{-x^2 / 2}, \hspace{0.3 cm} \forall x \in \mathbb{R}_{+}, 	
+	\frac{1}{\sqrt{2 \pi}} \left( \frac{1}{x} - \frac{1}{x^3} \right) e^{-x^2 / 2} \leq \mathbb{P} (X & > x) \leq \frac{1}{\sqrt{2 \pi}} \frac{1}{x} e^{-x^2 / 2}, \hspace{0.3 cm}  x > 0, 	
 	\end{align*}
 \end{proposition}
 \begin{proof}
@@ -22,51 +21,79 @@ Para mostrar el lado derecho de la desigualdad, recordemos que, si $X$ es una va
 	\begin{align}
 	\mathbb{P} (X > x) = \frac{1}{\sqrt{2 \pi}} \int_x^{\infty} e^{-t^2 / 2} dt. \label{abw}
 	\end{align}
-Consideremos entonces, los valores $t$ tales que $0 < x \leq t$. Entonces tenemos que, $1 \leq t/x$. De lo anterior y haciendo uso de (\ref{abw}) obtenemos
+Consideremos, los valores $t$ tales que $0 < x \leq t$, entonces $1 \leq t/x$. De lo anterior y haciendo uso de \ref{abw} obtenemos
 	\begin{align*}
 	\mathbb{P} (X > x) & = \frac{1}{\sqrt{2 \pi}} \int_x^{\infty} e^{-t^2 / 2} dt \\
 	& \leq \frac{1}{\sqrt{2 \pi}} \int_x^{\infty} \frac{t}{x} e^{-t^2 / 2} dt \\
 	& = \frac{1}{\sqrt{2 \pi}} \frac{1}{x} e^{-x^2 / 2}.
 	\end{align*}
-Para probar el lado izquierdo, veamos que 
-	\begin{align}
-	f(x) = (x^2 - 1) e^{-x^2 / 2} - (x^3) \int_x^{\infty} e^{-t^2 / 2} dt \leq 0. \label{abx}
-	\end{align}
-Pues $f(0) < 0$. Además, tenemos que $\lim_{x \rightarrow \infty} f(x) = 0$. Como $f'(x) > 0$, se tiene que  $f(x)$ es siempre negativa y entonces de (\ref{abx}) tenemos la desigualdad deseada.
+Para probar el lado izquierdo, veamos que integrando por partes obtenemos que
+\begin{align*}
+	\mathbb{P} (X > x) = \int_{x}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{- t^2 / 2} dt & = \int_{x}^{\infty} \frac{1}{t} \frac{1}{\sqrt{2 \pi}} t e^{- t^2 / 2} dt\\
+    & = - \frac{1}{t} \frac{1}{\sqrt{2 \pi}} \exp\{- t^2 / 2 \} \bigg|_{x}^{\infty} \\
+    & - \int_{x}^{\infty} \left( - \frac{1}{t^2} \right) \left( - \frac{1}{\sqrt{2 \pi}} \exp \{ - t^2 / 2 \} \right) dt \\
+    & = \frac{1}{x} \frac{e^{- x^2 / 2}}{\sqrt{2 \pi}} - \int_{x}^{\infty} \frac{1}{t^2} \frac{e^{- t^2 / 2}}{\sqrt{2 \pi}} dt \\
+    & > \frac{e^{-x^2 / 2}}{\sqrt{2 \pi}} \left( \frac{1}{x} - \frac{1}{x^3} \right) \hspace{0.5cm} \text{para } x > 0
+\end{align*}
+La desigualdad se obtiene al tener un valor positivo de la integral pues su integrando es siempre positivo.
 \end{proof}
 
 Tengamos presente el siguiente resultado que muestra la relación de convergencia en distribución y en probabilidad para variables aleatorias Gaussianas.
 
 \begin{theorem}
-Sea $(X_n, n \geq 1)$ una sucesión de variables aleatorias Gaussianas tales que para toda $n$, $X_n \sim N(m_n, \sigma_n^2)$, es decir, media $m_n \in \mathbb{R}$ y varianza $\sigma_n^2 \geq 0$.
+Sea $(X_n, n \geq 1)$ una sucesión de variables aleatorias Gaussianas tales que para toda $n$, $X_n \sim N(m_n, \sigma_n^2)$, con $m_n, \sigma_n^2 \in \mathbb{R}$ y $\sigma_n^2 \geq 0$.
 	\begin{enumerate}
-	\item Si $X_n \rightarrow X$ en distribución entonces $X \sim N(m, n)$ donde $m = \lim_{n \rightarrow \infty} m_n$ y $\sigma^2 = \lim_{n \rightarrow \infty} \sigma_n^2$.
+	\item Si $X_n \rightarrow X$ en distribución, entonces $X \sim N(m, n)$ donde $m = \lim_{n \rightarrow \infty} m_n$ y $\sigma^2 = \lim_{n \rightarrow \infty} \sigma_n^2$.
 	\item Si $X_n \rightarrow X$ en probabilidad entonces para toda $p \geq 1$, $X_n \rightarrow X$ en $\mathcal{L}^p$.
 	\end{enumerate}
 \end{theorem}
 
 \begin{proof}
-1. Como $X_n$ son variables aleatorias Gaussianas con media $m_n$ y varianza $\sigma_n^2$, su función característica está definida por
+%  para cualquier función continua y acotada, se cumple lo siguiente
+% 	\begin{align*}
+% 	\mathbb{E}[f(X_n)] \rightarrow \mathbb{E}[f(X)], \hspace{0.5cm} n \rightarrow \infty.
+% 	\end{align*}
+1. Puesto que cada $X_n$ es una variable aleatoria Gaussiana con media $m_n$ y varianza $\sigma_n^2$, la función característica de éstas se define como
 	\begin{align*}
-	\varphi_{X_n} (\lambda) = \exp \{i m_n \lambda - \frac{\sigma_n^2}{2} \lambda^2\}. % = \mathbb{E}\left[ e^{i \lambda X_n} \right].
+	\varphi_{X_n} (\lambda) = \exp \{i m_n \lambda - \frac{\sigma_n^2}{2} \lambda^2\} = \mathbb{E}\left[ e^{i \lambda X_n} \right].
 	\end{align*}
-Recordemos que el Teorema de Continuidad \cite[p.~322]{shiryaev} afirma que al ser $(X_n, n \geq 1)$ una sucesión que converge en distribución a $X$, entonces tenemos que 
-	\begin{align*}
-	\varphi_{X_n} (\lambda) \rightarrow \varphi_{X} (\lambda). 
-	\end{align*}
-% Como la sucesión $X_n$ converge en distribución a $X$ tenemos que, para cualquier función continua y acotada, se cumple lo siguiente
-%	\begin{align*}
-%	\mathbb{E}[f(X_n)] \rightarrow \mathbb{E}[f(X)], \hspace{0.5cm} n \rightarrow \infty.
-%	\end{align*}
-% Al ser $\varphi_{X_n} (\lambda)$ una función continua y acotada \cite[p.~278]{shiryaev} podemos aplicar la propiedad de convergencia en ley de $X_n$ obteniendo el siguiente resultado
-%	\begin{align*}
-%	\lim_{n \rightarrow \infty} \varphi_{X_n} (\lambda) & = \lim_{n \rightarrow \infty} \mathbb{E}\left[ e^{i \lambda X_n} \right] \\
-%	& = \mathbb{E}\left[ e^{i \lambda X} \right] \\
-%	& = \varphi_{X} (\lambda).
-%	\end{align*}
-Veamos que, la transformada de Fourier $\varphi_X(\lambda)$ es la función característica de una variable aleatoria Gaussiana con media $m$ y varianza $\sigma^2$, lo que implicaría que $X \sim N(m, \sigma^2)$. \\
+Como $X_n$ converge en distribución a $X$, tenemos del Teorema de Continuidad \cite[p.~320]{shiryaev} que $\varphi_{X_n} (t)$ converge a una función $\varphi_X (\lambda)$, con $\lambda \in \mathbb{R}$. Veamos ahora que, $\varphi_X(\lambda)$ es la función característica de una variable aleatoria Gaussiana con media $m$ y varianza $\sigma^2$, lo que implicaría que $X \sim N(m, \sigma^2)$. \\
 
-Consideremos el módulo de $\varphi_{X_n} (\lambda)$, recordando de la identidad de Euler que $e^{ix} = \cos(x) + i \sen(x)$ y observemos que
+Para corroborar lo anterior veamos que $m_n$ y $\sigma_n^2$ convergen, y entonces con $m := \lim_n m_n$ y $\sigma^2 := \lim_n \sigma_n^2$ se tendría que
+
+\begin{align*}
+	\varphi_X(\lambda) = \exp \{i m \lambda - \frac{\sigma^2}{2} \lambda^2\},
+\end{align*}
+en otras palabras, que $X$ es una variable aleatoria Gaussiana. \\
+
+Para ver que $(m_n)$ y $(\sigma_n^2)$ convergen, primero debemos verificar que las sucesiones son acotadas. Al ser $(X_n, n \geq 1)$ una sucesión de variables Gaussianas que convergen en distribución a $X$ podemos tomar a $F_n$, $F$ como las funciones de distribución acumulada de $X_n$ y $X$ respectivamente. Tomemos $t$ tal que $F(t) > 1 - \epsilon$, por lo que $t$ es un punto de continuidad de $F$. Luego, de la convergencia en distribución tenemos que $F_n(t) > 1 - \epsilon$ para toda $n \geq N$. Entonces la sucesión es tensa en el sentido de que para todo $\epsilon > 0$ existe una $r > 0$ tal que
+\begin{align}
+	\sup_{n \geq 1} \mathbb{P} (|X_n| > r) < \epsilon. \label{tightness}
+\end{align}
+
+Supongamos que $\sup_n (|m_n| + \sigma_n^2) = \infty$ y veamos que llegamos a una contradicción. En el primer caso, supongamos que $\sup_n |m_n| = \infty$. Al ser $X_n$ una variable Gaussiana, luego, $m_n$ además de ser la media de la distribución, también representa la mediana de $X_n$, por lo tanto 
+\begin{align*}
+	\mathbb{P}(|X_n| > |m_n|) \geq 1/2.
+\end{align*}
+
+Se sigue entonces que, para todo $M > 0$, existe una $n$ tal que $|m_n| > M$ y para este valor de $n$ se tiene que $\mathbb{P}(|X_n| > M) \geq 1/2$. Por lo tanto, para toda $M$ tenemos
+\begin{align*}
+	\sup_n \mathbb{P}(|X_n| > M) \geq 1/2,
+\end{align*}
+lo cual contradice la propiedad de \ref{tightness}. \\
+
+Por otra parte, si suponemos que $\sup_n \sigma_n^2 = \infty$ podemos notar que al ser $X_n$ una variable Gaussiana se tiene que la $\mathbb{P}(|x_n| \leq M$ está acotada por la constante $(\sqrt{2\sigma^2 \pi})^{-1}$. Por lo tanto, para toda $M > 0$ y para toda $n$
+\begin{align*}
+	\mathbb{P}(|X_n| \leq M) & \leq \int_{|M|} \frac{1}{\sigma_n \sqrt{ 2 \pi}} dx \\
+    & = \frac{M}{\sigma_n} \sqrt{\frac{2}{\pi}}.
+\end{align*}
+Utilizando la desigualdad anterior y la suposición sobre $\sigma_n^2$ podemos ver que
+\begin{align*}
+	\sup_n \mathbb{P}(|X_n| > M) \geq \sup_n \left( 1 - \frac{M}{\sigma_n} \sqrt{\frac{2}{\pi}} \right) = 1,
+\end{align*}
+nuevamente, llegamos a una contradicción. Por lo tanto, tenemos que $(m_n)$ y $(\sigma_n^2)$ son sucesiones acotadas. \\
+
+Por último, veamos que $(m_n)$ y $(\sigma_n^2)$ convergen. Consideremos el módulo de $\varphi_{X_n} (\lambda)$, recordando de la identidad de Euler que $e^{ix} = \cos(x) + i \sen(x)$ y observemos que
 	\begin{align*}
 	|\varphi_{X_n} (\lambda)| &=  \left \lvert \exp \left\{i m_n \lambda - \frac{\sigma_n^2}{2} \lambda^2 \right\} \right \rvert \\
 	& = \bigg \lvert \exp \left\{i m_n \lambda \right\} \bigg \rvert  \left\lvert \exp \left\{ - \frac{\sigma_n^2}{2} \lambda^2 \right\} \right\rvert\\
@@ -76,17 +103,9 @@ Para toda $\lambda \in \mathbb{R}$. Del Teorema de Mapeo Continuo \cite[p.~21]{b
 	\begin{align*}
 	|\varphi_{X_n} (\lambda)| = \exp \left\{- \frac{\sigma_n^2}{2} \lambda^2 \right\} \rightarrow |\varphi_X (\lambda)|, \hspace{0.3cm} \text{ para toda } \lambda \in \mathbb{R}.
 	\end{align*}
-Lo anterior, implica que  $\sigma_n^2 \rightarrow \sigma^2 \in [0, \infty)$, al ser una convergencia que no depende de $\lambda$. \\
+Lo anterior, implica que  $\sigma_n^2 \rightarrow \sigma^2 \in [0, \infty)$ pues la convergencia no depende de $m_n$. \\
 
-Ahora, comprobemos que la sucesión de medias $(m_n, n \geq 1)$ es acotada, para esto, supongamos que existe una subsucesión $(n_k, k \geq 0)$ de tal manera que $m_{n_k}$ diverge, es decir, $m_{n_k} \rightarrow \infty$ siempre que $k \rightarrow \infty$. \\ 
-
-Consideremos un punto $b$ de continuidad de la función de distribución de $X$, tal que, $b > a$, para toda $a \in \mathbb{R}$. Al distribuirse de manera normal las variables $X_n$, tenemos que
-	\begin{align*}
-	F_X (a) < F_X (b) = \lim_{k \rightarrow \infty} F_{X_{n_k}} (b) \leq \limsup_{k \rightarrow \infty} F_{X_{n_k}} (m_{n_k}) = \frac{1}{2}, 
-	\end{align*}
-lo cual resulta una contradicción, pues para cualquier variable aleatorias $X$ con función de distribución $F_X$ se tiene que $\lim_{x \rightarrow + \infty} F_X (x) = 1$. La contradicción surge que suponer la existencia de una subsucesión en la cual $(m_n, n \geq 1)$ no es acotada. \\
-
-Por último, consideremos dos valores, $m$ y $m'$, de adherencia en la sucesión mencionada. Entonces, para toda $\lambda \in \mathbb{R}$, 
+Consideremos dos valores, $m$ y $m'$, de adherencia en la sucesión mencionada. Entonces, para toda $\lambda \in \mathbb{R}$, 
 	\begin{align*}
 	e^{i m \lambda} = e^{i m' \lambda},
 	\end{align*}
@@ -96,7 +115,7 @@ se tiene que $m$ y $m'$ son iguales. Si tomamos a $m = \lim_n m_n$ y a $\sigma^2
 	\begin{align*}
 	\mathbb{E} \left[ \exp \{\theta X_n\} \right] = \exp \left\{ m_n \theta +  \frac{\sigma_n^2}{2} \theta^2 \right\}. 
 	\end{align*}
-Además del hecho de $e^{|x|} \leq e^x + e^{-x}$, se tiene que
+Además del hecho de que $e^{|x|} \leq e^x + e^{-x}$, se tiene 
 	\begin{align*}
 	\mathbb{E} \left[ \exp \{ \theta |X_n|\} \right] \leq \mathbb{E}[\exp \{ \theta X_n\}] + \mathbb{E}[\exp \{ - \theta X_n\}].
 	\end{align*}
@@ -112,12 +131,8 @@ y entonces
 	\begin{align}
 	\sup_{n \geq 1} \mathbb{E} \left[ |X_n - X|^q \right] < \infty. \label{aby}
 	\end{align}
-%Por el Teorema de Convergencia Dominada tenemos
-%	\begin{align*}
-%	\varphi_{X_n} (\lambda) = \mathbb{E} \left[ e^{i \lambda X_n} \right] \rightarrow \mathbb{E} \left[ e^{i \lambda X} \right].
-%	\end{align*}
-%Pero, recordemos que $|\varphi_{X_n} (\lambda)| = \exp \{ \frac{\sigma_n^2}{2} \lambda^2 \}$ converge para toda $\lambda$ cuando $n \rightarrow \infty$ si y solo si $\sigma_n^2 \rightarrow \sigma^2$, lo cual es suficiente para mostrar que $\sup_n \sigma_n^2 < \infty$. entonces sabemos que $(X_n^2, n \geq 1)$ es acotada en $\mathcal{L}^2$. \\
-Consideremos entonces, $p \geq 1$. Por hipótesis, la sucesión $(|X_n - X|^p, n \geq 1)$ converge a 0 en probabilidad, y es uniformemente integrable ya que si tomamos $q = 2p$ en (\ref{aby}), es acotada en $\mathcal{L}^2$. Por lo tanto, 
+
+Consideremos entonces, $p \geq 1$. Por hipótesis, la sucesión $(|X_n - X|^p, n \geq 1)$ converge a 0 en probabilidad, y además si tomamos $q = 2p$ en (\ref{aby}) tenemos que la sucesión esta acotada en $\mathcal{L}^2$ y por lo tanto es uniformemente integrable. Ambas propiedades de la sucesión implican que existe una convergencia en $\mathcal{L}^{p}$ (véase \cite[p.~221]{gut}). Por lo tanto, 
 	\begin{align*}
 	\mathbb{E} \left[ |X_n - X|^p \right] \rightarrow 0, \hspace{0.5cm} n \rightarrow \infty.
 	\end{align*}
@@ -125,8 +140,11 @@ Consideremos entonces, $p \geq 1$. Por hipótesis, la sucesión $(|X_n - X|^p, n
 
 Recordemos un último resultado antes de presentar la construcción del movimiento Browniano.
 
-\begin{proposition} 
-\label{cova}
+\begin{definition}
+Una familia $(X_t, t \geq 0)$ de variables aleatorias es un proceso Gaussiano si para toda $n$ y para toda $(t_1, t_2, \cdots, t_n) \in \mathbb{R}^n$, $(X_{t_1}, X_{t_2}, \cdots, X_{t_n})$ es un vector Gaussiano con valores en $\mathbb{R}^n$, es decir, cualquier combinación lineal de los elementos del vector es una variable aleatoria Gaussiana.
+\end{definition}
+
+\begin{proposition} \label{gaussiano1}
 Sea $\bar{X} = (X_1, X_2, \ldots, X_n)$ un vector Gaussiano. Entonces $X_1, X_2, \ldots, X_n$ son independientes si y solamente si $COV(X_i, X_j) = 0$ para toda $i \neq j$.
 \end{proposition}
 \begin{proof}
@@ -146,7 +164,7 @@ A continuación definiremos algunos conceptos referentes al movimiento Browniano
 La trayectoria de $(X_t, t \geq 0)$ se define como la función $t \rightarrow X_t(\omega)$ para cada $\omega \in \Omega$.
 \end{definition}
 
-De la última definición podemos decir que el resultado de un experimento aleatorio puede observarse de una manera continua en el tiempo a través de un modelo matemático. Con los siguientes conceptos podemos caracterizar a los procesos por sus trayectorias.
+De la última definición podemos decir que el resultado de un experimento aleatorio puede observarse de manera continua en el tiempo a través de un modelo matemático. Con los siguientes conceptos podemos caracterizar a los procesos por sus trayectorias.
 
 \begin{definition}
 Se dice que un proceso estocástico es continuo por la derecha (por la izquierda) si las trayectorias del proceso son continuas por la derecha (por la izquierda) casi seguramente.
@@ -157,15 +175,11 @@ De la misma manera, se dice que un proceso estocástico tiene límite por la der
 El movimiento Browniano está estrechamente relacionado con la distribución Gaussiana, por lo que la siguiente definición será de ayuda para los siguientes resultados.
 
 \begin{definition}
-Una familia $(X_t, t \geq 0)$ de variables aleatorias es un proceso Gaussiano si para toda $n$ y para toda $(t_1, t_2, \cdots, t_n) \in \mathbb{R}_{+}^{n}$, $(X_{t_1}, X_{t_2}, \cdots, X_{t_n})$ es un vector Gaussiano con valores en $\mathbb{R}^n$, es decir, para cualquier combinación lineal de los elementos del vector, se tiene una variable aleatoria gaussiana.
-% para toda $1 \leq i \leq n$ se tiene que $X_{t_i}$ es una variable aleatoria con distribución Gaussiana.
-\end{definition}
-
-\begin{definition}
 Decimos que $B = (B_t, t \geq 0)$ es un movimiento Browniano real que empieza en 0 si $B$ es un proceso Gaussiano centrado tal que para toda $s, t \geq 0$
 \begin{align}
 \mathbb{E}[B_s B_t] = COV(B_s, B_t) = s \wedge t.
 \end{align}
+
 El proceso $B$ es conocido como movimiento Browniano estándar.
 \end{definition}
 
@@ -183,12 +197,11 @@ son independientes.
 \end{proposition}
 
 \begin{proof}
-Veamos primero que el recíproco se cumple. Si $1$, $2$ y $3$ se cumplen, mostremos que $X$ es un movimiento Browniano. Consideremos los tiempos tales que $0 \leq t_1 \leq t_2 \leq \cdots \leq t_n$ y el vector Gaussiano $(X_{t_1}, X_{t_2} - X_{t_1}, \ldots, X_{t_n} - X_{t_{n-1}})$. \\
+Veamos primero que el recíproco se cumple. Si $1$, $2$ y $3$ se cumplen, mostremos que $X$ es un movimiento Browniano. Consideremos tiempos tales que $0 \leq t_1 \leq t_2 \leq \cdots \leq t_n$ y un vector Gaussiano $(X_{t_1}, X_{t_2} - X_{t_1}, \ldots, X_{t_n} - X_{t_{n-1}})$. \\
 
-Como $(X_{t_1}, X_{t_2} - X_{t_1}, \ldots, X_{t_n} - X_{t_{n-1}})$ es un vector Gaussiano, es claro que $(X_{t_1}, X_{t_2}, \ldots, X_{t_n})$ también lo es, pues resulta una combinación lineal de un vector Gaussiano, además resulta ser centrado ya que $X_{t_i} \sim N(0, t_i)$.
-% Entonces de $1$ y $2$ tenemos que $X_{t_1} \sim N(0, t_1)$. De $3$ sabemos que $X_{t_2} - X_{t_1} \sim N(0, t_2 - t_1)$, entonces podemos ver que como $X_{t_2} = (X_{t_2} - X_{t_1}) + X_{t_1}$ se tiene que $X_{t_2} \sim N(0, t_2)$. De la misma manera para $t_n$ sabemos que $(X_{t_1}, X_{t_2}, \ldots, X_{t_n})$ es un vector Gaussiano. Por ende, $X$ es un proceso Gaussiano centrado (ya que $X_t \sim N(0, t)$ para toda $t \geq 0$). \\
+Entonces de $(3)$ tenemos que, como $(X_{t_1}, X_{t_2} - X_{t_1}, \ldots, X_{t_n} - X_{t_{n-1}})$ es un vector gaussiano, es claro que $(X_{t_1}, X_{t_2}, \ldots, X_{t_n})$ también lo es, además, resulta ser un vector gaussiano centrado ya que para toda $i$ se tiene que $X_{t_i} \sim N(0, t_i)$. \\
 
-Ahora supongamos que $s \leq t$, de $1$ y $3$ tenemos que $X_s$ y $X_t - X_s$ son variables aleatorias independientes, lo cual implica que
+Ahora, supongamos que $s \leq t$, entonces de $1$ y $3$ tenemos que $X_s$ y $X_t - X_s$ son variables aleatorias independientes, lo que implica que
   \begin{align*}
   	\mathbb{E}[X_t X_s] &= \mathbb{E}[(X_t - X_s + X_s) X_s] \\
     &= \mathbb{E}[(X_t - X_s) X_s] + \mathbb{E}[X_s^2] \\
@@ -198,7 +211,7 @@ Ahora supongamos que $s \leq t$, de $1$ y $3$ tenemos que $X_s$ y $X_t - X_s$ so
   \end{align*}
 En general, $\mathbb{E}[X_t X_s] = s \wedge t$ para toda $s, t \geq 0$. Por lo tanto, $X$ es un movimiento Browniano. \\
 
-Supongamos ahora que $X$ es un movimiento Browniano. Primero, observemos que $\mathbb{E} [X_0^2] = \mathbb{E} [X_0 X_0] = 0$, por lo tanto, tenemos que $X_0$ c.s. Por otra parte, para $0 \leq s \leq t$, tenemos que la variable $X_t - X_s$ es una variable aleatoria Gaussiano centrada, pues $X$ es un proceso Gaussiano centrado. Además observamos que la varianza de la variable $X_t - X_s$ es
+Supongamos ahora que $X$ es un movimiento Browniano. Primero observemos que $\mathbb{E} [X_0^2] = \mathbb{E} [X_0 X_0] = 0$, por lo tanto, tenemos que $X_0 = 0$ c.s. Por otra parte, para $0 \leq s \leq t$, tenemos que la variable $X_t - X_s$ es una variable aleatoria Gaussiano centrada, pues X es un proceso Gaussiano centrado. Además observamos que la varianza de la variable $X_t - X_s$ es
   \begin{align*}
   	\mathbb{E} [(X_t - X_s)^2] &= \mathbb{E} [X_t^2] + \mathbb{E} [X_s^2] - 2 \mathbb{E} [X_t X_s] \\
     & = t + s - 2 s \\
@@ -206,37 +219,38 @@ Supongamos ahora que $X$ es un movimiento Browniano. Primero, observemos que $\m
   \end{align*}
 Por lo tanto, tenemos que $X_t - X_s \sim N(0, t - s)$. \\
 
-Por último, veamos que los incrementos de $X$ son independientes. Consideremos los tiempos tales que $0 \leq t_1 \leq t_2 \leq \cdots \leq t_n$, como el vector $(X_{t_1}, X_{t_2}, \ldots, X_{t_n})$ es Gaussiano entonces
+Por último, veamos que los incrementos de $X$ son independientes. Consideremos tiempos tales que $0 \leq t_1 \leq t_2 \leq \cdots \leq t_n$, como el vector $(X_{t_1}, X_{t_2}, \ldots, X_{t_n})$ es Gaussiano entonces
   \begin{align*}
   	(X_{t_1}, X_{t_2} - X_{t_1}, \ldots, X_{t_n} - X_{t_{n-1}}),
   \end{align*}
 también lo es y más aún, para toda $i < j$, tenemos
   \begin{align*}
-  	COV(X_{t_{i + 1}} - X_{t_i}, & X_{j_{i + 1}}  - X_{t_j}) = \mathbb{E} [(X_{t_{i + 1}} - X_{t_i})(X_{t_{j + 1}} - X_{t_j})] \\ %  - \mathbb{E} [X_{t_{i + 1}} - X_{t_i}] \mathbb{E}[X_{t_{j + 1}} - X_{t_j}] 
+  	COV(X_{t_{i + 1}} - X_{t_i}, X_{j_{i + 1}} - X_{t_j}) &= \mathbb{E} [(X_{t_{i + 1}} - X_{t_i})(X_{t_{j + 1}} - X_{t_j})] \\
     & = \mathbb{E} [X_{t_{i + 1}}X_{t_{j + 1}} - X_{t_i}X_{t_{j + 1}} - X_{t_{i + 1}}X_{t_j} + X_{t_i}X_{t_j}] \\
-% &- (\mathbb{E} [X_{t_{i + 1}}] - \mathbb{E}[X_{t_i}]) (\mathbb{E}[X_{t_{j + 1}}] - \mathbb{E}[X_{t_j}]) \\
-    & = \mathbb{E} [X_{t_{i + 1}}X_{t_{j + 1}}] - \mathbb{E}[X_{t_i}X_{t_{j + 1}}] - \mathbb{E}[X_{t_{i + 1}}X_{t_j}] + \mathbb{E}[X_{t_i}X_{t_j}] \\
+    & = \mathbb{E} [X_{t_{i + 1}}X_{t_{j + 1}}] - \mathbb{E}[X_{t_i}X_{t_{j + 1}}] \\
+    & - \mathbb{E}[X_{t_{i + 1}}X_{t_j}] + \mathbb{E}[X_{t_i}X_{t_j}] \\
     & = t_{i+1} + t_i - t_{i+1} - t_i \\
     & = 0,
   \end{align*}
-De la proposición \ref{cova}, vemos que las variables $X_{t_1}, X_{t_2} - X_{t_1}, \ldots, X_{t_n} - X_{t_{n-1}}$ son independientes.
+De la Proposición \ref{gaussiano1} vemos que, las variables $X_{t_1}, X_{t_2} - X_{t_1}, \ldots, X_{t_n} - X_{t_{n-1}}$ son independientes.
 \end{proof}
 
 % A continuación se da una prueba de que el movimiento Browniano existe
+
 
 \begin{theorem}[Wiener, 1923]
 El movimiento Browniano existe.
 \end{theorem}
 \begin{proof}
-\textbf{(Lévy, 1948)} Para la prueba, consideremos la construcción del movimiento Browniano en el intervalo $[0, 1]$. La idea es construir el movimiento Browniano como límite uniforme de funciones continuas. \\ %para asegurar que sus trayectorias resulten con la misma característica. \\
+\textbf{(Lévy, 1948)} Para la prueba, consideremos la construcción del movimiento Browniano en el intervalo $[0, 1]$. La idea es construir el movimiento Browniano como límite uniforme de funciones continuas. \\
 
-Primero vamos a construir al movimiento como un elemento aleatorio del espacio $\mathbb{C}[0, 1]$. Para ello, vamos a definir al conjunto de los diádicos en $[0, 1]$, es decir %, después se construye la correcta distribución conjunto del movimiento Browniano paso a paso sobre conjuntos finitos de la forma
+Primero vamos a construir al movimiento como un elemento aleatorio del espacio $\mathbb{C}[0, 1]$. Para ello, vamos a definir al conjunto de puntos diádicos en el intervalo $[0, 1]$, es decir, 
 	\begin{align*}
-		\mathcal{D}_n = \left\{ \frac{k}{2^n} : 0 \leq k \leq 2^k \right\},
+		\mathcal{D}_n = \left\{ \frac{k}{2^n} : 0 \leq k \leq 2^k \right\}.
 	\end{align*}
-Vamos a interpolar linealmente a través de estos puntos, y se verificará que el límite uniforme de estas funciones continuas existe y que éste cumpla con las propiedades del movimiento Browniano. Al final, se construye al movimiento Browniano en $\mathbb{R}_{+}$\\
+Vamos a interpolar linealmente a través de estos puntos y se verificará que el límite uniforme de estas funciones continuas existe y que éste cumpla con las propiedades del movimiento Browniano. Al final, se construye al movimiento Browniano en $\mathbb{R}_{+}$\\
 
-Consideremos una familia de variables aleatorias $(\xi_{k, n}, 0 \leq k \leq 2^n, n \geq 1)$ Gaussianas centradas y con varianza unitaria. Definamos al proceso $(X_n (t), t \in [0, 1], n \geq 0)$ de manera recursiva, como sigue:
+Consideremos una familia de variables aleatorias $(\xi_{k, n}, 0 \leq k \leq 2^n, n \geq 1)$ Gaussianas centradas y con varianza unitaria. Definamos al proceso $(X_n (t), t \in [0, 1], n \geq 1)$ de manera recursiva, como sigue
 
 	\begin{enumerate}
 	\item Sea $X_0 (0) = 0$, $X_0 (1) = \xi_{0, 0}$ con $X_0$ lineal en $[0, 1]$.
@@ -249,19 +263,19 @@ Consideremos una familia de variables aleatorias $(\xi_{k, n}, 0 \leq k \leq 2^n
 			X_0 (1) & \text{ si } t = 1.
 			\end{cases}
 		\end{align*}
-	con $X_1$ lineal en $[0, \frac{1}{2}]$ y en $(\frac{1}{2}, 1]$. 
+con $X_1$ lineal en $[0, \frac{1}{2}]$ y en $(\frac{1}{2}, 1]$. 
 	\item Considerando el caso para $n = 2$ tenemos que
 		\begin{align*}
 		X_2 (t) = 
 			\begin{cases}
 			0, & \text{ si } t = 0, \\
-			X_1 (\frac{1}{4}) + \frac{\xi_{1, 2}}{2}, & \text{ si } t = \frac{1}{4}, \\
+			X_1 (\frac{1}{4}) + \frac{\xi_{1, 2}}{2 \sqrt{2}}, & \text{ si } t = \frac{1}{4}, \\
 			X_1 (\frac{1}{2}), & \text{ si } t = \frac{1}{2}, \\
-			X_1 (\frac{3}{4}) + \frac{\xi_{2, 2}}{2}, & \text{ si } t = \frac{3}{4}, \\
+			X_1 (\frac{3}{4}) + \frac{\xi_{3, 2}}{2 \sqrt{2}}, & \text{ si } t = \frac{3}{4}, \\
 			X_1 (1), & \text{ si } t = 1.
 			\end{cases}
 		\end{align*}
-	con $X_2$ lineal en $[0, \frac{1}{4}]$, $(\frac{1}{4}, \frac{1}{2}]$, $(\frac{1}{2}, \frac{3}{4}]$ y $(\frac{3}{4}, 1]$.
+con $X_2$ lineal en $[0, \frac{1}{4}]$, $(\frac{1}{4}, \frac{1}{2}]$, $(\frac{1}{2}, \frac{3}{4}]$ y $(\frac{3}{4}, 1]$.
 	\end{enumerate}
 En general, para toda $n \geq 0$, el mapeo $t \rightarrow X_n (t)$ es lineal en cada uno de los intervalos de la forma
 	\begin{align*}
@@ -270,31 +284,31 @@ En general, para toda $n \geq 0$, el mapeo $t \rightarrow X_n (t)$ es lineal en 
 y además, 
 	\begin{align*}
 		X_n \left(\frac{2j}{2^n}\right) & := X_{n-1} \left(\frac{j}{2^{n-1}}\right), \\
-		X_n \left(\frac{2j + 1}{2^n}\right) & := X_{n-1} \left(\frac{2j + 1}{2^n}\right) + \frac{\xi_{2j + 1, n}}{2^{(n+1)/2}}. \\
+		X_n \left(\frac{2j + 1}{2^n}\right) & := X_{n-1} \left(\frac{2j + 1}{2^n}\right) + \frac{\xi_{2j + 1, n}}{2^{n/2}}. \\
 	\end{align*}
 Veamos que, para toda $n \geq 0$, el vector $(X_n(k / 2^n), 0 \leq k \leq 2^n)$ es Gaussiano, centrado y de covarianza
 	\begin{align}
 		\mathbb{E} \left[ X_n \left( \frac{k}{2^n} \right) X_n \left( \frac{\ell}{2^n} \right) \right] = \frac{k}{2^n} \wedge \frac{\ell}{2^n}. \label{abv}
 	\end{align}
-Para $n = 0$ tenemos que $X_0$ es lineal y su extremo $X_0(1)$ es una variable aleatoria Gaussiana centrada; en otras palabras, cualquier $X_0(1)$ es una combinación lineal de variables Gaussianas, más aún
+Para $n = 0$ tenemos que $X_0$ es lineal y su extremo $X_0(1)$ es  una variable aleatoria gaussiana centrada, en otras palabras, cualquier $X_0(t)$ es combinación lineal de variables aleatorias gaussianas, más aún
 	\begin{align*}
 		\mathbb{E} \left[ X_0 (0) X_0 (1) \right] & = \mathbb{E} \left[ 0 \cdot X_0 (1) \right] \\
 		& = 0 \\
 		& = \frac{0}{2^n} \wedge \frac{1}{2^n}.
 	\end{align*}
-Supongamos valido el caso para $n - 1$. Observemos que $(X_n (k / 2^n), 0 \leq k \leq 2^n)$ es una combinación lineal del vector Gaussiano $(X_{n-1} (k / 2^{n-1}), 0 \leq k \leq 2^{n-1})$ y de la familia de variables aleatorias Gaussianas $(\xi_{k, n}, o \leq k \leq 2^n)$, donde ambos componentes son independientes, por lo que, $(X_n (k / 2^n), 0 \leq k \leq 2^n)$  es un vector Gaussiano. \\
+Supongamos valido el caso para $n - 1$. Observemos que $(X_n (k / 2^n), 0 \leq k \leq 2^n)$ es una combinación lineal del vector Gaussiano $(X_{n-1} (k / 2^{n-1}), 0 \leq k \leq 2^{n-1})$ y de la familia de variables aleatorias Gaussianas $(\xi_{k, n}, 0 \leq k \leq 2^n)$, donde ambos componentes son independientes, por lo que, $(X_n (k / 2^n), 0 \leq k \leq 2^n)$  es un vector Gaussiano. \\
 
-Para $\ell > k$, se tiene
+Basta mostrar el caso en que $\ell = k$, pues si $\ell > k$ hacemos
 	\begin{align*}
-		\mathbb{E} \left[ X_n \left( \frac{k}{2^n} \right) X_n \left( \frac{\ell}{2^n} \right) \right] & = \mathbb{E} \left[ X_n \left( \frac{k}{2^n} \right)  \left( X_n \left( \frac{\ell}{2^n} \right) - X_n \left( \frac{k}{2^n} \right) + X_n \left( \frac{k}{2^n} \right) \right) \right] \\
-		& = \mathbb{E} \left[ X_n \left( \frac{k}{2^n} \right)  \left( X_n \left( \frac{\ell}{2^n} \right) - X_n \left( \frac{k}{2^n} \right) \right) \right] + \mathbb{E} \left[ X^2_n \left( \frac{k}{2^n} \right) \right] \\
-		& = \mathbb{E} \left[ X^2_n \left( \frac{k}{2^n} \right) \right].
+		\mathbb{E} \left[ X_n \left( \frac{k}{2^n} \right) X_n \left( \frac{\ell}{2^n} \right) \right] & = \mathbb{E} \left[ X_n \left( \frac{k}{2^n} \right) \left( X_n \left( \frac{\ell}{2^n} \right)  - X_n \left( \frac{k}{2^n} \right) + X_n \left( \frac{k}{2^n} \right) \right) \right] \\
+        & = \mathbb{E} \left[ X_n \left( \frac{k}{2^n} \right) \left( X_n \left( \frac{\ell}{2^n} \right)  - X_n \left( \frac{k}{2^n} \right) \right) \right] + \mathbb{E} \left[ X^2_n \left( \frac{k}{2^n} \right) \right] \\
+        & = \mathbb{E} \left[ X^2_n \left( \frac{k}{2^n} \right) \right].
 	\end{align*}
-De la misma manera se tiene para $\ell < k$, por lo que consideraremos únicamente el caso en que $\ell = k$
+Entonces, supongamos que $\ell = k$, y veamos que,
 	\begin{align*}
 		\mathbb{E} \left[ X_n^2 \left( \frac{k}{2^n} \right) \right] & = \frac{k}{2^n}.
 	\end{align*}
-Cuando $k$ es par, tenemos que $X_n (k / 2^n) = X_n (2j / 2^n) = X_{n-1} (j / 2^{n-1})$ entonces
+Para el caso en el que $k$ es par, tenemos que $X_n (k / 2^n) = X_n (2j / 2^n) = X_{n-1} (j / 2^{n-1})$ entonces
 	\begin{align*}
 		\mathbb{E} \left[ X_n^2 \left( \frac{k}{2^n} \right) \right] & = \mathbb{E} \left[ X_n^2 \left( \frac{2j}{2^n} \right) \right] \\
 		& = \mathbb{E} \left[ X_{n-1}^2 \left( \frac{j}{2^{n-1}} \right) \right] \\
@@ -308,7 +322,7 @@ Para el caso en el que $k$ es impar tenemos que
 	\begin{align*}
 		X_n \left( \frac{k}{2^n} \right) & = X_n \left( \frac{2j + 1}{2^n} \right) \\
 		& = X_{n-1} \left( \frac{2j + 1}{2^n} \right) + \frac{\xi_{2j+1, n}}{2^{(n+1)/2}} \\
-		& = X_{n-1} \left( \frac{j}{2^n} \right) + X_{n-1} \left( \frac{j + 1}{2^n} \right) + \frac{\xi_{2j+1, n}}{2^{(n+1)/2}} \\
+		& = X_{n-1} \left( \frac{2j}{2^n} \right) + X_{n-1} \left( \frac{2(j + 1)}{2^n} \right) + \frac{\xi_{2j+1, n}}{2^{(n+1)/2}} \\
 		& = \frac{1}{2} \left( X_{n-1} \left( \frac{j}{2^{n-1}} \right) + X_{n-1} \left( \frac{j + 1}{2^{n-1}} \right) \right) + \frac{\xi_{2j+1, n}}{2^{(n+1)/2}}. \\
 	\end{align*}
 Por lo tanto, 
@@ -322,37 +336,36 @@ Por lo tanto,
 Sabemos que $\xi$ es una variable Gaussiana independiente de $X_n$, además de tener media igual a $0$ y varianza unitaria. Entonces,
 	\begin{align*}
 		\mathbb{E} \left[ X_n^2 \left( \frac{k}{2^n} \right) \right] & = \frac{1}{4} \mathbb{E} \left[ \left( X_{n-1} \left( \frac{j}{2^{n-1}} \right) + X_{n-1} \left( \frac{j + 1}{2^{n-1}} \right) \right)^2 \right] + \frac{1}{2^{n+1}}.
-	\end{align*}
+	\end{align*} 
 Desarrollando el cuadrado y utilizando nuestro supuesto de covarianza para el proceso $X_n$ tenemos que
 	\begin{align*}
-	\mathbb{E} \left[ X_n^2 \left( \frac{k}{2^n} \right) \right] & = \frac{1}{4} \mathbb{E} \left[ X_{n-1}^2 \left( \frac{j}{2^{n-1}}  \right) \right] +  \mathbb{E} \left[ X_{n-1}^2 \left( \frac{j+1}{2^{n-1}} \right) \right] \\
-	& + 2\mathbb{E} \left[ X_{n-1}\left( \frac{j}{2^{n-1}}  \right) X_{n-1} \left( \frac{j+1}{2^{n-1}} \right) \right] + \frac{1}{2^{n+1}} \\
+	\mathbb{E} \left[ X_n^2 \left( \frac{k}{2^n} \right) \right] & = \frac{1}{4} \left[ \mathbb{E} \left[ X_{n-1}^2 \left( \frac{j}{2^{n-1}}  \right) \right] +  \mathbb{E} \left[ X_{n-1}^2 \left( \frac{j+1}{2^{n-1}} \right) \right] \right. \\
+	& \left. + 2\mathbb{E} \left[ X_{n-1}\left( \frac{j}{2^{n-1}}  \right) X_{n-1} \left( \frac{j+1}{2^{n-1}} \right) \right] \right] + \frac{1}{2^{n+1}} \\
 	& = \frac{1}{4} \left( \frac{j}{2^{n-1}} \right) + \frac{1}{4} \left( \frac{j+1}{2^{n-1}} \right) + \frac{1}{2} \left( \frac{j}{2^{n-1}} \right) + \frac{1}{2^{n+1}} \\
 	& = \frac{4j + 2}{2^{n+1}} = \frac{2j + 1}{2^n}.
 	\end{align*}
-Por lo tanto, para toda $n \geq 0$, $(X_n (t), t \in [0, 1])$ es un proceso Gaussiano centrado y de covarianza definida en (\ref{abv}). Ahora probemos que el proceso $(X_n (t), 0 \leq t \leq 1)$ converge uniformemente en el intervalo $[0, 1]$. Primero, veamos que el proceso converge uniformemente Cauchy, es decir, para todo $\epsilon > 0$ existe una $N \geq n$
-	\begin{align*}
-		\sup_{t \in [0, 1]} |X_n (t) - X_{n-1} (t)| < \epsilon.
-	\end{align*}
-Definamos los siguientes conjuntos, 
+Por lo tanto, para toda $n \geq 0$, $(X_n (t), t \in [0, 1])$ es un proceso Gaussiano centrado y de covarianza definida en (\ref{abv}). Ahora probemos que casi seguramente el proceso $(X_n (t), 0 \leq t \leq 1)$ converge uniformemente en el intervalo $[0, 1]$. Definamos los siguientes conjuntos, 
 	\begin{align*}
 		A_n = \left\{ \sup_{t \in [0, 1]} |X_n (t) - X_{n-1} (t)| \geq 2^{-n / 4} \right\}.
 	\end{align*}
 Notemos que, 
 	\begin{align*}
 		\mathbb{P}(A_n) & = \mathbb{P} \left( \bigcup_{j = 0}^{2n - 1} \left\{ \sup_{t \in [j/2^n, (j+1)/2^n]} |X_n (t) - X_{n-1} (t)| \geq 2^{-n / 4} \right\} \right) \\
-		& = \mathbb{P} \left( \bigcup_{j = 0}^{2n - 1} \left\{ |\frac{\xi_{2j+1, n}}{2^{(n+1)/2}}| \geq 2^{-n / 4} \right\} \right) \\
+		& = \mathbb{P} \left( \bigcup_{j = 0}^{2n - 1} \left\{ \bigg| \frac{\xi_{2j+1, n}}{2^{(n+1)/2}} \bigg| \geq 2^{-n / 4} \right\} \right) \\
 		& \leq 2^n \mathbb{P}\left( |N(0, 1)| \geq 2^{(n+2)/4} \right) \\
 		& = 2^{n+1} \mathbb{P}\left( N(0, 1) \geq 2^{(n+2)/4} \right) \\
-		& \leq \frac{1}{\sqrt{\pi}} 2^{3n/4} e^{-2^{n/2}},
+		& \leq \frac{1}{\sqrt{\pi}} 2^{\frac{3n}{4}} e^{-2^{n/2}},
 	\end{align*}
-Lo cual implica que $\sum \mathbb{P}(A_n) < \infty$, y entonces, por la Ley de Borel - Cantelli tenemos que existe un conjunto $\tilde{\Omega} \in \mathcal{F}$ con $\mathbb{P}(\tilde{\Omega}) = 1$, tal que, para todo $\omega \in \tilde{\Omega}$ existe $N(\omega) < \infty$ donde
-	\begin{align*}
-		\sup_{t \in [0, 1]} |X_n (t) - X_{n-1} (t)| \geq 2^{-n / 4} \hspace{0.5cm} \forall n \geq N.
-	\end{align*}
-Es decir, el proceso $X_n (t)$ uniformemente Cauchy, sin embargo, al ser funciones continuas en un espacio métrico con la imagen del espacio siendo completo, se tiene que es un proceso uniformemente convergente. Como $(X_n (t); n \geq 0, 0 \leq t \leq 1)$ uniformemente convergente en $\mathbb{C}([0, 1], \mathbb{R})$, dicho límite es una función continua , ya que $\mathbb{C}([0, 1], \mathbb{R})$ es un espacio completo bajo una topología uniforme. \\
+Lo cual implica que $\sum \mathbb{P}(A_n) < \infty$, y entonces, por la Ley de Borel - Cantelli tenemos que 
+\begin{align*}
+\mathbb{P} \left( \limsup_n A_n \right) = 0.
+\end{align*}
 
-Sea 
+Luego, tenemos que existe un conjunto $\tilde{\Omega} \in \mathcal{F}$ con $\mathbb{P}(\tilde{\Omega}) = 1$, tal que, para todo $\omega \in \tilde{\Omega}$ existe $N(\omega) < \infty$ donde
+	\begin{align*}
+		\sup_{t \in [0, 1]} |X_n (t) - X_{n-1} (t)| \leq 2^{-n / 4} \hspace{0.5cm} \forall n \geq N.
+	\end{align*}
+Es decir, casi seguramente el proceso $X_n (t)$ converge uniformemente con $t \in [0, 1]$. Al ser, $(X_n (t); n \geq 0, 0 \leq t \leq 1)$ uniformemente convergente en $\mathbb{C}([0, 1], \mathbb{R})$, dicho límite es una función continua, ya que $\mathbb{C}([0, 1], \mathbb{R})$ es completo bajo la topología uniforme. Sea 
 	\begin{align*}
 		X(t) := \lim_{n \rightarrow \infty} X_n (t), \hspace{0.5cm} t \in [0, 1], 
 	\end{align*}
@@ -362,7 +375,7 @@ entonces, por construcción, el proceso $(X(t), 0 \leq t \leq 1)$ es un proceso 
 		& = \lim_{n \rightarrow \infty} s_n \wedge t_n \\
 		& = s \wedge t, 
 	\end{align*}
-donde $s_n$ y $t_n$ son diádicos de la forma $j / 2^n$ y tales que $s_n \rightarrow s$, $t_n \rightarrow t$. Por lo tanto, $(X (t), 0 \leq t \leq 1)$ es un movimiento Browniano en el intervalo $[0, 1]$. \\
+donde $(s_n)$ y $(t_n)$ son diádicos de la forma $j / 2^n$ y tales que $s_n \rightarrow s$, $t_n \rightarrow t$. Por lo tanto, $(X (t), 0 \leq t \leq 1)$ es un movimiento Browniano en el intervalo $[0, 1]$. \\
 
 Para finalizar, consideremos $B_t^0, B_t^1, B_t^2, \ldots$ movimientos Brownianos independientes en el intervalo $[0, 1]$ y definamos
 	\begin{align*}
@@ -372,17 +385,67 @@ Para finalizar, consideremos $B_t^0, B_t^1, B_t^2, \ldots$ movimientos Browniano
 		B_{t-n}^n + \sum_{m = 0}^{n-1} B_1^m, & \text{ si } t \in [n, n+1)
 		\end{cases}
 	\end{align*}
-Entonces, $B_t$ es un movimiento Browniano en $\mathbb{R}_{+}$.
+Entonces, por último veamos que $B_t$ es un movimiento Browniano en $\mathbb{R}_{+}$. \\
+
+Recordemos que la combinación lineal de un proceso Gaussiano centrado es de nuevo, un proceso Gaussiano, por lo tanto, de la definición de $B_t$, tenemos que es un proceso Gaussiano centrado. 
+
+Además, veamos que para todo $s, t \in \mathbb{R}_{+}$ se cumple que
+\begin{align*}
+\mathbb{E}[B_s B_t] = s \wedge t.
+\end{align*}
+Consideremos primero el caso en que, $s, t \in [n, n+1)$ para cualquier $n$, con $s < t$. Tenemos que
+\begin{align*}
+\mathbb{E}[B_s B_t] & = \mathbb{E} \left[ \left( B_{s-n}^n + \sum_{m=0}^{n-1} B_1^m \right) \left( B_{t-n}^n + \sum_{m=0}^{n-1} B_1^m \right) \right] \\
+& = \mathbb{E}[B_{s-n}^n B_{t-n}^n] + \mathbb{E} \left[ \sum_{m=0}^{n-1} B_{s-n}^n B_1^m \right] + \mathbb{E} \left[ \sum_{m=0}^{n-1} B_{t-n}^n B_1^m \right] + \mathbb{E} \left[ \sum_{m=0}^{n-1} \left( B_1^m \right)^2 \right] \\
+& = \mathbb{E}[B_{s-n}^n B_{t-n}^n] + \sum_{m=0}^{n-1} \mathbb{E} \left[ B_{s-n}^n B_1^m \right] + \sum_{m=0}^{n-1} \mathbb{E} \left[ B_{t-n}^n B_1^m \right] + \sum_{m=0}^{n-1} \mathbb{E} \left[ \left( B_1^m \right)^2 \right].
+\end{align*}
+
+De la independencia de los movimientos $B^0, B^1, B^2, \ldots, B^{n-1}, B^n$ y al ser procesos Gaussianos centrados; tenemos que $\mathbb{E}[B^m B^n] = 0$ para toda $m < n$. Por lo tanto
+\begin{align*}
+\mathbb{E}[B_s B_t] & = \mathbb{E}[B_{s-n}^n B_{t-n}^n] + \sum_{m=0}^{n-1} \mathbb{E} \left[ \left( B_1^m \right)^2 \right].
+\end{align*}
+
+Como $B^n_t$ es un proceso Gaussiano, sabemos que tiene una varianza igual a $1$, entonces
+\begin{align*}
+\mathbb{E}[B_s B_t] & = \mathbb{E}[B_{s-n}^n B_{t-n}^n] + \sum_{m=0}^{n-1} \mathbb{E} \left[ \left( B_1^m \right)^2 \right] \\
+& = (s - n) \wedge (t - n) + n \\ 
+& = (s \wedge t).
+\end{align*}
+
+Para el caso en que, los tiempos $s$ y $t$ no pertenezcan al mismo intervalo de tiempo, observemos que para $s \in [m, m+1)$ y $t \in [n, n+1)$ con $m < n$ se tiene
+\begin{align*}
+\mathbb{E}[B_s B_t] & = \mathbb{E} \left[ \left( B_{s-m}^m + \sum_{j=0}^{m-1} B_1^j \right) \left( B_{t-n}^n + \sum_{k=0}^{n-1} B_1^k \right) \right] \\
+& = \mathbb{E}[B_{s-m}^m B_{t-n}^n] + \mathbb{E} \left[ \sum_{k=0}^{n-1} B_{s-m}^m B_1^k \right] + \mathbb{E} \left[ \sum_{j=0}^{m-1} B_{t-n}^n B_1^j \right] + \mathbb{E} \left[ \sum_{j=0}^{m-1} B_1^j \sum_{k=0}^{n-1} B_1^k \right] \\
+& = \mathbb{E}[B_{s-m}^m B_{t-n}^n] + \sum_{k=0}^{n-1} \mathbb{E} \left[ B_{s-m}^m B_1^k \right] + \sum_{j=0}^{m-1} \mathbb{E} \left[ B_{t-n}^n B_1^j \right] + \mathbb{E} \left[ \sum_{j=0}^{m-1} B_1^j \sum_{k=0}^{n-1} B_1^k \right]
+\end{align*}
+Al ser $B^m$ y $B^n$ independientes para todo $m \neq n$ y procesos Gaussianos centrados, tenemos que $\mathbb{E}[B_{s-m}^m B_{t-n}^n] = 0$; lo mismo ocurre para la primera y segunda suma excepto cuando su índice superior coincide, de ahí tenemos que $\mathbb{E}[B^m_{s-m} B^m_1] = s-m$, al ser $B^m$ un movimiento Browniano en $[0, 1]$. Por lo tanto,
+\begin{align}
+\mathbb{E}[B_s B_t] & = \mathbb{E}[B_{s-m}^m B_{t-n}^n] + \sum_{k=0}^{n-1} \mathbb{E} \left[ B_{s-m}^m B_1^k \right] \nonumber \\
+& + \sum_{j=0}^{m-1} \mathbb{E} \left[ B_{t-n}^n B_1^j \right] + \mathbb{E} \left[ \sum_{j=0}^{m-1} B_1^j \sum_{k=0}^{n-1} B_1^k \right] \nonumber \\
+& = (s - m) + \mathbb{E} \left[ \sum_{j=0}^{m-1} B_1^j \sum_{k=0}^{n-1} B_1^k \right] \label{mbr1}.
+\end{align}
+Desarrollando la última expresión vemos que
+\begin{align}
+	\mathbb{E} \left[ \sum_{j=0}^{m-1} B_1^j \sum_{k=0}^{n-1} B_1^k \right]  & = \sum_{j=0}^{m-1} \sum_{k=0}^{n-1} \mathbb{E} \left[ B_1^j  B_1^k \right] \nonumber \\
+    & = \sum_{j=0}^{m-1} 1 = m. \label{mbr2}
+\end{align}
+Utilizando (\ref{mbr2}) en (\ref{mbr1}) tenemos que
+\begin{align*}
+\mathbb{E}[B_s B_t] & = (s - m) + \mathbb{E} \left[ \sum_{j=0}^{m-1} B_1^j \sum_{k=0}^{n-1} B_1^k \right] \\
+& = (s - m) + m  \\
+& = s = s \wedge t.
+\end{align*}
+Por lo tanto $B_t$ es un movimiento Browniano en $\mathbb{R}_{+}$.
 \end{proof}
 
 \section{Trayectorias del movimiento Browniano}
 En esta sección, estudiaremos las propiedades trayectoriales del movimiento Browniano, y más específicamente probaremos el Criterio de Continuidad de Kolmogorov, resultado que nos asegura existe una versión continua del movimiento Browniano.
 
 \begin{definition}
-Sean $X = (X_t, t \in T)$ y $\tilde{X} = (\tilde{X}_t, t \in T)$ dos procesos definidos en un conjunto T. Decimos que $\tilde{X}$ es una modificación de $X$ si para toda $t \in T$, $X_t = \tilde{X}_t$ c.s.
+Sean $X = (X_t, t \geq 0)$ y $\tilde{X} = (\tilde{X}_t, t \geq 0)$ dos procesos definidos en un conjunto $\mathbb{R}_{+}$. Decimos que $\tilde{X}$ es una modificación de $X$ si para toda $t \in \mathbb{R}_{+}$, $X_t = \tilde{X}_t$ c.s.
 \end{definition}
 
-Si $\tilde{X}$ es una modificación de $X$, entonces para toda n y para toda $(t_1, t_2, \ldots, t_n) \in T^n$, 
+Si $\tilde{X}$ es una modificación de $X$, para toda n y para toda $(t_1, t_2, \ldots, t_n) \in \mathbb{R}_{+}^n$, entonces
   \begin{align*}
 	(X_{t_1}, X_{t_2}, \ldots, X_{t_n}) & = (\tilde{X}_{t_1}, \tilde{X}_{t_2}, \ldots, \tilde{X}_{t_n}) \hspace{0.5cm} \text{c.s.}
   \end{align*}
@@ -391,20 +454,19 @@ En particular, si alguno de los procesos es un movimiento Browniano, el otro tam
 \begin{definition}
 Decimos que $X$ y $\tilde{X}$ son indistinguibles si
   \begin{align*}
-	\mathbb{P} \left( \forall t \in T, X = \tilde{X} \right) = 1.
+	\mathbb{P} \left(X_t = \tilde{X}_t, \hspace{0.2cm} \forall t \in \mathbb{R}_{+} \right) = 1 
   \end{align*}
-  
 Si $X$ y $\tilde{X}$ son indistinguibles entonces $\tilde{X}$ es una modificación de $X$, además, ambos procesos tienen las mismas trayectorias casi seguramente.
 \end{definition}
 
-Por otra parte, observemos que si $\tilde{X} = (\tilde{X}_t, t \in T)$ es una modificación de $X = (X_t, t \in T)$ y ambos tienen trayectorias continuas casi seguramente, entonces $X$ y $\tilde{X}$ son indistinguibles.
+Por otra parte, observemos que si $\tilde{X} = (\tilde{X}_t, t \in \mathbb{R}_{+})$ es una modificación de $X = (X_t, t \in \mathbb{R}_{+})$ y ambos tienen trayectorias continuas casi seguramente, entonces $X$ y $\tilde{X}$ son indistinguibles.
 
 \begin{definition}
-Sean dos procesos estocásticos definidos $(X_t, t \in T)$ y $(\tilde{X}_t, t \in T)$ definidos en los espacios de probabilidad $(\Omega, \mathcal{F}, \mathbb{P})$ y $(\tilde{\Omega}, \tilde{\mathcal{F}}, \tilde{\mathbb{P}})$, respectivamente, y con el mismo espacio de estados $(E, \mathcal{E})$. \\
-
-Decimos que $X$ y $\tilde{X}$ son equivalente si para cualquier sucesión finita $t_1, t_2, \ldots, t_n$ donde $0 \leq t_1 < t_2 < \cdots < t_n < \infty$ y $A \in \mathcal{E}$ se tiene que
+Sean dos procesos estocásticos $(X_t, t \in \mathbb{R}_{+})$ y $(\tilde{X}_t, t \in \mathbb{R}_{+})$ definidos en los espacios de probabilidad $(\Omega, \mathcal{F}, \mathbb{P})$ y $(\tilde{\Omega}, \tilde{\mathcal{F}}, \tilde{\mathbb{P}})$, respectivamente, y con el mismo espacio de estados $(E, \mathcal{E})$.   
+  
+Decimos que $X$ y $\tilde{X}$ son equivalente si para cualquier sucesión finita $t_1, t_2, \ldots, t_n$ donde $0 \leq t_1 < t_2 < \cdots < t_n < \infty$ y toda $A_i \in \mathcal{E}$ con $1 \leq i \leq n$,
 	\begin{align*}
-	\mathbb{P} \left( (X_{t_1}, X_{t_2}, \ldots, X_{t_n}) \in A \right) = \mathbb{P} \left( (\tilde{X}_{t_1}, \tilde{X}_{t_2}, \ldots, \tilde{X}_{t_n}) \in A \right)
+	\mathbb{P} \left( X_{t_1} \in A_1 , X_{t_2} \in A_2, \ldots, X_{t_n} \in A_n \right) = \mathbb{P} \left( \tilde{X}_{t_1} \in A_1, \tilde{X}_{t_2} \in A_2, \ldots, \tilde{X}_{t_n} \in A_n \right).
 	\end{align*}
 \end{definition}
 
@@ -413,43 +475,35 @@ Sea $X = (X_t, t \in I)$ un proceso aleatorio indexado por un intervalo $I \subs
 	\begin{align*}
 	\mathbb{E} \left[\left( d(X_s, X_t)\right)^p\right] \leq c|t - s|^{1 + \epsilon}, \hspace{0.5cm} s, t \in I.
 	\end{align*}
-Entonces, existe una modificación $\tilde{X}$ de $X$, cuyas trayectorias son localmente Hölder de índice $\alpha$, para toda $\alpha \in (0, \epsilon / p)$, es decir, para toda $T \geq 0$
+Entonces, existe una modificación $\tilde{X}$ de $X$, cuyas trayectorias son localmente Hölder de índice $\alpha$, para toda $\alpha \in (0, \epsilon / p)$, es decir, para toda $T \geq 0$,
 	\begin{align*}
 	d \left( \tilde{X}_s(\omega), \tilde{X}_t(\omega)\right) \leq K(\omega, T) |t - s|^{\alpha}, \hspace{0.5cm} s, t \leq T.
 	\end{align*}
 \end{theorem}
 \begin{proof}
-La demostración de este importante resultado se basa en tres principales problemas. Comprobar que las trayectorias del proceso $X$ son $\alpha$-Hölder continuas en el conjunto de números diádicos del intervalo $[0,1]$. ``Extender'' al proceso $\tilde{X}$ para un intervalo $[0, T]$, finalmente, mostrar que $\tilde{X}$ está bien definido y que resulta ser una modificación de nuestro proceso original. \\
+La demostración de este importante resultado se basa en tres problemas. 1. Comprobar que las trayectorias del proceso $\tilde{X}$ son $\alpha$-Hölder continuas en el conjunto de números diádicos del intervalo $[0,1]$. 2. ``Extender'' al proceso $\tilde{X}$ para un intervalo $[0, T]$. 3. Finalmente, mostrar que $\tilde{X}$ está bien definido y que resulta ser una modificación de nuestro proceso original. \\
 
 Consideremos sin pérdida de generalidad que $I$ es un intervalo acotado y para simplificar la notación, definamos $I = [0, 1]$. De la desigualdad de Chebyshev veamos que para toda $a > 0$ y para toda $s, t \in [0, 1]$ tenemos que
 	\begin{align}
 	\mathbb{P} \left(d(X_s, X_t) > a \right) \leq \frac{\mathbb{E} \left[\left(d(X_s, X_t)^p\right)\right]}{a^p} \leq c \frac{|t-s|^{1+\epsilon}}{a^p}.\label{aca} 
 	\end{align}
-Si consideramos a $D_n$ como el conjunto de números diádicos del intervalo $[0, 1)$ tales que $D_n = \{k / 2^n : k = 0, 1, \ldots, 2^n\}$, entonces $D_0, D_1, \ldots $ es una secuencia de conjuntos crecientes, por lo que podemos definir al siguiente conjunto $D = \cup_n D_n = \lim_n D_n$. \\
+Si consideramos a $D_n$ como el conjunto de números diádicos del intervalo $[0, 1]$ tales que $D_n = \{k / 2^n : k = 0, 1, \ldots, 2^n\}$, entonces $D_0, D_1, \ldots $ es una sucesión de conjuntos crecientes, por lo que podemos definir al siguiente conjunto $D = \cup_n D_n = \lim_n D_n$. \\
 
 Tomemos a $s = (i-1)/2^n$, $t = i/2^n$ y $a = 1/2^{n \alpha}$. De (\ref{aca}), con $\alpha$ fija en $(0, \epsilon / p)$ obtenemos
 	\begin{align*}
 	\mathbb{P} \left( d(X_{\frac{i-1}{2^n}}, X_{\frac{i}{2^n}}) > \frac{1}{2^{n \alpha}} \right) & \leq c \frac{| i/2^n - (i-1)/2^n|^{1+\epsilon}}{2^{- n \alpha p}} \\
 	& = \frac{c}{2^{n(1 + \epsilon - \alpha p)}}.
 	\end{align*}
-Por lo tanto, 
-	\begin{align*}
-	\mathbb{P} \left( \max_{1 \leq i \leq 2^n} d(X_{\frac{i-1}{2^n}}, X_{\frac{i}{2^n}}) > \frac{1}{2^{n \alpha}} \right)  & \leq \sum_{i=1}^{2n} \mathbb{P} \left( d(X_{\frac{i-1}{2^n}}, X_{\frac{i}{2^n}}) > \frac{1}{2^{n \alpha}} \right) \\
-	& = \frac{c2^n}{2^{n(1 + \epsilon - \alpha p)}} \\
-	& = \frac{c}{2^{n(\epsilon - \alpha p)}}.
-	\end{align*}
 Como $\alpha \in (0, \epsilon / p)$ entonces, $\epsilon - p \alpha > 0$, por lo tanto
 	\begin{align*}
-	\sum_{n \geq 1} \frac{c}{2^{n(1 + \epsilon - \alpha p)}} < \infty.
+	\sum_{n \geq 1} \mathbb{P} \left( \max_{1 \leq i \leq 2^n} d(X_{\frac{i-1}{2^n}}, X_{\frac{i}{2^n}}) > \frac{1}{2^{n \alpha}} \right)  & \leq \sum_{n \geq 1} \sum_{i=1}^{2n} \mathbb{P} \left( d(X_{\frac{i-1}{2^n}}, X_{\frac{i}{2^n}}) > \frac{1}{2^{n \alpha}} \right) \\
+	& = \sum_{n \geq 1} \frac{c2^n}{2^{n(1 + \epsilon - \alpha p)}} \\
+	& = \sum_{n \geq 1} \frac{c}{2^{n(\epsilon - \alpha p)}} < \infty
 	\end{align*}
 En virtud del Lema de Borel-Cantelli sabemos que existe un conjunto $\tilde{\Omega} \subset \Omega$, $\tilde{\Omega} \in \mathcal{F}$, con $\mathbb{P} (\tilde{\Omega}) = 1$ tal que para cada $\omega \in \tilde{\Omega}$ existe una $n_0 := n_0 (\omega) < \infty$ tal que para toda $n \geq n_0$, 
 	\begin{align}
-	d \left(X_{\frac{i-1}{2^n}}, X_{\frac{i}{2^n}}\right) \leq 2^{-n \alpha}, \hspace{0.3cm} \text{para toda} 1 \leq i \leq 2^n \label{acb}
+	\max_{1 \leq i \leq 2^n} d \left(X_{\frac{i-1}{2^n}}, X_{\frac{i}{2^n}}\right) \leq 2^{-n \alpha}, \hspace{0.3cm} n \geq n_0. \label{acb}
 	\end{align}
-En otras palabras, 
-	\begin{align*}
-	\max_{1 \leq i \leq 2^n} d \left(X_{\frac{i-1}{2^n}}, X_{\frac{i}{2^n}}\right) \leq 2^{-n \alpha}, \hspace{0.3cm} n \geq n_0.
-	\end{align*}
 Por lo tanto, 
 	\begin{align*}
 	\sup_{n \geq n_0} \max_{1 \leq i \leq 2^n} \frac{d \left(X_{\frac{i-1}{2^n}}, X_{\frac{i}{2^n}}\right)}{2^{-n \alpha}} \leq 1.
@@ -458,26 +512,26 @@ Entonces,
 	\begin{align*}
 	\sup_{n \geq 1} \max_{1 \leq i \leq 2^n} \frac{d \left(X_{\frac{i-1}{2^n}}, X_{\frac{i}{2^n}}\right)}{2^{-n \alpha}} \leq K(\omega).
 	\end{align*}
-Veamos que el hecho anterior implica la condición $\alpha$-Hölder que buscamos observar en las trayectorias del proceso $X$. \\
+Veamos que lo anterior implica la condición $\alpha$-Hölder que buscamos observar en las trayectorias del proceso $X$. \\
 
 Recordemos que $t \in D$ si y solo si podemos escribir a $t$ como $\sum_{k=1}^N \zeta_k / 2^k$ donde $\zeta_k \in \{0, 1\}$. Consideremos dos elementos $s, t \in D$ tales que $s < t$. Sea $q \geq 1$ el entero más grande donde la desigualdad $t - s < 2^{-q}$ se cumple. Entonces, existen $0 \leq k \leq 2^{q}$ y enteros $l, m \geq 0$ tales que
 	\begin{align*}
-	s = \frac{k}{2^q} + \frac{\zeta_{q+1}}{2^{q+1}} + + \frac{\zeta_{q+2}}{2^{q+2}} + \ldots + + \frac{\zeta_{q+l}}{2^{q+l}}, \hspace{0.3cm} \zeta_j = 0 \text{ ó } 1; \\
-	t = \frac{k}{2^q} + \frac{\zeta_{q+1}}{2^{q+1}} + + \frac{\zeta_{q+2}}{2^{q+2}} + \ldots + + \frac{\zeta_{q+m}}{2^{q+m}}, \hspace{0.3cm} \tilde{\zeta}_j = 0 \text{ ó } 1.
+	s = \frac{k}{2^q} + \frac{\zeta_{q+1}}{2^{q+1}} + \frac{\zeta_{q+2}}{2^{q+2}} + \ldots + \frac{\zeta_{q+l}}{2^{q+l}}, \hspace{0.3cm} \zeta_j = 0 \text{ ó } 1; \\
+	t = \frac{k}{2^q} + \frac{\zeta_{q+1}}{2^{q+1}} + \frac{\zeta_{q+2}}{2^{q+2}} + \ldots + \frac{\zeta_{q+m}}{2^{q+m}}, \hspace{0.3cm} \tilde{\zeta}_j = 0 \text{ ó } 1.
 	\end{align*}
 Donde $k = [2^q s]$, en el cual $[x]$ es tal que $[x] \leq x \leq [x+1]$. Notemos que $k \leq [2^q t] \leq [2^q (s + 2^{-q})] = k+1$. Definamos los siguiente números, 
 	\begin{align*}
-	s_i & = \frac{k}{2^q} + \frac{\zeta_{q+1}}{2^{q+1}} + + \frac{\zeta_{q+2}}{2^{q+2}} + \ldots + + \frac{\zeta_{q+i}}{2^{q+i}}, \hspace{0.3cm} i = 0, 1, \ldots, l \\
-	t_j & = \frac{k}{2^q} + \frac{\zeta_{q+1}}{2^{q+1}} + + \frac{\zeta_{q+2}}{2^{q+2}} + \ldots + + \frac{\zeta_{q+j}}{2^{q+j}}, \hspace{0.3cm} j = 0, 1, \ldots, m.
+	s_i & = \frac{k}{2^q} + \frac{\zeta_{q+1}}{2^{q+1}} + \frac{\zeta_{q+2}}{2^{q+2}} + \ldots + \frac{\zeta_{q+i}}{2^{q+i}}, \hspace{0.3cm} i = 0, 1, \ldots, l \\
+	t_j & = \frac{k}{2^q} + \frac{\zeta_{q+1}}{2^{q+1}} + \frac{\zeta_{q+2}}{2^{q+2}} + \ldots + \frac{\zeta_{q+j}}{2^{q+j}}, \hspace{0.3cm} j = 0, 1, \ldots, m.
 	\end{align*}
 Entonces, de la desigualdad del triángulo obtenemos
 	\begin{align*}
 	d(X_s, X_t) & = d(X_{s_l}, X_{t_m}) \\
-	& \leq d(X_{s_0}, X_{t_0}) + \sum_{i=0}^l d(X_{s_i}, X_{s_{i-1}}) + \sum_{j=0}^m d(X_{t_j}, X_{t_{j-1}}) \\
-	& \leq \sum_{i=0}^l K(\omega) 2^{-(q+i) \alpha} + \sum_{j=0}^m K(\omega) 2^{-(q+j) \alpha} \hspace{0.3cm} \text{ (haciendo uso de (\ref{acb})) } \\
-	& = K(\omega) 2^{-q \alpha} \left[ \sum_{i=0}^l 2^{-i \alpha} + \sum_{j=0}^l 2^{-j \alpha} \right] \\
-	& \leq 2K(\omega) 2^{-q \alpha} \sum_{i=0}^{\infty} 2^{-i \alpha} \\
-	& = 2K(\omega) 2^{-q \alpha} \left[1 + \sum_{i=0}^{\infty} 2^{-i \alpha} \right]  \hspace{0.3cm} \text{ (serie geométrica) } \\
+	& \leq d(X_{s_0}, X_{t_0}) + \sum_{i=1}^l d(X_{s_i}, X_{s_{i-1}}) + \sum_{j=1}^m d(X_{t_j}, X_{t_{j-1}}) \\
+	& \leq \sum_{i=1}^l K(\omega) 2^{-(q+i) \alpha} + \sum_{j=1}^m K(\omega) 2^{-(q+j) \alpha} \hspace{0.3cm} \text{ (haciendo uso de (\ref{acb})) } \\
+	& = K(\omega) 2^{-q \alpha} \left[ \sum_{i=1}^l 2^{-i \alpha} + \sum_{j=1}^m 2^{-j \alpha} \right] \\
+	& \leq 2K(\omega) 2^{-q \alpha} \sum_{i=1}^{\infty} 2^{-i \alpha} \\
+	& = 2K(\omega) 2^{-q \alpha} \left[1 + \sum_{i=1}^{\infty} 2^{-i \alpha} \right]  \hspace{0.3cm} \text{ (serie geométrica) } \\
 	& = 2K(\omega) 2^{-q \alpha} \left[1 + \frac{2^{- \alpha}}{1 - 2^{- \alpha}} \right] \\
 	& = 2K(\omega) 2^{-q \alpha} \left[ \frac{1}{1 - 2^{- \alpha}} \right] = \frac{2K(\omega) 2^{-q \alpha}}{1 - 2^{- \alpha}}.
 	\end{align*}
@@ -500,7 +554,7 @@ El límite existe gracias a la condición de continuidad uniforme y al criterio 
 
 Veamos que para todo $\delta > 0$ se tiene que
 	\begin{align*}
-	\mathbb{P} \left(d(X_s, X_t) > \delta \right) & \leq \frac{\mathbb{E} d(X_s, X_t)^p}{\delta^p} \\
+	\mathbb{P} \left(d(X_s, X_t) > \delta \right) & \leq \frac{\mathbb{E} [d(X_s, X_t)^p]}{\delta^p} \\
 	& \leq \frac{c|t-s|^{1+ \epsilon}}{\delta^p} \xrightarrow{s \rightarrow t} 0.
 	\end{align*}
 Por lo que, para toda $t \in I$ se tiene que
@@ -515,26 +569,26 @@ Sea $B = (B_t, t \geq 0)$ un movimiento Browniano. El proceso $B$ admite una mod
 \end{corollary}
 \begin{proof}
 Recordemos que $B_t - B_s$ posee la misma distribución que $\sqrt{(t - s) N}$ donde N es una variable aleatoria normal estándar. Entonces, para $p > 0$ tenemos,
-	\begin{align*}
+\begin{align*}
 	\mathbb{E} \left[ |B_s - B_t|^p \right] = |t-s|^{p/2} \mathbb{E} \left[ |N(0, 1)|^p \right],
 	\end{align*}
 Luego, para una $\epsilon \in (0, 1/2)$ tenemos que 
 	\begin{align*}
-	\mathbb{E} \left[ |B_s - B_t|^p \right] = |t-s|^{p/2} \mathbb{E} \left[ |\tilde{B}_{t-s}|^p \right] = c(p) |t-s|^{1 + (p/2 -1)},
-	\end{align*}
-Tomando $p > 2$, vemos que $\alpha = 1/2 - \epsilon < (p/2 - 1)/p$. Si tomamos a $p$ suficientemente grande, podemos aplicar el Criterio de Continuidad de Kolmogorov para probar nuestro enunciado.
+	\mathbb{E} \left[ |B_s - B_t|^p \right] = |t-s|^{p/2} \mathbb{E} \left[ |\tilde{B}_{1}|^p \right] = c(p) |t-s|^{1 + (p/2 -1)},
+\end{align*}
+Tomando $p > 2$, vemos que para $\alpha < (p/2 - 1)/p$, tomando $\epsilon = p/2 - 1$. Si tomamos a $p$ suficientemente grande, podemos aplicar el Criterio de Continuidad de Kolmogorov para probar nuestro enunciado.
 \end{proof}
 
 \section{Propiedad de Markov}
-En esta última sección mostraremos la propiedad de Markov para el movimiento Browniano, la cual a grandes rasgos, nos dice que si un movimiento Browniano $B = (B_t, t \in T)$ comienza en un punto $x$, entonces el movimiento a tiempo $\tilde{B} = B_{t+s} - B_s, t \in T$ tiene la misma distribución como el proceso que comenzó en $t$. \\
+En esta última sección mostraremos la propiedad de Markov para el movimiento Browniano, la cual a grandes rasgos, nos dice que si un movimiento Browniano $B = (B_t, t \in \mathbb{R}_{+})$ comienza en un punto $x$, entonces el movimiento a tiempo $\tilde{B} = (B_{t+s} - B_s, t \in \mathbb{R}_{+})$ tiene la misma distribución como el proceso que comenzó en $s$. \\
 
-Para poder ver este resultado, considere a $\mathcal{F}_t^0$ como la $\sigma$-álgebra generada por $\{ B_s, s \leq t \}$ y sea $\mathcal{F}_t$ la versión completa de $\mathcal{F}_t^0$, es decir, los conjuntos de $\mathcal{F}_t^0$ junto con los conjunto de medida cero. Se tiene que para $s < t$, entonces $\mathcal{F}_s \subset \mathcal{F}_t$. \\
+Para poder ver este resultado, considere a $\mathcal{F}_t^0$ como la $\sigma$-álgebra generada por $\{ B_s, s \leq t \}$ y sea $\mathcal{F}_t$ la versión completa de $\mathcal{F}_t^0$, es decir, los conjuntos de $\mathcal{F}_t^0$ junto con los subconjuntos de conjuntos de medida cero. Se tiene que para $s < t$, entonces $\mathcal{F}_s \subset \mathcal{F}_t$. \\
 
 \begin{theorem}[Propiedad de Markov]
 Sea $s > 0$, el proceso $\tilde{B}_t = (B_{t+s} - B_s, t \geq 0)$ es un movimiento Browniano independiente de $\mathcal{F}_s$.
 \end{theorem}
 \begin{proof}
-Notemos fácilmente que $\tilde{B}_t$ es un movimiento Browniano, pues $B_{t+s}$ y $B_s$ son procesos Gaussianos centrados, por lo que la diferencia entre ellos resulta ser un proceso Gaussiano centrado. Además, $B_{t+s}$ y $B_s$ son procesos son continuos, entonces $B_{t+s} - B_s$ es continuo. Por último, veamos que
+Notemos fácilmente que $\tilde{B}_t$ es un movimiento Browniano, pues $B_{t+s}$ y $B_s$ son procesos Gaussianos centrados, por lo que la diferencia entre ellos resulta ser un proceso Gaussiano centrado. Además, $B_{t+s}$ y $B_s$ son procesos continuos, entonces $B_{t+s} - B_s$ es continuo. Por último, veamos que
 	\begin{align*}
 	COV \left( \tilde{B}_u, \tilde{B}_v \right) & =  \mathbb{E} \left[ (B_{u+s} - B_s) (B_{v+s} - B_s) \right]  \\ 
 	& = \mathbb{E} [B_{u+s} \ B_{v+s}] - \mathbb{E} [B_{u+s} \ B_s] - \mathbb{E}[B_s \ B_{v+s}] + \mathbb{E}[B_s \ B_s] \\
@@ -545,13 +599,13 @@ Por lo que $\tilde{B}$ es un movimiento Browniano. \\
 
 Recordemos que si dos vectores (finitos) son independientes, entonces, lo son también para conjuntos de clases bajo intersecciones finitas (Teorema 10.1 de \cite[p.~65]{jacodprotter}) y del Teorema de Clases Monótonas \cite[p.~36]{jacodprotter}, entonces, basta ver que para toda $s_1 \leq s_2 \leq \ldots \leq s_n \leq s$ y $t_1 \leq t_2 \leq \ldots \leq t_m \leq t$, los vectores $(\tilde{B}_{t_1}, \ldots, \tilde{B}_{t_m})$ y $(B_{s_1}, \ldots, B_{s_n})$ son independientes. \\
 
-Veamos que, $(\tilde{B}_{t_1}, \ldots, \tilde{B}_{t_m}), (B_{s_1}, \ldots, B_{s_n})$ es un vector Gaussiano, y además, 
+Como $(\tilde{B}_{t_1}, \ldots, \tilde{B}_{t_m})$ y $(B_{s_1}, \ldots, B_{s_n})$ son vectores Gaussianos, de la Proposición \ref{gaussiano1} tenemos que para toda $i \neq j$
 	\begin{align*}
-	\mathbb{E} \left[ \tilde{B}_{t_j} B_{s_i} \right] & = \mathbb{E} \left[ \left( B_{t_j + s} - B_s \right) B_{s_i} \right] \\
+	COV(\tilde{B}_{t_j} B_{s_i}) = \mathbb{E} \left[ \tilde{B}_{t_j} B_{s_i} \right] & = \mathbb{E} \left[ \left( B_{t_j + s} - B_s \right) B_{s_i} \right] \\
 	& = \mathbb{E} \left[ B_{t_j + s}B_{s_i} \right] - \mathbb{E} \left[ B_s B_{s_i} \right] \\
 	& = s_i - s_i = 0,
 	\end{align*}
-Lo que nos indica la independencia de los vectores y por el argumento previo, tenemos que $\tilde{B}_t$ es independiente de $\mathcal{F}_s$.
+lo que nos asegura la independencia de los vectores y por el argumento previo, tenemos que $\tilde{B}_t$ es independiente de $\mathcal{F}_s$.
 \end{proof}
 
 Otra manera de ver la la propiedad de Markov es la siguiente.
@@ -562,28 +616,27 @@ Sea $s > 0$. Al condicionar el proceso $\widehat{B} = (B_{t+s}, t \geq 0)$ con r
 Para toda $t \geq 0$ tenemos que $\widehat{B}_t = \tilde{B}_t + B_s$. Entonces, si $t_1 \leq t_2 \leq \ldots \leq t_n$ y toda función boreliana y acotada $ f : \mathbb{R}^n \rightarrow \mathbb{R}$, se tiene que
 	\begin{align*}
 	\mathbb{E} \left[ f \left( \widehat{B}_{t_1}, \ldots, \widehat{B}_{t_n} \right) \bigg| \mathcal{F}_s \right] & = \mathbb{E} \left[ f \left( \tilde{B}_{t_1} + B_s, \ldots, \tilde{B}_{t_n} + B_s \right) \bigg| \mathcal{F}_s \right] \\
-	& = \mathbb{E} \left[ f \left( \tilde{B}_{t_1} + x, \ldots, \tilde{B}_{t_n} + x \right) \bigg| B_s = x \right] \\
-	& = \mathbb{E} \left[ f \left( \tilde{B}_{t_1} + x, \ldots, \tilde{B}_{t_n} + x \right) \right] \hspace{0.3cm} \text{ (prop. de Markov)} \\
-	& = \mathbb{W}^x \left[ f \left( X_{t_1}, \ldots, X_{t_n} \right) \right],
+	& = \mathbb{E} \left[ f \left( \tilde{B}_{t_1} + x, \ldots, \tilde{B}_{t_n} + x \right), \ x = B_s \right] \\
+	& = \mathbb{E} \left[ f \left( B_{t_1} + x, \ldots, B_{t_n} + x \right) \right] \hspace{0.3cm} \text{ (prop. de Markov)} \\
+	& = \mathbb{E}_{x} \left[ f \left( B_{t_1}, \ldots, B_{t_n} \right) \right],
 	\end{align*}
-por lo que, $\widehat{B}$ es un movimiento Browniano que comienza en el punto $B_s = x$.
+donde $\mathbb{E}_x$ es la ley del movimiento Browniano que empieza en $x$. Por lo que, $\widehat{B}$ es un movimiento Browniano que comienza en el punto $B_s = x$.
 \end{proof}
 \end{proposition}
 
 \subsection{Ley de Blumenthal}
-Presentamos la Ley 0 - 1 de Blumenthal, la cual es una herramienta útil para estudiar ciertas propiedades de las trayectorias del movimiento Browniano, aunque no es el objetivo principal de este capítulo, se darán algunas observaciones.
+Presentamos la Ley 0 - 1 de Blumenthal, la cual es una herramienta útil para estudiar ciertas propiedades de las trayectorias del movimiento Browniano, aunque no es el objetivo principal de este capítulo, se darán algunas observaciones. Se dice que una $\sigma$-álgebra  $\mathcal{F}$, es trivial si para toda $A \in \mathcal{F}$, se tiene que $\mathbb{P}(A) = 0$ o $1$.
 
 \begin{theorem}[Ley 0 - 1 de Blumenthal]
+\label{blumenthal}
 Sea $\mathcal{F}_{t^{+}} = \cap_{u > t} \mathcal{F}_u$, entonces $\mathcal{F}_{0^{+}}$ es trivial.
 \end{theorem}
 \begin{proof}
-Se dice que una $\mathcal{F}$ $\sigma$-álgebra es trivial si, para toda $A \in \mathcal{F}$, se tiene que $\mathbb{P}(A) = 0$ o $1$. \\
-
 Veamos primero que para toda $s \geq 0$, $(B_{t+s} - B_s, t \geq 0)$ es independiente de $\mathcal{F}_{s^{+}}$. Para obtener este resultado, basta ver que para todo evento $A$ en $\mathcal{F}_{s^{+}}$, con $0 \leq t_1 \leq \cdots \leq t_n$ se tiene que
 	 \begin{align*}
 	 \mathbb{E} \left[ 1_A f \left( \tilde{B}_{t_1}, \ldots, \tilde{B}_{t_n} \right) \right] = \mathbb{P} (A) \mathbb{E} \left[ f \left( B_{t_1}, \ldots, B_{t_n} \right) \right],
 	 \end{align*}
-donde $f : \mathbb{R}^n \rightarrow \mathbb{R}$ y $\tilde{B}_{t_i} = B_{t_i + s} - B_s$. \\
+donde $f : \mathbb{R}^n \rightarrow \mathbb{R}$ es continua y acotada, además $\tilde{B}_{t_i} = B_{t_i + s} - B_s$. \\
 
 De la propiedad de Markov, observemos que para cualquier $\epsilon > 0$, con $A \in \mathcal{F}_{s^{+}} \subset \mathcal{F}_{s + \epsilon}$ se tiene que
 	 \begin{align*}
@@ -606,7 +659,7 @@ Consideremos un movimiento Browniano $B_t$ y definamos
 	\tau_0^{+} & = \inf \{ t \geq 0 : B_t > 0 \}; \\
 	\tau_0^{-} & = \inf \{ t \geq 0 : B_t < 0 \}.
 	\end{align*}
-Entonces, $\tau_0^{+} = 0$ c. s. y $\tau_0^{-} = 0$ c. s. Además, $\{t : B_t = 0\}$ no es acotado c. s.
+Entonces, $\tau_0^{+} = 0$ c. s. y $\tau_0^{-} = 0$ c. s. 
 \end{proposition}
 \begin{proof}
 Es fácil ver que, si $B$ es un movimiento Browniano, entonces $-B$ resulta ser un movimiento Browniano. A esta propiedad se le conoce como simetría del movimiento Browniano, lo que nos permite deducir que si $\epsilon > 0$ entonces
@@ -617,33 +670,37 @@ Así, para toda $\epsilon > 0$ se cumple que $\mathbb{P} (B_t \geq 0, t \in [0, 
 
 Luego, podemos ver que $\{\tau_0^{-} = 0\} \in \mathcal{F}_{0^{+}}$ ya que 
 	\begin{align*}
-	\{\tau_0^{-} = 0\} = \bigcap_{n \geq 1} \left\{ 0 < t < \frac{1}{n}, B_t < 0 \right\}.
+	\{\tau_0^{-} = 0\} = \bigcap_{n \geq 1} \left\{ 0 < t < \frac{1}{n}: \ B_t < 0 \right\}.
 	\end{align*}
 
 Entonces, $\tau_0^{-}$ debe tener probabilidad $0$ ó $1$, pero ya sabemos que $\mathbb{P}(\tau_0^{-} = 0) \geq 1/2$, entonces $\mathbb{P}(\tau_0^{-} = 0) = 1$, donde el mismo argumento aplica para $\tau_0^{+}$. 
 \end{proof}
 
+Lo cual nos dice casi seguramente que los tiempos $\{t : B_t = 0\}$ no son acotados, en otras palabras, vemos que el movimiento Browniano oscila alrededor de su punto de origen. \\
+
+Además, el resultado anterior nos dice que casi seguramente, el movimiento Browniano entre inmediatamente a $(0, \infty)$, esta propiedad será de gran utilidad a la hora de analizar una característica peculiar en los problemas de tiempo de paro a tiempo continuo. \\
+
 De acuerdo al último resultado, la trayectoria del movimiento Browniano oscila infinitamente alrededor de su punto de inicio.
 
 \section{Propiedad Fuerte de Markov}
-La última parte del capítulo trata sobre la extensión de la propiedad de Markov a tiempo no necesariamente definidos. Consideremos un movimiento Browniano $B = (B_t, t \geq 0)$ definido en un espacio de probabilidad completo (si todos los subconjuntos de eventos nulos son eventos nulos) $(\Omega, \mathcal{F}, \mathbb{P})$ y las $\sigma$-álgebras como en la sección pasada.
+En la última parte de este capítulo veremos la extensión de la propiedad de Markov a tiempo no determinista. Consideremos un movimiento Browniano $B = (B_t, t \geq 0)$ definido en un espacio de probabilidad completo (si todos los subconjuntos de eventos nulos son eventos nulos) $(\Omega, \mathcal{F}, \mathbb{P})$ y las $\sigma$-álgebras como en la sección pasada.
 
-\begin{theorem}[Propiedad Fuerte de Markov]
+\begin{theorem}[Propiedad Fuerte de Markov] \label{markov-fuerte}
 Sea $\tau$ un tiempo de paro. Considere el proceso $(\tilde{B}_t := B_{t + \tau} - B_{\tau}, t \geq 0)$, si éste es condicionado con respecto al evento $\{ \tau < \infty \}$, entonces, $\tilde{B}_t$ es un movimiento Browniano independiente de $\mathcal{F}_{\tau}$. Donde $\mathcal{F}_{\tau}$ es descrita en la Definición \ref{algebraaleatoria}.
 \end{theorem}
 \begin{proof}
 % Supongamos primero que nuestro tiempo de paro $\tau$ es finito c. s. 
-Como en la prueba para la Ley de Blumenthal, basta probar que para todo evento $A \in mathcal{F}_{\tau}$, con $0 \leq t_1 \leq \cdots \leq t_n$ y una función $f : \mathbb{R}^n \rightarrow \mathbb{R}_{+}$ continua y acotada, 
+Como en la prueba de la Propiedad de Markov, basta probar que para todo evento $A \in \mathcal{F}_{\tau}$, con $0 \leq t_1 \leq \cdots \leq t_n$ y una función $f : \mathbb{R}^n \rightarrow \mathbb{R}_{+}$ continua y acotada, 
 	\begin{align}
 	\mathbb{E} \left[ 1_A f \left( \tilde{B}_{t_1}, \ldots, \tilde{B}_{t_n} \right) \right] = \mathbb{P} (A) \mathbb{E} \left[ f \left( B_{t_1}, \ldots, B_{t_n} \right) \right], \label{acd}
 	\end{align}
-después utilizar el Lema de Clases Monótonas para extender el resultado al proceso completo con respecto a la $\sigma$-álgebra $\mathcal{F}_{\tau}$. \\
+después utilizar el Lema de Clases Monótonas (\cite[p.~36]{jacodprotter}) para extender el resultado al proceso completo con respecto a la $\sigma$-álgebra $\mathcal{F}_{\tau}$. \\
 
-Para ver que $\tilde{B}$ es un movimiento Browniano, basta con escoger $A$ como $\Omega$ en (\ref{acd}) y observando que las trayectorias de $\tilde{B}$ son siempre continuas. Finalmente, veamos que se cumple la ecuación anterior. \\
+Para ver que $\tilde{B}$ es un movimiento Browniano, basta con escoger $A$ como $\Omega$ en (\ref{acd}) y observar que las trayectorias de $\tilde{B}$ son siempre continuas. \\
 
-Consideremos números diádicos de tal manera que podamos aproximarnos al nuestro proceso, entonces tenemos que
+Finalmente, veamos que se cumple la ecuación anterior. Consideremos números diádicos de tal manera que podamos aproximarnos a nuestro proceso, entonces tenemos que
 	\begin{align*}
-	\sum_{j = 1}^{\infty} 1_{\frac{j-1}{2^m} < \tau \leq \frac{j}{2^m}} f \left( B_{\frac{j}{2^m} + t_1} - B_{\frac{j}{2^m}}, \cdots, B_{\frac{j}{2^m} + t_n} - B_{\frac{j}{2^m}}  \right) \xrightarrow{m \rightarrow \infty} f \left( \tilde{B}_{t_1}, \ldots, \tilde{B}_{t_n} \right).
+	\sum_{j = 1}^{\infty} 1_{ \{ \frac{j-1}{2^m} < \tau \leq \frac{j}{2^m} \} } f \left( B_{\frac{j}{2^m} + t_1} - B_{\frac{j}{2^m}}, \cdots, B_{\frac{j}{2^m} + t_n} - B_{\frac{j}{2^m}}  \right) \xrightarrow{m \rightarrow \infty} f \left( \tilde{B}_{t_1}, \ldots, \tilde{B}_{t_n} \right).
 	\end{align*}
 Del Teorema de Convergencia Monótona, 
 	\begin{align}

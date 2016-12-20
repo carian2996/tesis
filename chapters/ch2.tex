@@ -5,14 +5,14 @@ El propósito principal del presente capítulo es mostrar algunos resultados bá
 \section{Enfoque con Martingalas}
 Interpretaremos al proceso $G_n$ como la ganancia obtenida si la observación de $G$ es parada al tiempo $n$. Supongamos que nuestro proceso es adaptado a la filtración $(\mathcal{F}_n, n \geq 1)$ en el sentido de que, para toda $n$, la observación $G_n$ es $\mathcal{F}_n$-medible. \\
 
-Considere a la $\sigma$-álgebra $\mathcal{F}_n$ como la información del proceso $G$, disponible a tiempo n. Si se desea tomar una decisión con respecto al proceso, en este caso, detenerse o no; esta resolución deberá estar basada solamente en $\mathcal{F}_n$, es decir, no es posible realizar suposición alguna con respecto a $G$ a un tiempo mayor a $n$. \\
+Considere a la $\sigma$-álgebra $\mathcal{F}_n$ como la información del proceso $G$, disponible a tiempo n. Se desea tomar una decisión con respecto al proceso, en este caso, detenerse o no; esta resolución deberá estar basada solamente en $\mathcal{F}_n$, es decir, no es posible realizar suposición alguna con respecto a $G$ a un tiempo mayor a $n$. \\
 % Podemos interpretar a $\mathcal{F}_n$ como la información disponible a tiempo $n$. Para cualquier decisión tomada con respecto al tiempo óptimo de paro, ésta deberá ser basada solamente en la información disponible hasta ese momento (ninguna suposición o anticipación está permitida). 
 
-Definamos nuestro problema de una manera más formal. Sea una sucesión adaptada de variables aleatorias no negativas $G = (G_n, n \geq 1)$ definidas en un espacio de probabilidad $(\Omega, \mathcal{F}, (\mathcal{F}_n)_{n \geq 1}, \mathbb{P})$. Sea $\mathcal{M}_\tau$ el conjunto de tiempos de paro finitos casi seguramente, los cuales son mayores a $\tau$ (el cual puede ser un tiempo de paro). Estamos interesados en resolver el siguiente problema de paro óptimo
+Definamos nuestro problema de una manera más formal. Sea una sucesión adaptada de variables aleatorias no negativas $G = (G_n, n \geq 1)$ definidas en un espacio de probabilidad filtrado $(\Omega, \mathcal{F}, (\mathcal{F}_n)_{n \geq 1}, \mathbb{P})$. Sea $\mathcal{M}_\tau$ el conjunto de tiempos de paro respecto a $(\mathcal{F}_n, n \geq 1)$ finitos casi seguramente, los cuales son mayores a $\tau$ (el cual puede ser un tiempo de paro). Estamos interesados en resolver el siguiente problema de paro óptimo
 	\begin{align}
 	V_n = \sup_{\tau \in \mathcal{M}_n} \mathbb{E}[G_\tau]. \label{abb}
 	\end{align}
-Notemos que el problema de paro óptimo involucra dos tareas: mostrar el tiempo de paro que optimiza la esperanza (si es que existe) y calcular el valor óptimo para $V$. \\
+Notemos que el problema de paro óptimo involucra dos tareas: mostrar el tiempo de paro que optimiza la esperanza (si es que existe) y calcular el valor óptimo para $V_n$. \\
 
 Para asegurar la existencia de $\mathbb{E}[G_\tau]$ en (\ref{abb}) necesitamos agregar un supuesto adicional
 	\begin{align}
@@ -20,15 +20,15 @@ Para asegurar la existencia de $\mathbb{E}[G_\tau]$ en (\ref{abb}) necesitamos a
 	\end{align}
 Este supuesto nos asegura, uniformemente, que todas las esperanzas son finitas.  \\
 
-Parece razonable pensar que la decisión de detenerse debería estar basada en el valor esperado de los retornos observados hasta el momento de la decisión. Supongamos que no hemos detenido el proceso al momento $n$, entonces, deberíamos observar todas las cantidades $\mathbb{E}[G_\tau]$ para aquellos tiempos de paro $\tau \in \mathcal{M}_n$, los cuales pueden ser vistos como los potenciales retornos al no habernos detenido a tiempo $n$, y compararlos con el retorno $G_n$ el cual representa la ganancia que obtendríamos si nos detenemos en ese momento. \\
+Para poder tomar la decisión de detenerse o no, se debería considerar dos aspectos; la ganancia si se decide detenerse y los retornos esperados al momento de la decisión en caso de que no se desee detenerse, en otras palabras, supongamos que no hemos detenido el proceso al momento $n$, entonces, deberíamos observar todas las cantidades $\mathbb{E}[G_\tau]$ para aquellos tiempos de paro $\tau \in \mathcal{M}_n$, los cuales pueden ser vistos como los potenciales retornos al no habernos detenido a tiempo $n$, y compararlos con el retorno $G_n$, el cual representa la ganancia que obtendríamos si nos detenemos en ese momento. \\
 
 Sería deseable poder observar el valor de $\sup_{\tau \in \mathcal{M}_n} \mathbb{E}[G_\tau \mid \mathcal{F}_n]$, sin embargo, una dificultad surge al tomar el supremo de las esperanzas condicionales en (\ref{abc}) sobre un conjunto no numerable de valores $\tau$ en $\mathcal{M}_n$, el valor $\sup_{\tau \in \mathcal{M}_n} \mathbb{E}[G_\tau \mid \mathcal{F}_n]$ no está definido como una función medible pues cada objeto en el supremo es una variable aleatoria. \\
 
 \subsection{Supremo Esencial}
 
-Para poder resolver este problema, es necesario introducir el concepto de supremo esencial. El siguiente teorema expresa la definición y funcionalidad del concepto del supremo esencial de variables aleatorias.
+Para poder resolver este problema, es necesario introducir el concepto de supremo esencial. El siguiente teorema expresa la definición y funcionalidad del supremo esencial de variables aleatorias.
 
-\begin{theorem}[Supremo Esencial de Variables Aleatorias]
+\begin{theorem}[Supremo Esencial]
 Sea $(Z_\alpha : \alpha \in I)$ una colección de variables aleatorias definidas en un espacio de probabilidad $(\Omega, \mathcal{F}, \mathbb{P})$, donde $I$ es un conjunto arbitrario de índices. Entonces existe un conjunto numerable $J \subset I$ tal que la variable aleatoria $Z^{*} : \Omega \rightarrow \bar{\mathbb{R}} : = \mathbb{R} \cup \{- \infty, \infty\}$ definida por
 	\begin{align*}
 	Z^{*} = \sup_{\alpha \in J} Z_\alpha,
@@ -50,11 +50,11 @@ Sin perdida de generalidad supongamos que $Z^{*} : \Omega \rightarrow [-1, 1]$, 
 	\begin{align*}
 	|Z_\alpha| \leq 1, \hspace{0.5cm} \forall \alpha \in I.
 	\end{align*}
-De otra forma, se puede utilizar la biyección $f(x) = \frac{2}{\pi} \arctan(x)$ que mapea al conjunto $\mathbb{R}$ con el intervalo $[-1, 1]$. \\
+De otra forma, se puede utilizar la biyección $f(x) = \frac{2}{\pi} \arctan(x)$ que mapea al conjunto $\mathbb{R}$ al intervalo $[-1, 1]$. \\
 
 \noindent Denotemos a $\mathcal{C}$ como la familia de conjuntos numerables de $I$
 	\begin{align*}
-	\mathcal{C} = \{C \in I \mid C \text{ es numerable}\}.
+	\mathcal{C} = \{C \subset I \mid C \text{ es numerable}\}.
 	\end{align*}
 % Consideremos la siguiente notación, para cualquier conjunto $C \in \mathcal{C}$
 %	\begin{align*}
@@ -74,21 +74,25 @@ con $J = \cup_n C_n$. Verifiquemos ahora que nuestra variable aleatoria cumple c
 	\begin{align}
 	\mathbb{P}(Z_\beta > Z^{*}) > 0, \label{abd}
 	\end{align}
-Entonces, para los índices $\{ \beta : Z^{*} < Z_\beta\}$ se tiene que $\mathbb{E}[Z^{*}] < \mathbb{E}[Z_\beta]$. Del Teorema de Convergencia Monótona tenemos que 
+Entonces, para los índices $\{ \beta : Z^{*} < Z_\beta\}$ se tiene que $\mathbb{E}[Z^{*}, Z^{*} < Z_\beta] < \mathbb{E}[Z_\beta, Z^{*} < Z_\beta]$. Del Teorema de Convergencia Monótona tenemos que 
 	\begin{align*}
-	a = \sup_{n \geq 1} \mathbb{E} \left[ \sup_{\alpha \in C_n} Z_{\alpha} \right] = \lim_n \mathbb{E}\left[ \sup_{\alpha \in C_n} Z_{\alpha} \right] = \mathbb{E}\left[ \sup_{\alpha \in J} Z_\alpha \right] = \mathbb{E}[Z^{*}] < \mathbb{E}[Z_\beta]
+	a = \sup_{n \geq 1} \mathbb{E} \left[ \sup_{\alpha \in C_n} Z_{\alpha},  Z^{*} < Z_\beta \right] & = \lim_n \mathbb{E}\left[ \sup_{\alpha \in C_n} Z_{\alpha},  Z^{*} < Z_\beta \right] \\
+    & = \mathbb{E}\left[ \sup_{\alpha \in J} Z_\alpha,  Z^{*} < Z_\beta \right] \\ 
+    & = \mathbb{E}[Z^{*},  Z^{*} < Z_\beta] \\
+    & < \mathbb{E}[Z_\beta,  Z^{*} < Z_\beta]
 	\end{align*}
-Además, para todo índice $\{ \beta : Z^{*} < Z_\beta\}$ se tiene que $\mathbb{E}[\max (Z_\beta, Z^{*})] = \mathbb{E}[Z_\beta]$, combinando estos resultados obtenemos
+Además, se tiene que $\mathbb{E}[\max (Z_\beta, Z^{*}),  Z^{*} < Z_\beta] = \mathbb{E}[Z_\beta,  Z^{*} < Z_\beta]$, combinando estos resultados obtenemos
 	\begin{align}
-	a < \mathbb{E}[\max (Z_\beta, Z^{*})]. \label{abe}
+	a < \mathbb{E}[\max (Z_\beta, Z^{*}),  Z^{*} < Z_\beta]. \label{abe}
 	\end{align}
 Por otro lado, como $J \cup \{\beta\}$ es un conjunto que pertenece a $\mathcal{C}$ tenemos 
 	\begin{align}
-	\mathbb{E} \left[ \max (Z_\beta, Z^{*}) \right] = \mathbb{E} \left[ \sup_{\alpha \in J \cup \{\beta\}} Z_\alpha \right] \leq \sup_{C \in \mathcal{C}} \mathbb{E} \left[ \sup_{\alpha \in C} Z_{\alpha} \right] = a. \label{abf}
+	\mathbb{E} \left[ \max (Z_\beta, Z^{*}),  Z^{*} < Z_\beta \right] & = \mathbb{E} \left[ \sup_{\alpha \in J \cup \{\beta\}} Z_\alpha,  Z^{*} < Z_\beta \right] \nonumber \\
+    & \leq \sup_{C \in \mathcal{C}} \mathbb{E} \left[ \sup_{\alpha \in C} Z_{\alpha} \right] = a. \label{abf}
 	\end{align}
 De (\ref{abe}) y (\ref{abf}) tenemos
 	\begin{align*}
-	a < \mathbb{E} \left[ \max (Z_\beta, Z^{*}) \right] \leq a.
+	a < \mathbb{E} \left[ \max (Z_\beta, Z^{*}),  Z^{*} < Z_\beta \right] \leq a.
 	\end{align*}
 La contradicción surge al suponer (\ref{abd}), por lo tanto $\mathbb{P}(Z_\alpha \leq Z^{*}) = 1$ para toda $\alpha \in I$. \\
 
@@ -103,15 +107,15 @@ En particular, la condición (\ref{abg}) se cumple para toda $\alpha \in J$, don
 Es decir, $\mathbb{P}(Z^{*} \leq Y) = 1$ se cumple.
 \end{proof}
 
-El siguiente corolario muestra que bajo ciertas condiciones, nuestras variables aleatorias $Z_\alpha$ se puede escoger al conjunto de índices de tal manera que el supremo esencial tenga una propiedad extra. 
+El siguiente corolario muestra que bajo ciertas condiciones, podemos tomar variables aleatorias $Z_{\alpha_{n}}$, con índices $\alpha_{n}$ que hagan converger a la sucesión a la variable $Z^{*}$
 
 \begin{corollary}
 \label{coroesssup}
-Si la familia $(Z_\alpha : \alpha \in I)$ cumple que para cualquier $\alpha$, $\beta \in I$ existe un $\gamma \in I$ tal que $Z_\alpha \vee Z_\beta \leq Z_\gamma$ en un sentido $\mathbb{P}$-c.s., entonces el conjunto numerable $J = \{\alpha_0, \alpha_1, \alpha_2, \cdots\}$ puede ser escogido de tal manera que
+Si la familia $(Z_\alpha : \alpha \in I)$ cumple que para cualquier $\alpha$, $\beta \in I$ existe un $\gamma \in I$ tal que $Z_\alpha \vee Z_\beta \leq Z_\gamma$ c.s., entonces el conjunto numerable $J = \{\alpha_0, \alpha_1, \alpha_2, \cdots\}$ puede ser escogido de tal manera que
 	\begin{align*}
 	Z^{*} = \lim_{n \uparrow \infty} Z_{\alpha_n}, \hspace{0.3cm} \mathbb{P}\text{-c.s.}
 	\end{align*}
-donde la sucesión $( Z_{\alpha_n})_{n \geq 0}$ es creciente.
+donde la sucesión $( Z_{\alpha_n})_{n \geq 0}$ es creciente casi seguramente.
 \end{corollary}
 \begin{proof}
 Supongamos que $J = \{\alpha_0, \alpha_1, \alpha_, \cdots\}$ es el conjunto numerable del teorema anterior, entonces podemos reemplazar a $J$ por una nueva sucesión
@@ -125,11 +129,11 @@ donde $\alpha_0^{*} = \alpha_0$ y los elementos restantes estén determinados de
 	& \vdots \\
 	\alpha_{n+1}^{*} \text{ tal que } Z_{\alpha_{n+1}^{*}} & \geq \max(Z_{\alpha_n^{*}}, Z_{\alpha_n}) \text{ c.s. } \\
 	\end{align*}
-Como $Z_{\alpha_{n+1}^{*}} \geq Z_{\alpha_{n+1}}$ casi seguramente y como la sucesión $(Z_{\alpha_n^{*}}, n \geq 0)$ es una sucesión creciente cuyos elementos están acotados casi seguramente por $Z^{*}$ tenemos que
+Como $Z_{\alpha_{n+1}^{*}} \geq Z_{\alpha_{n}}$ casi seguramente y como la sucesión $(Z_{\alpha_n^{*}}, n \geq 0)$ es una sucesión creciente cuyos elementos están acotados casi seguramente por $Z^{*}$ tenemos que
 	\begin{align*}
 	Z^{*} \geq \lim_n Z_{\alpha_n^{*}} = \sup_{\alpha \in J^{*}} Z_\alpha \geq \sup_{\alpha \in J} Z_\alpha = Z^{*}, \hspace{0.3cm} \mathbb{P}\text{-c.s.}
 	\end{align*}
-Por lo tanto $Z^{*} = \lim_{n \uparrow \infty} Z_{\alpha_n^{*}}$ $\mathbb{P}$-c.s.
+Por lo tanto $Z^{*} = \lim_{n \uparrow \infty} Z_{\alpha_n^{*}}$ casi seguramente.
 \end{proof}
 
 \subsection{Solución al problema de paro óptimo}
@@ -185,14 +189,14 @@ Sin importar que condición llegue a pasar, tenemos que $\bar{\tau} \in \mathcal
 	& = G_n 1_{\{\tau = n\}} + 1_{\{\tau \geq n+1\}}  \mathbb{E}[ \mathbb{E} [G_{\bar{\tau}} \mid \mathcal{F}_{n+1}] \mid \mathcal{F}_n].
 	\end{align*}
 Además, sabemos que $S_{n+1} = \esssup_{\tau \in \mathcal{M}_{n+1}} \mathbb{E}[G_\tau \mid \mathcal{F}_{n+1}] \geq \mathbb{E}[G_{\tau^{*}} \mid \mathcal{F}_{n+1}]$ para toda $\tau^{*} \in \mathcal{M}_{n+1}$, por lo tanto
-	\begin{align}
-	\mathbb{E}[G_\tau \mid \mathcal{F}_n] & = G_n 1_{\{\tau = n\}} + 1_{\{\tau \geq n+1\}}  \mathbb{E}[ \mathbb{E} [G_{\bar{\tau}} \mid \mathcal{F}_{n+1}] \mid \mathcal{F}_n] \nonumber \\
-	& \leq G_n 1_{\{\tau = n\}} + 1_{\{\tau \geq n+1\}}  \mathbb{E}[ S_{n+1} \mid \mathcal{F}_n] \nonumber \\ 
+	\begin{align*}
+	\mathbb{E}[G_\tau \mid \mathcal{F}_n] & = G_n 1_{\{\tau = n\}} + 1_{\{\tau \geq n+1\}}  \mathbb{E}[ \mathbb{E} [G_{\bar{\tau}} \mid \mathcal{F}_{n+1}] \mid \mathcal{F}_n] \\
+	& \leq G_n 1_{\{\tau = n\}} + 1_{\{\tau \geq n+1\}}  \mathbb{E}[ S_{n+1} \mid \mathcal{F}_n] \\ 
 	& \leq \max (G_n, \mathbb{E}[S_{n+1} \mid \mathcal{F}_n]).
-	\end{align}
-De modo que,  $\max (G_n, \mathbb{E}[S_{n+1} \mid \mathcal{F}_n])$ es siempre mayor a $\mathbb{E}[G_\tau \mid \mathcal{F}_n]$ para todo $\tau \in \mathcal{M}_n$, resulta ser una cota superior, de la propiedad del supremo esencial, sabemos que éste siempre es menor a cualquier cota superior, verificando entonces (\ref{corrJC}). \\
+	\end{align*}
+De modo que,  $\max (G_n, \mathbb{E}[S_{n+1} \mid \mathcal{F}_n])$ es siempre mayor a $\mathbb{E}[G_\tau \mid \mathcal{F}_n]$ para todo $\tau \in \mathcal{M}_n$, por lo que resulta ser una cota superior, entonces, de la propiedad del supremo esencial sabemos que éste siempre es menor a cualquier cota superior, verificando así (\ref{corrJC}). \\
 
-Para corroborar la segunda desigualdad, tenemos que, si $S_n$ es mayor que $\max (G_n, \mathbb{E}[S_{n+1} \mid \mathcal{F}_n])$, entonces tiene que ser mayor a $G_n$ y al mismo tiempo, mayor a $\mathbb{E}[S_{n+1} \mid \mathcal{F}_n])$. Por definición sabemos que
+Para corroborar la segunda desigualdad, tenemos que, si $S_n$ es mayor que $\max (G_n, \mathbb{E}[S_{n+1} \mid \mathcal{F}_n])$, entonces tiene que ser mayor a $G_n$ y al mismo tiempo, mayor a $\mathbb{E}[S_{n+1} \mid \mathcal{F}_n]$. Por definición sabemos que
 	\begin{align}
 	S_n \geq G_n, \hspace{0.5cm} \mathbb{P}\text{-c.s.}  \label{abh}
 	\end{align}
@@ -200,7 +204,7 @@ Entonces, basta mostrar que
 	\begin{align*}
 	S_n \geq \mathbb{E}[S_{n+1} \mid \mathcal{F}_n].
 	\end{align*}
-Veamos ahora que, $(\mathbb{E}[G_\tau \mid \mathcal{F}_{n+1}] : \tau \in \mathcal{M}_{n+1})$ cumple con las condiciones del Corolario \ref{coroesssup}. Supongamos que $\alpha, \beta \in \mathcal{M}_{n+1}$, denotemos a $\bar{A}$ como el complemento del conjunto $A$ y definamos
+Veamos que, $\{ \mathbb{E}[G_\tau \mid \mathcal{F}_{n+1}] : \tau \in \mathcal{M}_{n+1} \}$ cumple con las condiciones del Corolario \ref{coroesssup}. Supongamos que $\alpha, \beta \in \mathcal{M}_{n+1}$, denotemos a $\bar{A}$ como el complemento del conjunto $A$ y definamos
 	\begin{align*}
 	\gamma = \alpha 1_A + \beta 1_{\bar{A}}, \hspace{0.3cm} \text{ donde } A = \{\mathbb{E}[G_\alpha \mid \mathcal{F}_{n+1}] \geq \mathbb{E}[G_\beta \mid \mathcal{F}_{n+1}]\}.
 	\end{align*}
@@ -214,7 +218,7 @@ Del Corolario \ref{coroesssup} tenemos que existe una sucesión $\{\gamma_k : k 
 	\begin{align*}
 	S_{n+1} = \esssup_{\tau \in \mathcal{M}_{n+1}} \mathbb{E}[G_\tau \mid \mathcal{F}_{n+1}] = \lim_{k \rightarrow \infty} \mathbb{E}[G_{\gamma_k} \mid \mathcal{F}_{n+1}],
 	\end{align*}
-donde $\mathbb{E}[G_{\gamma_k} \mid \mathcal{F}_{n+1}] \leq \mathbb{E}[G_{\gamma_{k+1}} \mid \mathcal{F}_{n+1}]$, con $k \geq 1$, $\mathbb{P}$-c.s., entonces haciendo uso del Teorema de Convergencia Monótona tenemos que
+donde $\mathbb{E}[G_{\gamma_k} \mid \mathcal{F}_{n+1}] \leq \mathbb{E}[G_{\gamma_{k+1}} \mid \mathcal{F}_{n+1}]$, con $k \geq 1$, $\mathbb{P}$-c.s., haciendo uso del Teorema de Convergencia Monótona tenemos que
 	\begin{align}
 	\mathbb{E}[S_{n+1} \mid \mathcal{F}_n] & = \mathbb{E}\left[\lim_{k \rightarrow \infty} \mathbb{E}[G_{\gamma_k} \mid \mathcal{F}_{n+1}] \bigg | \mathcal{F}_n \right]  \nonumber \\
 	& = \lim_{k \rightarrow \infty} \mathbb{E}[\mathbb{E}[G_{\gamma_k} \mid \mathcal{F}_{n+1}] \mid \mathcal{F}_n] \nonumber \\
@@ -229,13 +233,13 @@ De (\ref{abh}) y (\ref{abi}) sabemos que
 S_n & \geq \max (G_n, \mathbb{E}[S_{n+1} \mid \mathcal{F}_n]).
 \end{align}
 
-Finalmente, debido a (\ref{corrJC}) y (\ref{corrJC2}) tenemos que $S_n = \max \{G_n, \mathbb{E}[S_{n+1} \mid \mathcal{F}_n]\}$. \\
+Por último, de las dos desigualdades (\ref{corrJC}) y (\ref{corrJC2}) tenemos que $S_n = \max \{G_n, \mathbb{E}[S_{n+1} \mid \mathcal{F}_n]\}$. \\
 
 \noindent $(2)$ De la Propiedad $(1)$ tenemos que para toda $n$
 	\begin{align*}
 	S_n \geq \mathbb{E}[S_{n+1} \mid \mathcal{F}_n].
 	\end{align*}
-Por lo que, $S_n$ es una supermartingala. Veamos también que, si $n \leq k < \tau_n$, con $\tau_n$ como el primer momento después del tiempo $n$ en el que $S_\ell = G_\ell$ entonces
+Por lo tanto, $S_n$ es una supermartingala. Veamos que si $n \leq k < \tau_n$, con $\tau_n$ como el primer momento en el que $S_\ell = G_\ell$ para algún tiempo $\ell \geq n$, tenemos de la propiedad $(1)$ que $S_k = \max ( G_k, \mathbb{E} [S_{k+1} \mid \mathcal{F}_k] )$, pero como $k < \tau_n$ entonces
 	\begin{align}
 	S_k = \mathbb{E}[S_{k+1} \mid \mathcal{F}_k], \hspace{0.3cm} \text{ c.s. } \label{abj}
 	\end{align}
@@ -251,9 +255,15 @@ De (\ref{abj}) y (\ref{abk}) tenemos que para toda $k \geq n$
 	& = S_{k \wedge \tau_n} 1_{\{\tau_n \leq k\}} + 1_{\{k+1 \leq \tau_n\}} S_k \\
 	& = S_{k \wedge \tau_n}.
 	\end{align*}
-Por lo tanto, el proceso parado $(S_{k \wedge \tau_n} : k \leq n)$ es una martingala. \\
+Por lo tanto, el proceso parado $(S_{k \wedge \tau_n} : k \geq n)$ es una martingala. \\
 
-\noindent $(3)$ Por la Propiedad $(2)$ tenemos, en particular para $N > n$, que
+\noindent $(3)$ Para mostrar que $\mathbb{E}[S_n] = V_n$ observemos que se cumple al mismo tiempo las siguientes desigualdades
+\begin{align*}
+	\mathbb{E}[S_n] & \leq V_n, \\
+    \mathbb{E}[S_n] & \geq V_n.
+\end{align*}
+
+Por la Propiedad $(2)$ tenemos, en particular para $N > n$, que
 	\begin{align*}
 	S_n = S_{n \wedge \tau_n} & = \mathbb{E}[S_{N \wedge \tau_n} \mid \mathcal{F}_n] \\
 	& = \mathbb{E}[S_{N \wedge \tau_n} 1_{\{\tau_n < N\}} + S_{N \wedge \tau_n} 1_{\{\tau_n \geq N\}} \mid \mathcal{F}_n] \\
@@ -269,9 +279,9 @@ Para $n < N$ vemos que
 	\begin{align*}
 	\mathbb{E}[G_n \mid \mathcal{F}_N] \leq \mathbb{E} \left[ \sup_n G_n \bigg | \mathcal{F}_N \right]
 	\end{align*}
-Por lo que, de la definición del supremo esencial, sabemos que éste es la mínima cota superior del conjunto de variables aleatorias $\{\mathbb{E}[G_n \mid \mathcal{F}_N] : n < N\}$, por lo que
+Por lo que, de la definición del supremo esencial, sabemos que éste es la mínima cota superior, por lo que
 	\begin{align*}
-	S_N = \esssup_{\tau \in \mathcal{M}_N} \mathbb{E}[G_\tau \bigg | \mathcal{F}_N] \leq \mathbb{E}\left[\sup_n G_n \mid \mathcal{F}_N \right], \hspace{0.3cm} \text{ para } n < N.
+	S_N = \esssup_{\tau \in \mathcal{M}_N} \mathbb{E}[G_\tau \mid \mathcal{F}_N] \leq \mathbb{E}\left[\sup_n G_n \bigg | \mathcal{F}_N \right], \hspace{0.3cm} \text{ para } n < N.
 	\end{align*}
 Y por lo tanto usando el Teorema de Convergencia Monótona, además del supuesto de que $\mathbb{E}[\sup_n G_n] < \infty$ implica que $\mathbb{E}[\sup_n G_n \mid \mathcal{F}_n] < \infty$ c.s., 
 	\begin{align}
@@ -285,13 +295,11 @@ La última igualdad se da por el supuesto de que $\mathbb{P}(\tau_n < \infty) = 
 	\end{align*}
 De (\ref{abl}) y (\ref{abm}) concluimos que si $N \rightarrow \infty$ entonces
 	\begin{align*}
-	S_n = \mathbb{E}[S_{\tau_n} \mid \mathcal{F}_n].
+	S_n = \mathbb{E}[G_{\tau_n} \mid \mathcal{F}_n].
 	\end{align*}
-Por último, por un lado tenemos que 
+Por último, recordemos que $S_{\tau_n} = G_{\tau_n}$, por lo que
 	\begin{align}
-	\mathbb{E}[S_n] & = \mathbb{E}[\mathbb{E}[S_{\tau_n} \mid \mathcal{F}_n]] \nonumber \\
-	& = \mathbb{E}[\mathbb{E}[G_{\tau_n} \mid \mathcal{F}_n]] \nonumber \\
-	& = \mathbb{E}[G_{\tau_n}] \leq \sup_{\tau \in \mathcal{M}_n} \mathbb{E}[G_{\tau}] = V_n. \label{abn}
+	\mathbb{E}[S_n] & = \mathbb{E}[S_{\tau_n}] = \mathbb{E}[G_{\tau_n}] \leq \sup_{\tau \in \mathcal{M}_n} \mathbb{E}[G_{\tau}] = V_n. \label{abn}
 	\end{align}
 
 Por otra parte, como $(S_n, n \geq 1)$ es una supermartingala y por el Teorema \ref{opcional} tenemos que
@@ -325,20 +333,23 @@ Es decir, $\mathbb{E}[S_n]$ y el tiempo de paro $\tau_n$ son óptimos para el pr
 	\begin{align*}
 	S_k = \mathbb{E}[G_{\tau_k} \mid \mathcal{F}_k] \leq \mathbb{E}[U_{\tau_k} \mid \mathcal{F}_k].
 	\end{align*}
-Del Teorema de Paro Opcional de Doob y el Lema de Fatou aplicado al proceso de paro $U_{m \wedge \tau_n} \geq - \sup_{n \leq \gamma \leq \tau_k} |G_\gamma|$ obtenemos
+Del Teorema de Paro Opcional de Doob y el Lema de Fatou aplicado al proceso de paro $U_{m \wedge \tau_n}$ obtenemos
 	\begin{align*}
-	\mathbb{E}[U_{\tau_k} \mid \mathcal{F}_k] = \mathbb{E} \left[ \liminf_{m \rightarrow \infty} U_{m \wedge \tau_k } \bigg| \mathcal{F}_k \right] \leq \liminf_{m \rightarrow \infty} \mathbb{E}[U_{m \wedge \tau_k } \mid \mathcal{F}_k] \leq \mathbb{E}[U_{m \wedge \tau_k } \mid \mathcal{F}_k]  \leq U_k.
+	S_k & = \mathbb{E}[U_{\tau_k} \mid \mathcal{F}_k] \\
+    & = \mathbb{E} \left[ \liminf_{m \rightarrow \infty} U_{m \wedge \tau_k } \bigg| \mathcal{F}_k \right] \\
+    & \leq \liminf_{m \rightarrow \infty} \mathbb{E}[U_{m \wedge \tau_k } \mid \mathcal{F}_k] \\
+    & \leq \mathbb{E}[U_{m \wedge \tau_k } \mid \mathcal{F}_k] \leq U_k.
 	\end{align*}
-Por lo tanto, $(S_k : k \geq n)$ es la mínima supermartingala que domina a $(G_k : k \geq n)$.
+La segunda igualdad, está justificada por el hecho de que $U_{m \wedge k}$ está acotado inferiormente por $- \sup_{n \leq \gamma \leq \tau_k} |G_{\gamma} |$. Por lo tanto, $(S_k : k \geq n)$ es la mínima supermartingala que domina a $(G_k : k \geq n)$.
 
 \end{proof}
 
 \section{Enfoque con Cadenas de Markov}
-En esta sección presentaremos los resultados básicos de la teoría de paro óptimo, considerando tiempos discreto y procesos de Markov. Sea $X = (X_n, n \geq 1)$ definida en un espacio de probabilidad $(\Omega, \mathcal{F}, (\mathcal{F}_n)_{n \geq 1}, \mathbb{P}_x)$ y tomando valores en un espacio medible $(E, \mathcal{E})$. Asumiremos además que para todo $x \in E$, la cadena $X$ empieza en el estado $x$ bajo la medida $\mathbb{P}_x$. Por cuestiones de simplicidad  definiremos al espacio de probabilidad como $(\Omega, \mathcal{F}) = (E^{\mathbb{Z}_{+}}, \mathcal{E}^{\mathbb{Z}_{+}})$, así los operadores de traslación $\theta_n : \Omega \rightarrow \Omega$ pueden definirse como $f \circ \theta_n (\omega_{m}) = f(\omega_{m+n})$ para funcionales $f$ del proceso canónico $\omega_m$. \\
+En esta sección presentaremos los resultados básicos de la teoría de paro óptimo, considerando tiempos discreto y procesos de Markov. Sea $X = (X_n, n \geq 1)$ una cadena de Markov definida en un espacio de probabilidad $(\Omega, \mathcal{F}, (\mathcal{F}_n)_{n \geq 1}, \mathbb{P}_x)$ y tomando valores en un espacio medible $(E, \mathcal{E})$. Asumiremos además que para todo $x \in E$, la cadena $X$ empieza en el estado $x$ bajo la medida $\mathbb{P}_x$. Por cuestiones de simplicidad  definiremos al espacio de probabilidad como $(\Omega, \mathcal{F}) = (E^{\mathbb{Z}_{+}}, \mathcal{E}^{\mathbb{Z}_{+}})$, así los operadores de traslación $\theta_n : \Omega \rightarrow \Omega$ pueden definirse como $f \circ \theta_n (\omega_{m}) = f(\omega_{m+n})$ para funcionales $f$ del proceso canónico $\omega_m$. \\
 
 Recordemos que la propiedad de Markov nos dice que para toda función positiva, continua y uniformemente acotada $f$, tenemos que para toda $n \in \mathbb{N}$ y $x \in E$, condicionando a $X_n = x$, la distribución de $X_{n+1}$ es
 	\begin{align*}
-	\mathbb{P}_{xy} = \mathbb{P}(X_{n+1} = x \mid X_n = y), y \in \mathcal{E}
+	\mathbb{P}_{xy} = \mathbb{P}(X_{n+1} = y \mid X_n = x), \hspace{0.3cm} x \in E
 	\end{align*}
 Además es independiente de $\mathcal{F}_1, \mathcal{F}_1, \ldots, \mathcal{F}_{n-1}$, entonces 
 	\begin{align*}
@@ -362,7 +373,7 @@ Supongamos que $\mathbb{P}_x(\tau_0 < \infty) = 1$ para toda $x \in E$, donde $\
 Para toda $x \in E$, con $n \geq 1$.
 \end{lemma}
 \begin{proof}
-Veamos en primer lugar que si $\tau \in \mathcal{M}_0$ entonces $\tau \circ \theta_n \in \mathcal{M}_n$. En particular, si $\tau_k^B := \inf \{n \geq k : X_n \in B\}$ para un $B \in \mathcal{E}$. En ese caso tenemos que
+Veamos en primer lugar que si $\tau \in \mathcal{M}_0$ entonces $\tau \circ \theta_n \in \mathcal{M}_n$. En particular, si $\tau_k^B := \inf \{n \geq k : X_n \in B\}$ para un $B \in \mathcal{E}$, tenemos que
 	\begin{align*}
 	\tau_0^B \circ \theta_k & = \inf \{m \geq 0 : X_{m+k} \in B\} \\
 	& = \inf \{n \geq k : X_n \in B\} - k \\
@@ -375,14 +386,16 @@ Entonces
 	& =  \esssup_{\tau \in \mathcal{M}_0} \mathbb{E}_x [G(\tilde{X}_\tau)] \bigg|_{x = X_n} \nonumber \\
 	& = V(X_n). \label{abp}
 	\end{align}
-Donde $\tilde{X}$ es una copia independiente de $X$. La desigualdad se da para una $\tau \in \mathcal{M}_0$, tenemos que $n+ (\tau \circ \theta_n) \in \mathcal{M}_n$, sin embargo, no todos los tiempos de paro en $\mathcal{M}_n$ pueden ser escritos de esa manera. Además, como $\mathcal{M}_1 \subseteq \mathcal{M}_0$ y del hecho anterior
+Donde $\tilde{X}$ es una copia independiente de $X$. La desigualdad ocurre pues no todos los tiempos de paro en $\mathcal{M}_n$ pueden ser escritos de la forma $n+ (\tau \circ \theta_n)$ con $\tau \in \mathcal{M}_0$. \\
+
+Por otro lado, como $\mathcal{M}_1 \subseteq \mathcal{M}_0$ y del hecho anterior
 	\begin{align*}
 	V(x) & \geq \sup_{\tau \in \mathcal{M}_1} \mathbb{E}_x [G(X_\tau)] \\
 	& \geq \sup_{\tau \in \mathcal{M}_0} \mathbb{E}_x [G(X_{1+ (\tau \circ \theta_1)})].
 	\end{align*}
 Como $1+ (\tau \circ \theta_1) \in \mathcal{M}_1$ entonces podemos hacer uso de la esperanza condicional y aplicar la propiedad de Markov
 	\begin{align*}
-	\sup_{\tau \in \mathcal{M}_0} \mathbb{E}_x \left[ \mathbb{E}_x [G(\tilde{X}_\tau)] \bigg|_{x= X_1} \right] & = \sup_{\tau \in \mathcal{M}_0} \mathbb{E}_x[\mathbb{E}[G(X_{1+ (\tau \circ \theta_1)}) \mid \mathcal{F}_1]] \\
+	\sup_{\tau \in \mathcal{M}_0} \mathbb{E}_x [G(X_{1+ (\tau \circ \theta_1)})] & = \sup_{\tau \in \mathcal{M}_0} \mathbb{E}_x[\mathbb{E}[G(X_{1+ (\tau \circ \theta_1)}) \mid \mathcal{F}_1]] \\
 	& = \sup_{\tau \in \mathcal{M}_0} \mathbb{E}_x \left[ \mathbb{E}_x [G(\tilde{X}_\tau)] \bigg|_{x= X_1} \right].
 	\end{align*}
 Por último, de la definición de tiempo de paro
@@ -398,23 +411,23 @@ Donde la igualdad es correcta al ser $\tau_0$ óptimo en $V$, pues se tiene que,
 	\end{align*}
 De forma similar, tenemos que para $m \leq n$
 	\begin{align*}
-	V_m (x) \geq \mathbb{E}_x [V(X_n)] = \mathbb{E}_x [V(X_n) \mid \mathcal{F}_m].
+	V(X_m) \geq \mathbb{E}_x [V(X_n)] = \mathbb{E}_x [V(X_n) \mid \mathcal{F}_m].
 	\end{align*}
 Por lo tanto, $(V(X_n) : n \geq 1)$ es una supermartingala y entonces tenemos que
 	\begin{align}
-	E[V(X_{n+1}) \mid \mathcal{F}_n] = \mathbb{E}_x [V(X_1)] \bigg|_{x = X_n} \leq V(X_n). \label{abq}
+	E[V(X_{n+1}) \mid \mathcal{F}_n] = \mathbb{E}_x [V(\tilde{X}_1)] \bigg|_{x = X_n} \leq V(X_n). \label{abq}
 	\end{align}
 De la definición de $V(x)$ tenemos que para cualquier tiempo de paro en $\mathcal{M}_1$
 	\begin{align*}
 	V(x) \geq \mathbb{E}_x [G(X_\tau)].
 	\end{align*}
-En particular si definimos a $\tau = 1$ observamos que para toda $x \in E$
+En particular si definimos al tiempo de paro $\tau$ como el valor inicial del proceso podemos observar que para toda $x \in E$
 	\begin{align}
 	V(x) \geq G(x) \label{abr}
 	\end{align}
 De (\ref{abq}) y (\ref{abr}) podemos concluir que $V_n$ es una supermartingala que domina a $G_n$, entonces, utilizando (4) del Teorema \ref{probmartin} tenemos que
 	\begin{align}
-	V(x) \geq S_n \label{abs}
+	V(X_n) \geq S_n \label{abs}
 	\end{align}
 Finalmente, al tener (\ref{abp}) y (\ref{abs}), podemos concluir la prueba.
 \end{proof}
@@ -433,10 +446,11 @@ El óptimo tiempo de paro entonces debería ser
 	\end{align*}
 
 \begin{theorem}
+\label{paro_markov}
 Supongamos que $\mathbb{P} (\tau_P < \infty) = 1$ para toda $x \in E$. Entonces
 	\begin{enumerate}
 	\item El proceso de paro $(V(X_{n \wedge \tau_P}) : n \geq 1)$ es una $\mathbb{P}_x$-martingala para cada $x \in E$.
-	\item El tiempo de paro $\tau_P$ es óptimo en (\ref{abo}).
+	\item El tiempo de paro $\tau_P$ es óptimo para (\ref{abo}).
 	\item El proceso $(V(X_n) : n \geq 1)$ es la mínima supermartingala que domina a $(G(X_n) : n \geq 1)$
 	\end{enumerate}
 \end{theorem}

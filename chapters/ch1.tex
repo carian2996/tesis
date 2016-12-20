@@ -1,31 +1,31 @@
-En el presente capítulo presentamos la definición de martingala, así como algunas propiedades que surgen gracias a la estructura de estos procesos. Las martingalas son una de las herramientas más útiles de la teoría de probabilidad moderna. En particular, las martingalas son una referencia para el estudio de teoremas límite o convergencia, pues la teoría de martingalas proporciona pruebas más elegantes y estéticamente atractivas.
+En el primer capítulo de este trabajo presentamos la definición de martingala, así como algunas propiedades que surgen gracias a la estructura de estos procesos. Las martingalas son una de las herramientas más útiles de la teoría de probabilidad moderna. En particular, las martingalas son una referencia para el estudio de teoremas límite o convergencia, pues la teoría de martingalas proporciona pruebas más elegantes y estéticamente atractivas.
 
 \section{Definición}
-Consideremos un espacio de probabilidad conocido y fijo $(\Omega, \mathcal{F}, \mathbb{P})$, así como una sucesión de $\sigma$-algebras $(\mathcal{F}_n, n \geq 0)$, tales que $\mathcal{F}_n \subset \mathcal{F}_{n+1} \subset \mathcal{F}$ para todo $n \geq 0$.
+Consideremos un espacio de probabilidad conocido y fijo $(\Omega, \mathcal{F}, \mathbb{P})$, así como una sucesión de $\sigma$-algebras $(\mathcal{F}_n)_{n \geq 0}$, tales que $\mathcal{F}_n \subset \mathcal{F}_{n+1} \subset \mathcal{F}$ para todo $n \geq 0$.
 
 \begin{definition}[Martingala]
 \label{martingala}
 	Decimos que $X = (X_n, n \geq 0)$ es una $(\mathcal{F}_n)$-\emph{martingala}, si
 	\begin{enumerate}
-		\item $\mathbb{E}[|X_n|] < \infty$ para cada $n$;
-		\item $X_n$ es $\mathcal{F}_n$-medible, para cada $n$;
+		\item $\mathbb{E}[|X_n|] < \infty$ para cada $n$.
+		\item $X_n$ es $\mathcal{F}_n$-medible, para cada $n$.
 		\item $\mathbb{E}[X_n \mid \mathcal{F}_m] = X_m$ c.s., para todo $m \leq n$.
 	\end{enumerate}
 \end{definition}
 
-Podemos observar que (2) es \emph{casi} una implicación de (3), la cual sostiene que $X_m$ es casi seguramente igual a una variable aleatoria $\mathcal{F}_m$ medible. \\
+Podemos observar que (2) es \emph{casi} una implicación de (3), la cual sostiene que $X_m$ es casi seguramente igual a una variable aleatoria $\mathcal{F}_m$-medible. \\
 
-Recordemos que la Ley Fuerte de los Grandes Números afirma que \cite[p.~173]{jacodprotter}: si $(X_n, n \geq 0)$ es una sucesión de variables aleatorias las cuales son independientes e idénticamente distribuidas con $\mathbb{E}[X_n] = \mu$ y $\sigma_{X_n}^{2} < \infty$ para toda $n$, y si $S_n = \sum_{j=1}^{n} X_j$, entonces $\lim_{n \rightarrow \infty} \frac{S_n}{n} = \mu$, casi seguramente. Por otro lado, la Ley Cero Uno de Kolmogorov nos asegura que \cite[p.~381]{shiryaev}, si consideramos una sucesión de variables aleatorias $(X_n, n \geq 0)$ independientes entre si, el evento cola debe tener una probabilidad 0 o 1, es decir, debe ser una constante. Entonces, $\frac{S_n}{n} \rightarrow \mu$ cuando $n \rightarrow \infty$, donde $\mu$ es una variable aleatoria cuyo valor siempre es constante. \\
+Recordemos que la Ley Fuerte de los Grandes Números afirma que \cite[p.~173]{jacodprotter} si $(X_n, n \geq 0)$ es una sucesión de variables aleatorias las cuales son independientes e idénticamente distribuidas con $\mathbb{E}[X_n] = \mu$ y $\sigma_{X_n}^{2} < \infty$ para toda $n$, y si $S_n = \sum_{j=1}^{n} X_j$, entonces $\lim_{n \rightarrow \infty} \frac{S_n}{n} = \mu$, casi seguramente. Por otro lado, la Ley Cero Uno de Kolmogorov nos asegura que \cite[p.~381]{shiryaev}, si consideramos una sucesión de variables aleatorias $(X_n, n \geq 0)$ independientes entre si, el evento cola debe tener una probabilidad 0 o 1, es decir, debe ser una constante. Entonces, $\frac{S_n}{n} \rightarrow \mu$ cuando $n \rightarrow \infty$, donde $\mu$ es una variable aleatoria cuyo valor siempre es constante. \\
 
 Es de poco interés el estudio de sucesiones convergentes a límites que sean constantes. Sin embargo, si escribimos la sucesión anterior de una manera distinta tenemos que
 \begin{align*}
 	\lim_{n \rightarrow \infty} \frac{S_n - n\mu}{n} = 0, \hspace{0.3cm} c.s.
 \end{align*}
 
-Veamos en el siguiente ejemplo que una propiedad clave de la sucesión $(S_n - n\mu, n \geq 0)$ es que, si $\mathcal{F}_n = \sigma ( S_k \mid k \leq n )$, entonces la sucesión es una martingala.
+Observemos en el siguiente ejemplo que una propiedad clave de la sucesión $(S_n - n\mu, n \geq 0)$ es que, si $\mathcal{F}_n = \sigma ( S_k \mid k \leq n )$, entonces la sucesión es una martingala.
 
 \begin{example}
-	Sea $(X_n, n \geq 0)$ una sucesión de variables aleatorias independientes con $\mathbb{E}[|X_n|] < \infty$, para toda $n$. Para $n \geq 0$ sea $\mathcal{F}_n = \sigma ( S_k \mid k \leq n )$ y $S_n = \sum_{k=0}^n X_k$. Entonces tenemos que para toda $m \leq n$
+	Sea $(X_n, n \geq 0)$ una sucesión de variables aleatorias independientes con $\mathbb{E}[|X_n|] < \infty$, para toda $n$. Para $n \geq 0$ sea $S_n = \sum_{k=0}^n X_k$ y $\mathcal{F}_n = \sigma ( S_k \mid k \leq n )$. Entonces tenemos que para toda $m \leq n$
 	\begin{align}
 		\mathbb{E}[S_n - n\mu \mid \mathcal{F}_m] & = \mathbb{E}[S_m + (S_n - S_m) - n\mu \mid \mathcal{F}_m] \nonumber \\
 		& = (S_m - n\mu) + \mathbb{E}[S_n - S_m \mid \mathcal{F}_m] \nonumber \\
@@ -49,13 +49,13 @@ Una propiedad importante de las martingalas es que poseen una esperanza cuyo val
 para toda $n \geq 0$.
 \end{proof}
 
-Por otro lado, en general no sucede que si un proceso tiene un valor esperado constante, este proceso resulte ser una martingala. Sin embargo, con las condiciones necesarias la afirmación anterior llega a ocurrir. Para poder mostrar el resultado requerimos de una definición que será vital para desarrollo de este capítulo.
+Por otro lado, si un proceso tiene un valor esperado constante, este proceso no necesariamente es una martingala. Sin embargo, con las condiciones necesarias la afirmación anterior llega a ocurrir. Para poder mostrar el resultado requerimos de una definición que será vital para desarrollo de este capítulo.
 
 \begin{definition}[Tiempo de Paro]
 Una variable aleatoria $\tau: \Omega \rightarrow \bar{\mathbb{N}} = \mathbb{N} \cup \{ \infty \}$ es un tiempo de paro con respecto a ($\mathcal{F}_n$) si $\{ \tau \leq n \} \in \mathcal{F}_n$.
 \end{definition}
 
-Los tiempos de paro pueden ser pensados como aquel tiempo en el que ocurre algún evento de interés, con la convención de que el tiempo de paro toma el valor $+ \infty$ si el evento nunca ocurre. El término ``tiempo de paro" proviene de un concepto involucrado con los juegos de apuestas: dependiendo de ciertos eventos, un apostador puede dejar el juego en cualquier momento (un tiempo aleatorio), pero en el momento en que decide detenerse, esa decisión debe estar basada en los eventos que han ocurrido en el pasado y no en eventos futuros.
+Los tiempos de paro pueden ser pensados como aquel tiempo en el que ocurre algún evento de interés, con la convención de que el tiempo de paro toma el valor $+ \infty$ si el evento nunca ocurre. El término ``tiempo de paro"  proviene de un concepto involucrado con los juegos de apuestas: dependiendo de ciertos eventos, un apostador puede dejar el juego en cualquier momento (un tiempo aleatorio), pero en el momento en que decide detenerse, esa decisión debe estar basada en los eventos que han ocurrido en el pasado y no en eventos futuros.
 
 \begin{proposition} 
 \label{espconst}
@@ -70,23 +70,23 @@ Los tiempos de paro pueden ser pensados como aquel tiempo en el que ocurre algú
 	\begin{align*}
 		\mathbb{E}[X_{\tau}] & = \mathbb{E}\left[\sum_{n=0}^{\infty} X_n 1_{ \{\tau = n\} } \right] \\
 		& = \mathbb{E}\left[\sum_{n=0}^{[c]} X_n  1_{ \{\tau = n\} }\right] \\
-		& = \sum_{n=0}^{[c]} \mathbb{E}[X_n 1_{ \{\tau = n\} }] \\
-		& = \sum_{n=0}^{[c]} \mathbb{E}[\mathbb{E}[X_[c] \mid \mathcal{F}_n] 1_{ \{\tau = n\} }].
+		& = \sum_{n=0}^{[c]} \mathbb{E}[X_n 1_{ \{\tau = n\} }]
+		% & = \sum_{n=0}^{[c]} \mathbb{E}[\mathbb{E}[X_{[c]}] \mid \mathcal{F}_n] 1_{ \{\tau = n\} }].
 	\end{align*}
 	Notemos que podemos escribir a $\{ \tau = n\}$ como $\{ \tau \leq n\} \setminus \{ \tau \leq n-1\}$ donde ambos eventos pertenecen a $\mathcal{F}_n$ por ser $\tau$ un tiempo de paro, por lo tanto $\{ \tau = n\} \in \mathcal{F}_n$, entonces
 	\begin{align*}
 		 \mathbb{E}[X_{\tau}] & = \sum_{n=0}^{[c]} \mathbb{E}[\mathbb{E}[X_{[c]} 1_{ \{\tau = n\} } \mid \mathcal{F}_n]] \\
 		 & = \sum_{n=0}^{[c]} \mathbb{E}[X_{[c]}  1_{ \{\tau = n\} }] \\
-		 & = \mathbb{E}\left[\sum_{n=0}^{[c]} X_c 1_{ \{\tau = n\} }\right] \\
+		 & = \mathbb{E}\left[\sum_{n=0}^{[c]} X_{[c]} 1_{ \{\tau = n\} }\right] \\
 		 & = \mathbb{E}\left[X_{[c]}  \sum_{n=0}^{[c]} 1_{ \{\tau = n\} }\right] \\
 		 & = \mathbb{E}[X_{[c]}] = \mathbb{E}[X_0].
 	\end{align*}
 \end{proof}
 
-La siguiente definición muestra que para un tiempo de paro $\tau$, $\mathcal{F}_{\tau}$ puede ser interpretada la información disponible para algún momento aleatorio. Esta $\sigma$-algebra es conocida como \emph{$\sigma$-algebra parada} y será de utilidad más adelante.
+La siguiente definición muestra que, para un tiempo de paro $\tau$, $\mathcal{F}_{\tau}$ puede ser interpretada la información disponible para algún momento aleatorio. Esta $\sigma$-álgebra es conocida como \emph{$\sigma$-álgebra parada} y será de utilidad más adelante.
 
 \begin{definition}  \label{algebraaleatoria}
-	Sea $\tau$ un tiempo de paro, entonces tenemos que la $\sigma$-algebra parada en $\tau$ esta definida como,
+	Sea $\tau$ un tiempo de paro, entonces tenemos que la $\sigma$-álgebra parada en $\tau$ esta definida como,
 	\begin{align*}
 	\mathcal{F}_{\tau} = \{ \Lambda \in \mathcal{F} \mid \Lambda \cap \{ \tau \leq n \} \in \mathcal{F}_n, \text{ para toda } n \}.
 	\end{align*}
@@ -107,7 +107,7 @@ Veamos que la definición anterior tiene sentido, al probar que $\mathcal{F}_{\t
 	\end{align*}
 	Se tiene entonces que $\bigcup_{k=0}^{\infty} A_k \in \mathcal{F}_{\tau}$. \\
 	
-	Como $\mathcal{F}_{\tau}$ contiene al conjunto $\Omega$, y al ser cerrado bajo complementos y uniones contables,  $\mathcal{F}_{\tau}$ es una $\sigma$-algebra.
+	Como $\mathcal{F}_{\tau}$ contiene al conjunto $\Omega$, y al ser cerrado bajo complementos y uniones contables,  $\mathcal{F}_{\tau}$ es una $\sigma$-álgebra.
 \end{proof}
 
 Verifiquemos dos sencillas proposiciones que serán de ayuda a la hora de presentar un resultado importante, el  Teorema de Paro Opcional de Doob.
@@ -125,7 +125,7 @@ Verifiquemos dos sencillas proposiciones que serán de ayuda a la hora de presen
 
 \begin{proposition}
 \label{medible}
-	Supongamos que $(X_n, n \geq 0)$ es una sucesión de variables aleatorias tales que para toda $n$ se tiene que $X_n$ es $\mathcal{F}_n$ medible. Consideremos un tiempo de paro $\tau$, entonces $X_{\tau}$ es $\mathcal{F}_{\tau}$ medible.
+	Supongamos que $(X_n, n \geq 0)$ es una sucesión de variables aleatorias tales que para toda $n$ se tiene que $X_n$ es $\mathcal{F}_n$ medible. Consideremos un tiempo de paro $\tau$, entonces $X_{\tau}$ es $\mathcal{F}_{\tau}$- medible.
 \end{proposition}
 \begin{proof}
 	Recordemos que podemos reescribir el término $X_{\tau}$ como
@@ -166,7 +166,7 @@ Los siguientes teoremas muestran un poderoso resultado, que liga los conceptos p
 	\begin{align*}
 		\phi(\omega) = \gamma(\omega)1_{\Lambda}(\omega) + \tau(\omega)1_{\Lambda^c}(\omega).
 	\end{align*}
-Veamos que $\{\phi \leq n\} = (\Lambda \cap \{\gamma \leq n\}) \cup (\Lambda^c \cap \{\tau \leq n\})$, entonces, sabemos que como $\Lambda \in \mathcal{F}_{\gamma}$ tenemos que $(\Lambda \cap \{\gamma \leq n\}) \in \mathcal{F}_n$. Por otro lado, como $\Lambda \in \mathcal{F}_{\gamma}$ entonces $\Lambda^c \in \mathcal{F}_{\gamma}$ y por la Proposición \ref{inclu}, tenemos que $\Lambda^c \in \mathcal{F}_{\tau}$ por lo que $(\Lambda^c \cap \{\tau \leq n\}) \in \mathcal{F}_n$. Por lo tanto, $\phi$ es un tiempo de paro.\\
+Veamos que $\{\phi \leq n\} = (\Lambda \cap \{\gamma \leq n\}) \cup (\Lambda^c \cap \{\tau \leq n\})$, entonces, sabemos que como $\Lambda \in \mathcal{F}_{\gamma}$ tenemos $(\Lambda \cap \{\gamma \leq n\}) \in \mathcal{F}_n$. Por otro lado, como $\Lambda \in \mathcal{F}_{\gamma}$ entonces $\Lambda^c \in \mathcal{F}_{\gamma}$ y por la Proposición \ref{inclu}, se tiene $\Lambda^c \in \mathcal{F}_{\tau}$ por lo que $(\Lambda^c \cap \{\tau \leq n\}) \in \mathcal{F}_n$. Por lo tanto, $\phi$ es un tiempo de paro.\\
 	
 Por el hecho anterior y la Proposición \ref{espconst} sabemos que $\mathbb{E}[X_{\phi}] =  \mathbb{E}[X_0] = \mathbb{E}[X_{\tau}]$. Por último, veamos que,
 	\begin{align*}
@@ -202,7 +202,7 @@ Con las conclusiones vistas hasta ahora podemos establecer un resultado parcial 
 			m & \text{ si } \omega \notin \Lambda.
 		\end{cases}
 	\end{align*}
-	Podemos verificar fácilmente que $\tau$ es un tiempo de paro, ya que $\{\tau \leq n\} = (\Lambda \cap \{n = n\}) \cup (\Lambda^c \cap \{m \leq n\})$. Si $\omega \in \Lambda$ entonces $\{\tau = n\} \in \mathcal{F}_n$, además $\Lambda \in \mathcal{F}_m \subset \mathcal{F}_n$. Por otro lado, si $\omega \notin\Lambda$, entonces $\{m \leq n\} \in \mathcal{F}_m \subset \mathcal{F}_n$ y como $\Lambda \in \mathcal{F}_m$ entonces $\Lambda^c \in \mathcal{F}_m \subset \mathcal{F}_n$. \\
+	Podemos verificar fácilmente que $\tau$ es un tiempo de paro, ya que $\{\tau \leq n\} = (\Lambda \cap \{n = n\}) \cup (\Lambda^c \cap \{m \leq n\})$. Si $\omega \in \Lambda$ entonces $\{\tau = n\} \in \mathcal{F}_n$. Por otro lado, si $\omega \notin\Lambda$, entonces $\{m \leq n\} \in \mathcal{F}_m \subset \mathcal{F}_n$ y como $\Lambda \in \mathcal{F}_m$ entonces $\Lambda^c \in \mathcal{F}_m \subset \mathcal{F}_n$. \\
 	
 \noindent Al ser $\tau$ un tiempo de paro tenemos que
 	\begin{align*}
@@ -223,14 +223,14 @@ Con las conclusiones vistas hasta ahora podemos establecer un resultado parcial 
 \section{Supermartingalas y Submartingalas}
 Para llegar a un segundo resultado importante en la teoría de martingalas, es necesario introducir un nuevo concepto asociado con nuestra Definición \ref{martingala}. Si reemplazamos la igualdad por una desigualdad en las condiciones dadas de la definición de martingala obtenemos el siguiente concepto. \\
 
-Consideremos un espacio de probabilidad dado $(\Omega, \mathcal{F}, \mathbb{P})$ y una sucesión creciente de $\sigma$-algebras $(\mathcal{F}_n, n \geq 0)$.
+Consideremos un espacio de probabilidad dado $(\Omega, \mathcal{F}, \mathbb{P})$ y una sucesión creciente de $\sigma$-algebras $(\mathcal{F}_n)_{n \geq 0}$.
 
 \begin{definition}
 \label{submartin}
 	Una sucesión de variables $(X_n, n \geq 0)$ es llamada \emph{submartingala} si,
 	\begin{enumerate}
-		\item $\mathbb{E}[|X_n|] < \infty$ para cada $n$;
-		\item $X_n$ es $\mathcal{F}_n$ medible, para cada $n$;
+		\item $\mathbb{E}[|X_n|] < \infty$ para cada $n$.
+		\item $X_n$ es $\mathcal{F}_n$ medible, para cada $n$.
 		\item $\mathbb{E}[X_n \mid \mathcal{F}_m] \geq X_m$ c.s., para todo $m \leq n$.
 	\end{enumerate}
 \end{definition}
@@ -241,7 +241,7 @@ Recordemos que la desigualdad de Jensen nos asegura lo siguiente \cite[p.~205]{j
 
 \begin{proposition}
 \label{convexa}
-	Si $(X_n, n \geq 0)$ es una martingala, coni $\phi$ una función convexa y $\phi(X_n)$ es integrable para toda $n$, entonces $(\phi(X_n), n \geq 0)$ es una submartingala.
+	Si $(X_n, n \geq 0)$ es una martingala, con $\phi$ una función convexa y $\phi(X_n)$ es integrable para toda $n$, entonces $(\phi(X_n), n \geq 0)$ es una submartingala.
 \end{proposition}
 \begin{proof}
 	Sea $m \leq n$, tenemos que $\mathbb{E}[X_n \mid \mathcal{F}_m] = X_m$, c.s., entonces al aplicar $\phi(\mathbb{E}[X_n \mid \mathcal{F}_m]) = \phi(X_m)$, c.s. y como $\phi$ es una función convexa podemos concluir de la desigualdad de Jensen
@@ -259,7 +259,7 @@ El siguiente teorema muestra la fuerte relación que existe entre las martingala
 
 \begin{theorem}[Descomposición de Doob]
 \label{descdoob}
-	Sea $(X_n, n \geq 0)$ es una submartingala. Entonces, se tiene la siguiente descomposición del proceso para cada $n \geq 1$
+	Sea $(X_n, n \geq 0)$ una submartingala. Entonces, se tiene la siguiente descomposición del proceso para cada $n \geq 0$
 	\begin{align*}
 	X_n = X_0 + M_n + A_n, \hspace{1cm} \text{con    } M_0 = A_0 = 0.
 	\end{align*}
@@ -279,7 +279,7 @@ El siguiente teorema muestra la fuerte relación que existe entre las martingala
 	& = \mathbb{E}[X_n - X_{n-1} \mid \mathcal{F}_{n-1}]. 
 	\end{align*}
 	
-	\noindent Teniendo en cuenta ambas igualdades obtenemos la siguiente igualdad
+	\noindent Teniendo en cuenta ambas igualdades obtenemos lo siguiente
 	\begin{align*}
 		\mathbb{E}[X_n \mid \mathcal{F}_{n-1}] - X_{n-1} = A_n - A_{n-1}.
 	\end{align*}
@@ -318,7 +318,7 @@ El siguiente teorema muestra la fuerte relación que existe entre las martingala
 \end{proof}
 
 \begin{corollary}
-	Sea $(X_n, n \geq 0)$ es una supermartingala. Entonces, existe una única descomposición del proceso para cada $n \geq 1$,
+	Sea $(X_n, n \geq 0)$ es una supermartingala. Entonces, existe una única descomposición del proceso para cada $n \geq 0$,
 	\begin{align*}
 		X_n = X_0 + M_n - A_n,
 	\end{align*}
@@ -329,11 +329,12 @@ El siguiente teorema muestra la fuerte relación que existe entre las martingala
 	\begin{align*}
 		Y_n = Y_0 + L_n + B_n,
 	\end{align*}
-Entonces $X_n = X_0 - L_n - B_n$, al definir $M_n = - L_n$ y $A_n = B_n$ para toda $n \geq 1$.
+Entonces $X_n = X_0 - L_n - B_n$, al definir $M_n = - L_n$ y $A_n = B_n$ para toda $n \geq 1$. 
+% El resultado final se sigue de la misma manera que en el Teorema \ref{descdoob}.
 \end{proof}
 
 \section{Desigualdades Maximales}
-A continuación mostramos las principales desigualdades para martingalas, las cuales serán una herramienta para el estudio de la convergencia de martingalas. Consideremos un espacio de probabilidad fijo y conocido $(\Omega, \mathcal{F}, \mathbb{P})$ y una sucesión de $\sigma$-algebras $(\mathcal{F}_n)_{n \geq 0}$ tales que $\mathcal{F}_n \subset \mathcal{F}_{n+1} \subset \mathcal{F}$ para toda $n$. Consideremos una sucesión de variables aleatorias integrables $(M_n, n \geq 0)$ y además, para cada $n$, se tiene que $M_n$ es $\mathcal{F}_n$-medible. Definamos
+A continuación mostramos las principales desigualdades para martingalas, las cuales serán una herramienta para el estudio de la convergencia de martingalas. Consideremos un espacio de probabilidad $(\Omega, \mathcal{F}, \mathbb{P})$ y una sucesión de $\sigma$-álgebras $(\mathcal{F}_n)_{n \geq 0}$ tales que $\mathcal{F}_n \subset \mathcal{F}_{n+1} \subset \mathcal{F}$, para toda $n$. Consideremos una sucesión de variables aleatorias integrables $(M_n, n \geq 0)$ y además, para cada $n$, se tiene que $M_n$ es $\mathcal{F}_n$-medible. Definamos
 \begin{align*}
 	M_n^{*} = \sup_{j \leq n} |M_j|.
 \end{align*}
@@ -363,17 +364,8 @@ En el caso donde $(M_n, n \geq 0)$ no solo cumple con las condiciones mencionada
 	\end{align*}
 	Veamos que sin importar que caso consideremos para $(M_n, n \geq 0)$ (martingala o submartingala positiva), $(|M_n|, n \geq 0)$ es una submartingala. \\ 
 	
-	Si $M$ una martingala, por la Proposición \ref{convexa} tenemos que $(|M_n|, n \geq 0)$ es una submartingala. Por otro lado, si $M$ es una submartingala positiva entonces resulta que $|M_n| = M_n$ para toda $n$. Por lo que $(|M_n|, n \geq 0)$ es una submartingala.
-	% $M_m \leq \mathbb{E}[M_n \mid \mathcal{F}_m]$ c.s. para toda $m \leq n$, además, como $M$ es positiva para toda $n$ tenemos que $M_n > 0$, entonces, $|M_n|$ es creciente para toda $n$, ya que $\phi(x) = |x|$ es una función convexa y creciente en $\mathbb{R}_{+}$, por lo tanto
-	\begin{align}
-	|M_m| \leq  |\mathbb{E}[M_n \mid \mathcal{F}_m]|. \label{corrJC1}
-	\end{align}
-De la desigualdad de Jensen tenemos que 
-	\begin{align}
-	|\mathbb{E}[M_n \mid \mathcal{F}_m]| \leq \mathbb{E}[|M_n| \mid \mathcal{F}_m]. \label{corrJC2}
-	\end{align}
-De (\ref{corrJC1}) y (\ref{corrJC2}) tenemos que $(|M_n|, n \geq 0)$ es una submartingala. \\
-	
+	Si $M$ es una martingala, por la Proposición \ref{convexa} tenemos que $(|M_n|, n \geq 0)$ es una submartingala. Por otro lado, si $M$ es una submartingala positiva entonces resulta que $|M_n| = M_n$ para toda $n$. Por lo que $(|M_n|, n \geq 0)$ es una submartingala. \\
+    
 	Observemos que el evento $\{ \tau \leq n, |M_{\tau}| \geq \alpha\}$ representa el primer momento en el que ocurre la condición $\{|M_{\tau}| \geq \alpha\}$ que resulta ser el mismo evento que $\{\sup_{j \leq n} |M_j| = M_n^{*} \geq \alpha\}$, entonces
 	\begin{align}
 		\mathbb{P}(M_n^{*} \geq \alpha) = \mathbb{P}(\tau \leq n, |M_{\tau}| \geq \alpha). \label{aad}
@@ -382,7 +374,7 @@ Utilizando la desigualdad de Markov tenemos que
 	\begin{align}
 		\mathbb{P}(\tau \leq n, |M_{\tau}| \geq \alpha) = \mathbb{P}(M_n^{*} \geq \alpha)  \leq \frac{\mathbb{E}[M_n^{*}]}{\alpha} = \mathbb{E} \left[\frac{|M_{\tau}|}{\alpha}  1_{\{\tau \leq n\}} \right]. \label{aae}
 	\end{align}
-Veamos por otro lado, en el conjunto $\{ \tau \leq n\}$ tenemos que $M_{\tau} = M_{\tau \wedge n}$. De (\ref{aad}) y (\ref{aae}) tenemos que
+Veamos por otro lado que, en el conjunto $\{ \tau \leq n\}$ tenemos que $M_{\tau} = M_{\tau \wedge n}$. De (\ref{aad}) y (\ref{aae}) tenemos que
 	\begin{align*}
 		\mathbb{P}(M_n^{*} \geq \alpha) \leq \frac{1}{\alpha} \mathbb{E}[|M_{\tau}|  1_{\{\tau \leq n\}}] = \frac{1}{\alpha} \mathbb{E}[|M_{\tau \wedge n}|  1_{\{\tau \leq n\}}].
 	\end{align*}
@@ -440,7 +432,7 @@ Del teorema de Fubini,
 	\end{align*}
 \end{theorem}
 \begin{proof}
-	Consideremos el caso en que $M$ es una martingala. Como $\phi(x) = |x|$ es una función convexa entonces por la Proposición \ref{convexa} tenemos que $|M|$ es una submartingala. Consideremos además los siguiente procesos para una $n$ fija,
+	Consideremos el caso en que $M$ es una martingala. Como $\phi(x) = |x|$ es una función convexa entonces por la Proposición \ref{convexa} tenemos que $|M|$ es una submartingala. Consideremos además los siguientes procesos para una $n$ fija,
 	\begin{align*}
 		X_n & = M_n1_{\{|M_n| > \frac{\alpha}{2} \} }, \\
 		Z_j & = \mathbb{E}[X_n \mid \mathcal{F}_j], \hspace{0.3cm} 0 \leq j \leq n.
@@ -467,14 +459,14 @@ Del teorema de Fubini,
 		& \leq \frac{2}{\alpha} \mathbb{E}[|Z_n|] \leq \frac{2}{\alpha} \mathbb{E}[|X_n|] \ (\text{Jensen}) \\
 		& = \frac{2}{\alpha} \mathbb{E}[|M_n|1_{\{|M_n| > \frac{\alpha}{2}\}}].
 	\end{align*}
-	Con este último resultado podemos aplicar a la igualdad del Lema \ref{repint} y verificar la desigualdad deseada
+	Dado este último resultado, podemos utilizar la igualdad del Lema \ref{repint} y verificar la desigualdad deseada
 	\begin{align*}
 		\mathbb{E}[(M_n^{*})^p] & = \int_0^{\infty} p \lambda^{p-1} \mathbb{P}(M_n^{*} > \lambda) d\lambda \\
 		& \leq \int_0^{\infty} p \lambda^{p-1}  \frac{2}{\lambda} \mathbb{E}[|M_n|1_{\{|M_n| > \frac{\lambda}{2}\}}] d\lambda.
 	\end{align*}
 	Usando el Teorema de Fubini y realizando los cálculos de la integral obtenemos
 	\begin{align*}
-		& = \int_0^{\infty} 2p \lambda^{p-2} \mathbb{E}[|M_n|1_{\{2|M_n| > \lambda\}} ] d\lambda \\
+		\mathbb{E}[(M_n^{*})^p] & \leq \int_0^{\infty} 2p \lambda^{p-2} \mathbb{E}[|M_n|1_{\{2|M_n| > \lambda\}} ] d\lambda \\
 		& = \mathbb{E}\left[ |M_n| \int_0^{2|Mn|} 2p\lambda^{p-2} d\lambda \right] \\
 		& = \frac{2^p p}{p-1} \mathbb{E}[|M_n|^p].
 	\end{align*}
@@ -501,52 +493,45 @@ Esta desigualdad nos será de gran ayuda a la hora de demostrar uno de los resul
 
 \begin{lemma}
 \label{lemdes2}
+
 Sea $X = (X_n, n \geq 0)$ una submartingala y $Y = (Y_n, n \geq 0)$ una supermartingala. Entonces para todo $\lambda > 0$
 	\begin{align}
-		\lambda  \mathbb{P}(X_n^{*} > \lambda) & \leq \mathbb{E}[X_n^{+} 1_{\{X_n^{*} > \lambda\}}] \label{aaj}, \\
-		\lambda  \mathbb{P}(Y_n^{*} > \lambda) & \leq \mathbb{E}[Y_0] - \mathbb{E}[Y_n 1_{\{Y_n^{*} \leq \lambda\}}]. \label{aak}
+		\lambda  \mathbb{P}(X_n^{*} \geq \lambda) & \leq \mathbb{E}[X_n^{+} 1_{\{X_n^{*} \geq \lambda\}}] \label{aaj}, \\
+		\lambda \mathbb{P}(Y_n^{*} \geq \lambda) & \leq \mathbb{E}[Y_0] - \mathbb{E}[Y_n 1_{\{Y_n^{*} < \lambda\}}]. \label{aak}
 	\end{align}
 \end{lemma}
 \begin{proof}
-Si definimos a $\tau$ de la siguiente manera
+Comencemos probando (\ref{aak}). Definamos
 	\begin{align*}
-	\tau = \inf \{k \leq n \mid X_k \geq \lambda\}
+	\tau = \inf \{k \leq n \mid Y_k \geq \lambda\},
 	\end{align*}
-Con $\tau = n$, si $X_n^{*} > \lambda$
-Entonces tenemos que, como $X$ es una martingala
-	\begin{align*}
-	0 \leq \mathbb{E}[X_0^{+}] & \leq \mathbb{E}[X_{\tau}^{+}] \\
-	& = \mathbb{E}[X_{\tau}^{+} 1_{\{X_n^{*} \leq \lambda\}}] + \mathbb{E}[X_{\tau}^{+} 1_{\{X_n^{*} > \lambda\}}] \\
-	& \leq \mathbb{E}[\lambda  1_{\{X_n^{*} \leq \lambda\}}] + \mathbb{E}[X_{\tau}^{+} 1_{\{X_n^{*} > \lambda\}}] \\
-	& = \lambda  \mathbb{P}(X_n^{*} \leq \lambda) + \mathbb{E}[X_n^{+} 1_{\{X_n^{*} > \lambda\}}] \\
-	& = \lambda  (1 - \mathbb{P}(X_n^{*} > \lambda)) + \mathbb{E}[X_n^{+} 1_{\{X_n^{*} > \lambda\}}] \\
-	& \leq - \lambda \mathbb{P}(X_n^{*} > \lambda) + \mathbb{E}[X_n^{+} 1_{\{X_n^{*} > \lambda\}}].
-	\end{align*}
-
-Por lo tanto $\lambda  \mathbb{P}(X_n^{*} > \lambda) \leq \mathbb{E}[X_n^{+} 1_{\{X_n^{*} > \lambda\}}]$. \\
-
-Consideremos ahora el caso donde $Y$ es una supermartingala. Definamos a $\tau$ como $\inf \{k \leq n \mid X_k \geq \lambda\}$, donde $\tau = n$ si $X_n^{*} < \lambda$
+donde $\tau = n$ si $Y_n^{*} < \lambda$. Entonces tenemos que, como $Y$ es una supermartingala
 	\begin{align*}
 	\mathbb{E}[Y_0] & \geq \mathbb{E}[Y_{\tau}] \\
-	& = \mathbb{E}[Y_{\tau} 1_{\{Y_n^{*} > \lambda\}}] + \mathbb{E}[Y_{\tau} 1_{\{Y_n^{*} \leq \lambda\}}] \\
-	& \geq \mathbb{E}[\lambda  1_{\{Y_n^{*} > \lambda\}}] + \mathbb{E}[Y_{\tau} 1_{\{Y_n^{*} \leq \lambda\}}] \\
-	& = \lambda  \mathbb{P}(Y_n^{*} > \lambda) + \mathbb{E}[Y_n 1_{\{Y_n^{*} \leq \lambda\}}].
-	\end{align*}
+	& = \mathbb{E}[Y_{\tau} 1_{\{Y_n^{*} \geq \lambda\}}] + \mathbb{E}[Y_{\tau} 1_{\{Y_n^{*} < \lambda\}}] \\
+	& \geq \mathbb{E}[\lambda 1_{\{Y_n^{*} \geq \lambda\}}] + \mathbb{E}[Y_{\tau}^{+} 1_{\{Y_n^{*} < \lambda\}}] \\
+	& = \lambda \mathbb{P}(Y_n^{*} \geq \lambda) + \mathbb{E}[Y_n 1_{\{Y_n^{*} < \lambda\}}].
+    \end{align*}
+Por lo tanto, 
+	\begin{align*}
+    \lambda \mathbb{P}(Y_n^{*} > \lambda) & \leq \mathbb{E}[Y_0] - \mathbb{E}[Y_n 1_{\{Y_n^{*} \leq \lambda\}}].
+    \end{align*}
+De la definición de submartingala podemos hacer $X = - Y$ y entonces sabemos que $X$ es una submartingala, tomando los mismos argumentos que antes se tiene (\ref{aaj}).
 \end{proof}
 Con el lema anterior podemos verificar el Teorema \ref{lp2}
 
 \begin{proof}
 Verifiquemos el caso para una submartingala positiva. Supongamos en primer lugar que
 	\begin{align}
-	||M_n^{*}||_p = \mathbb{E}[|M_n^{*}|^{\frac{1}{p}}]^p < \infty. \label{aal}
+	||M_n^{*}||_p = \mathbb{E}[|M_n^{*}|^p]^{\frac{1}{p}} < \infty. \label{aal}
 	\end{align}
 Del Lema \ref{repint} tenemos que para toda $p > 1$
 	\begin{align*}
-	\mathbb{E}[M_n^{*}]^p & = \int_0^{\infty} p \lambda^{p-1} \mathbb{P}(M_n^{n} > \lambda) d\lambda.
+	\mathbb{E}[(M_n^{*})^p] & = \int_0^{\infty} p \lambda^{p-1} \mathbb{P}(M_n^{*} > \lambda) d\lambda.
 	\end{align*}
 Del Lema \ref{lemdes2} y como $M$ es una submartingala positiva entonces
 	\begin{align*}
-	\mathbb{E}[M_n^{*}]^p = \int_0^{\infty} p \lambda^{p-1} \mathbb{P}(M_n^{n} > \lambda) d\lambda  \leq \int_0^{\infty} p \lambda^{p-1} \left( \frac{1}{\lambda} \mathbb{E}[M_n 1_{\{M_n^{*} > \lambda\}}] \right) d\lambda.
+	\mathbb{E}[M_n^{*}]^p  \leq \int_0^{\infty} p \lambda^{p-1} \left( \frac{1}{\lambda} \mathbb{E}[M_n 1_{\{M_n^{*} > \lambda\}}] \right) d\lambda.
 	\end{align*}
 Utilizando el teorema de Fubini obtenemos las siguientes igualdades
 	\begin{align}
@@ -632,7 +617,7 @@ Tomando la esperanza en ambos lados de (\ref{aaq}) y con el hecho de que $\eta_{
 \end{proof}
 
 \section{Teoremas de Convergencia de Martingalas}
-En esta última sección presentamos resultados respecto a la convergencia de martingalas, así como el concepto de \emph{uniformemente integrables} para una colección de variables aleatorias, el cual tiene una relación fuerte con la convergencia de martingalas. Concluimos el primer capítulo con la prueba del Teorema del Límite Central de Martingalas análogo al conocido Teorema del Límite Central, pero mostrando las bondades de trabajar con las propiedades de las martingalas.
+En esta última sección presentamos resultados respecto a la convergencia de martingalas, así como el concepto de \emph{uniformemente integrable} para una colección de variables aleatorias, el cual tiene una fuerte relación con la convergencia de martingalas. Concluimos el primer capítulo con la prueba del Teorema del Límite Central de Martingalas análogo al conocido Teorema del Límite Central, pero mostrando las bondades de trabajar con las propiedades de las martingalas.
 
 \begin{theorem}[Teorema de Convergencia de Martingalas]
 \label{conver1}
@@ -654,7 +639,7 @@ Sabemos además, que para todo real $a, x$ se tiene $(x-a)^{+} \leq x^{+} + |a|$
 	& \leq \frac{1}{b - a} \sup_n \mathbb{E}[(X_n - a)^{+}] \\
 	& \leq \frac{1}{b - a} \left( \sup_n \mathbb{E}[X_n^{+}] + |a| \right) \leq \frac{c}{b-a} < \infty.
 	\end{align*}
-Donde $c$ es alguna constante y es finita por las condiciones estipuladas. Más aún, como $\mathbb{E}[U(a, b)] < \infty$ entonces $\mathbb{P}(U(a, b) < \infty) = 1$, es decir, el proceso $X_n$ realiza un número finito de cruces ascendentes casi seguramente.
+Donde $c$ es alguna constante  finita por las condiciones estipuladas. Más aún, como $\mathbb{E}[U(a, b)] < \infty$ entonces $\mathbb{P}(U(a, b) < \infty) = 1$, es decir, el proceso $X_n$ realiza un número finito de cruces ascendentes casi seguramente.
 
 Veamos que el conjunto de puntos muestrales donde el límite de $X_n$ no existe tiene probabilidad cero. Para esto, consideremos para todo $a < b$
 	\begin{align*}
@@ -668,7 +653,7 @@ Por otro lado, tenemos que
 	& = \bigcup_{{a, b} \in \mathbb{Q}} \left\{ \omega : \liminf_n X_n(\omega) \leq a < b \leq  \limsup_n X_n(\omega) \right\} \\
 	& = \left\{ \omega : \liminf_n X_n(\omega) < \limsup_n X_n(\omega) \right\}.
 	\end{align*}
-Por lo tanto, $\mathbb{P}(\liminf_n X_n < \limsup_n X_n ) = 0$. Entonces $\mathbb{P}(\liminf_n X_n = \limsup_n X_n \}) = 1$ concluyendo que $\lim_n X_n$ existe casi seguramente. \\
+Por lo tanto, $\mathbb{P}(\liminf_n X_n < \limsup_n X_n ) = 0$. Entonces $\mathbb{P}(\liminf_n X_n = \limsup_n X_n ) = 1$ concluyendo que $\lim_n X_n$ existe casi seguramente. \\
 
 Veamos que $X = \lim_n X_n \in L^1$. Como $X_n$ es un submartingala entonces tenemos que $\mathbb{E}[X_0] \leq \mathbb{E}[X_n]$, por lo tanto
 	\begin{align}
@@ -706,6 +691,7 @@ Un conjunto $\mathcal{H}$ de $L^1$ se dice que es una colección de variables al
 Con los siguientes resultados podemos asegurar la condición de integrabilidad a partir de dos condiciones.
 
 \begin{proposition}
+\label{cond_uniforminte}
 Sea $\mathcal{H}$ una clase de variables aleatorias
 	\begin{enumerate}
 	\item Si $\sup_{X \in \mathcal{H}} \mathbb{E}[|X|^p] < \infty$ para alguna $p > 1$, entonces $\mathcal{H}$ es uniformemente integrable.
@@ -719,7 +705,7 @@ Sea $\mathcal{H}$ una clase de variables aleatorias
 		\begin{align*}
 		|X| 1_{\{|X| > c\}} \leq c^{1-p}  |X|^p 1_{\{|X| > c\}}.
 		\end{align*}
-	Y entonces,
+Entonces,
 		\begin{align*}
 		\mathbb{E}\left[ |X| 1_{\{|X| > c\}} \right] \leq c^{1-p}  \mathbb{E} \left[ |X|^p 1_{\{|X| > c\}} \right] \leq \frac{k}{c^{p-1}},
 		\end{align*}
@@ -746,6 +732,7 @@ Sea $\mathcal{H}$ una clase de variables aleatorias
 El siguiente resultado es una versión más fuerte del Teorema \ref{conver1} para el caso de martingalas.
 
 \begin{theorem}
+\label{cerrada_uniforme}
 	\begin{enumerate}
 	\item Sea $(M_n, n \geq 0)$ una martingala y supongamos que $(M_n, n \geq 0)$ es una colección de variables aleatorias uniformemente integrables. Entonces
 	\begin{align*}
@@ -753,18 +740,18 @@ El siguiente resultado es una versión más fuerte del Teorema \ref{conver1} par
 	\end{align*}
 	$M_{\infty}$ está en $L^1$, y $M_n$ converge a $M_{\infty}$ en $L^1$. Más aún, la propiedad de martingala se mantiene para $M_{\infty}$, es decir, $M_n = \mathbb{E} \left[ M_{\infty} \mid \mathcal{F}_n \right]$.
 	
-	\item Sea $Y \in L^1$ y considere la martingala $M_n = \mathbb{E} \left[ Y \mid \mathcal{F}_n \right]$. Entonces $(M_n, n \geq 1)$ es una colección de variables aleatorias uniformemente integrables.
+	\item Sea $Y \in L^1$ y considere la martingala $M_n = \mathbb{E} \left[ Y \mid \mathcal{F}_n \right]$. Entonces $(M_n, n \geq 0)$ es una colección de variables aleatorias uniformemente integrables.
 	\end{enumerate}
 \end{theorem}
 \begin{proof}
 \begin{enumerate}
-\item De la definición de uniformemente integrable para variables aleatorias, tenemos que, para toda $\epsilon > 0$ existe una constante $c > 0$ tal que $\sup_{X \in \mathcal{H}} \mathbb{E} [ 1_{ \{|X| > c\} } |X| ] \leq \epsilon$. Entonces
+\item De la definición de uniformemente integrable para variables aleatorias, tenemos que, para toda $\epsilon > 0$ existe una constante $c > 0$ tal que $\sup_{X \in \mathcal{H}} \mathbb{E} [ |X| 1_{ \{|X| > c\} } ] \leq \epsilon$. Entonces
 	\begin{align*}
-	\mathbb{E}[|M_n|] = \mathbb{E} \left[ |M_n|1_{ \{|M_n| > c\} } \right] + \mathbb{E} \left[ |M_n|1_{ \{|M_n| \leq c\} } \right] \leq \epsilon + c.
+	\mathbb{E}[|M_n|] = \mathbb{E} \left[ |M_n|1_{ \{|M_n| \geq c\} } \right] + \mathbb{E} \left[ |M_n|1_{ \{|M_n| < c\} } \right] \leq \epsilon + c.
 	\end{align*}
-Por lo tanto $(M_n)_{n \geq 0}$ está en acotado en $L^1$, es por esta razón que se tiene $\sup_n \mathbb{E}[M_n^{+}] < \infty$. Utilizando el Teorema \ref{conver1} 
+Por lo tanto $(M_n, n \geq 0)$ está acotado en $L^1$, es por esta razón que se tiene $\sup_n \mathbb{E}[M_n^{+}] < \infty$. Utilizando el Teorema \ref{conver1} 
 	\begin{align*}
-	\lim_{n \rightarrow \infty} M_n = M_{\infty} \text{ existe c.s. y } M_{\infty} \text{ está en } L^1.
+	\lim_{n \rightarrow \infty} M_n = M_{\infty} \text{ existe c.s. y } M_{\infty} \in L^1.
 	\end{align*}
 Para mostrar la convergencia del proceso a la variables aleatoria $M_{\infty}$ en $L^1$ veamos que para una constante $N$ suficientemente grande $\mathbb{E}[|M_n - M_{\infty}|] < \epsilon$ para toda $n \geq N$. \\
 
@@ -776,18 +763,18 @@ Si definimos
 	\begin{align*}
 	f_c(x) = 
 	\begin{cases}
-	c, & \text{ si } c > x; \\
-	x, & \text{ si } |x| \leq c; \\
+	c, & \text{ si } c > x, \\
+	x, & \text{ si } |x| \leq c, \\
 	-c, & \text{ si } x < -c.
 	\end{cases}
 	\end{align*}
 Tenemos que $f_c(x)$ es Lipschitz. Por la integrabilidad uniforme sabemos que existe $c$ suficientemente grande tal que para cualquier $\epsilon > 0$ dada:
 	\begin{align}
-	\mathbb{E}[ |f_c(M_n) & - M_n|] < \frac{\epsilon}{3}, \text{ para toda } n; \label{aas} \\
+	\mathbb{E}[ |f_c(M_n) & - M_n|] < \frac{\epsilon}{3}, \text{ para toda } n, \label{aas} \\
 	\mathbb{E}[ |f_c(M_{\infty}) & - M_{\infty}|] < \frac{\epsilon}{3}. \label{aat}
 	\end{align}
 	
-Como $\lim_n M_n = M_{\infty}$ y por la condición de $f_c$ tenemos que $\lim_n f_c(M_n) = f_c(M_{\infty})$. Por el Teorema de Convergencia Dominada de Lebesgue \cite[p.~52]{jacodprotter} tenemos que para cualquier $n \geq N$, para $N$ suficientemente grande
+Como $\lim_n M_n = M_{\infty}$ casi seguramente tenemos que $\lim_n f_c(M_n) = f_c(M_{\infty})$. Por el Teorema de Convergencia Dominada de Lebesgue \cite[p.~52]{jacodprotter} tenemos que para cualquier $n \geq N$, para $N$ suficientemente grande
 	\begin{align}
 	\mathbb{E} [ | f_c(M_n) & - f_c(M_{\infty}) |] < \frac{\epsilon}{3}. \label{aau}
 	\end{align}
@@ -802,9 +789,9 @@ Sin embargo,
 	& \leq \mathbb{E}[|(M_m - M_{\infty}) 1_{\Lambda}|] \\
 	& \leq \mathbb{E}[|M_m - M_{\infty}|],
 	\end{align*}
-Donde $\mathbb{E}[|M_n - M_{\infty}|] \rightarrow 0$ cuando $n \rightarrow 0$, por lo tanto, $\mathbb{E}[M_{\infty} \mid \mathcal{F}_m] = M_m$ c.s.
+Donde $\mathbb{E}[|M_n - M_{\infty}|] \rightarrow 0$ cuando $m \rightarrow \infty$, por lo tanto, $\mathbb{E}[M_{\infty} \mid \mathcal{F}_m] = M_m$ c.s.
 
-\item Sabemos $(M_n, n \geq 0)$ es una martingala. Para una variable $Y \in L^1$, con $c > 0$ tenemos que
+\item Sabemos que $(M_n, n \geq 0)$ es una martingala. Para una variable $Y \in L^1$, con $c > 0$ tenemos que
 	\begin{align*}
 	M_n 1_{\{|M_n > c|\}} = \mathbb{E}\left[Y1_{\{|M_n > c|\}} \mid \mathcal{F}_n\right],
 	\end{align*}
@@ -834,7 +821,7 @@ donde $0 \leq n < m$.
 
 \begin{theorem}[Teorema de Convergencia de Martingalas Reversibles]
 \label{conver2}
-Sea $(X_{-n}, \mathcal{F}_{-n})_{n \in \mathbb{N}}$ una martingala reversible, y sea $\mathcal{F}_{-\infty} = \cap_{n = 0}^{\infty} \mathcal{F}_{-n}$. Entonces la sequencia $(X_{-n})$ converge c.s. y en $L^1$ al límite $X$ c.s., cuando $n \rightarrow +\infty$ (en particular $X$ es c.s. finita e integrable).
+Sea $(X_{-n}, \mathcal{F}_{-n})_{n \in \mathbb{N}}$ una martingala reversible, y sea $\mathcal{F}_{-\infty} = \cap_{n = 0}^{\infty} \mathcal{F}_{-n}$. Entonces la secuencia $(X_{-n})$ converge c.s. y en $L^1$ al límite $X$ c.s., cuando $n \rightarrow +\infty$ (en particular $X$ es c.s. finita e integrable).
 \end{theorem}
 \begin{proof}
 Sea $U_{-n}^{[a, b]}$ es el número de cruces ascendentes de $(X_{-n}, n \geq 0)$ de $[a, b]$ entre el tiempo $-n$ y $1$. Entonces $U_{-n}^{[a, b]}$ es creciente mientras $n$ crece, además consideremos $U^{-}(a, b) = \lim_n U_{-n}^{[a, b]}$, el cual existe por ser $U_{-n}^{[a, b]}$ una sucesión creciente y acotada. Por el Teorema de Convergencia Monótona
@@ -843,7 +830,7 @@ Sea $U_{-n}^{[a, b]}$ es el número de cruces ascendentes de $(X_{-n}, n \geq 0)
 	\end{align*}
 Entonces $\mathbb{P}(U^{-}(a, b) < \infty) = 1$. El mismo argumento de los cruces ascendentes que se utilizó en la prueba del Teorema \ref{conver1} implica que el $\lim_{n \rightarrow \infty} X_{-n} = X$ existe c.s. \\
 
-Sea $\phi(x) = x^{+} = (x \vee 0)$, la cual es una función convexa y creciente, entonces $\phi(X_{-n})$ es integrable para toda $n$. De la desigualdad de Jensen y (\ref{aav}) se infiere que 
+Sea $\phi(x) = x^{+} = (x \vee 0)$, la cual es una función convexa y creciente. Entonces $\phi(X_{-n})$ es integrable para toda $n$. De la desigualdad de Jensen y (\ref{aav}) se infiere que 
 	\begin{align*}
 	X_{-n}^{+} \leq \mathbb{E}[X_0^{+} \mid \mathcal{F}_{-n}].
 	\end{align*}
@@ -855,7 +842,7 @@ Del Lema de Fatou y por el hecho de que $X_{-n}^{+} \geq 1$ y $X_{-n}^{+} \right
 	\begin{align*}
 	\mathbb{E}[X^{+}] \leq \liminf_n \mathbb{E}[X_{-n}^{+}] \leq \mathbb{E}[X_0^{+}] < \infty.
 	\end{align*}
-Implicando que $X^{+} \in L^1$ y por el mismo argumento aplicado a la martingala $(-X_n)$ se muestra que $X^{-} \in L^1$, entonces $X \in L^1$. \\
+Implicando que $X^{+} \in L^1$ y por el mismo argumento aplicado a la martingala $(-X_n)$ se muestra que $X^{-} \in L^1$, en otras palabras $X \in L^1$. \\
 
 La convergencia en $L^1$ es una implicación del Teorema \ref{conver1}, pues se demostró que, si $X_{-n} \rightarrow X$ c.s., si $X \in L^1$ y además $(X_{-n})$ es uniformemente integrable, entonces $X_{-n} \rightarrow X$ en $L^1$.
 \end{proof}
@@ -893,10 +880,10 @@ Haciendo uso de las hipótesis (1) y (2) tenemos,
 	\end{align}
 Además como $|\bar{X}_j| \leq |X_j|$ y $S_p = \sum_{i=1}^p X_i$, para $1 \leq p \leq n$ tenemos
 	\begin{align}
-	\mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_p} \right] & = \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} (S_{p-1} + X_p) } \right] \label{aay} \\
+	\mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_p} \right] & = \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} (S_{p-1} + X_p) } \right] \nonumber \\
 	& = \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_{p-1}} e^{iu \frac{1}{\sqrt{n}} X_p} \right] \nonumber \\ 
 	& = \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_{p-1}} \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} X_p} \bigg| \mathcal{F}_{p-1} \right]\right] \nonumber \\ 
-	& = \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_{p-1}} \varphi_{n, p} (u) \right] \nonumber.
+	& = \mathbb{E}\left[e^{iu \frac{1}{\sqrt{n}} S_{p-1}} \varphi_{n, p} (u) \right] \label{aay}.
 	\end{align}
 Usando (\ref{aay}) y (\ref{aax}) tenemos
 	\begin{align*}
