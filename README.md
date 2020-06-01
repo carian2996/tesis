@@ -1,11 +1,11 @@
-# tesis
-Repo para los archivos .tex de la tesis de licenciatura.
+# Optimal Stopping Problems
+This repo contains all .tex files from my bachelor thesis.
 
-Ian Castillo Rosales
-09 de Junio de 2015
+Author: Ian Castillo Rosales
+Finished: 09 de Junio de 2015
+Full doc (in Spanish): http://132.248.9.195/ptd2016/noviembre/0753111/Index.html
 
-Las files que contiene 'chapters' son aquellos necesarios para 'main.tex'.
-Se contiene:
+Each file contains one chapters required so `main.tex` can compile the full document.
 
 - portada.tex
 - agradecimientos.tex
@@ -13,6 +13,4 @@ Se contiene:
 - ch[1-5].tex
 - biblio.tex
 
-Los files que contiene 'images' son los necesarios para la creación de la portada.
-
-Todos los archivos están escritos en TeX. Todos los derechos reservados. 2017.
+The folder `images` gather all images necesaries to create portrait.
